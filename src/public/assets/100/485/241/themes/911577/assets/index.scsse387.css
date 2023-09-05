@@ -19,6 +19,7 @@
 }
 .home-slider {
   margin-bottom: 40px;
+  border-radius: 6px;
 }
 .home-slider .swiper-slide {
   text-align: center;
