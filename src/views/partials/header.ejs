@@ -1,3 +1,4 @@
+<div class="opacity_menu"></div>
 <header class="header header-index" style="position: relative">
   <div class="container" style="position: relative">
     <div class="row align-items-center">
@@ -10,7 +11,7 @@
         <div class="header-menu-des">
           <div class="header-menu-des">
             <nav class="header-nav">
-              <ul class="item_big">
+              <!-- <ul class="item_big">
                 <li class="nav-item active">
                   <a class="a-img a-index" href="/" title="Home"> Home </a>
                 </li>
@@ -219,6 +220,288 @@
 
                 <li class="nav-item">
                   <a class="a-img a-index" href="/catalogue" title="Catalogue"> Catalogue </a>
+                </li>
+              </ul> -->
+              
+              <ul class="item_small d-lg-none d-block float-container tab">
+                <li><button class="tablinks active" onclick="openCity(event, 'London')">Menu</button></li>
+                <li><button class="tablinks" onclick="openCity(event, 'Paris')">Products</button></li>
+              </ul>
+              <ul class="item_big tabcontent" id="London">
+                <li class="nav-item active float-child-li"><a class="a-img a-index" href="/" title="Home"> Home </a></li>
+                <li class="nav-item float-child-li"><a class="a-img a-index" href="/about" title="About"> About </a></li>
+                <li class="nav-item has-mega float-child-li"><a class="a-img caret-down a-index" href="/products" title="Products"> Products </a>
+                  <i class="fa fa-caret-down"></i>
+                  <div class="mega-content d-lg-block d-none">
+                    <div class="row">
+                      <div class="col-lg-8 col-12">
+                        <ul class="level0">
+                          <li class="level1 parent item fix-navs" data-title="Baskets" data-link="/products/baskets">
+                            <a class="hmega" href="/products/baskets" title="Baskets">Baskets</a>
+                            <ul class="level1">
+                              <li class="level2">
+                                <a href="/products/baskets/laundry" title="Laundry">Laundry</a>
+                              </li>
+
+                              <li class="level2">
+                                <a href="/products/baskets/store" title="Store">Store</a>
+                              </li>
+
+                              <li class="level2">
+                                <a href="/products/baskets/boxes" title="Boxes">Boxes</a>
+                              </li>
+                            </ul>
+                          </li>
+
+                          <li
+                            class="level1 parent item fix-navs"
+                            data-title="Home Decors"
+                            data-link="/products/home-decors">
+                            <a class="hmega" href="/products/home-decors" title="Home Decors">Home Decors</a>
+                            <ul class="level1">
+                              <li class="level2">
+                                <a href="/products/home-decors/mirrors" title="Mirrors">Mirrors</a>
+                              </li>
+
+                              <li class="level2">
+                                <a href="/products/home-decors/wall-shelves" title="Wall Shelves">Wall Shelves</a>
+                              </li>
+
+                              <li class="level2">
+                                <a href="/products/home-decors/clothes-hangers" title="Clothes Hangers"
+                                  >Clothes Hangers</a
+                                >
+                              </li>
+                            </ul>
+                          </li>
+
+                          <li
+                            class="level1 parent item fix-navs"
+                            data-title="Kitchen ware"
+                            data-link="/products/kitchen-ware">
+                            <a class="hmega" href="/products/kitchen-ware" title="Kitchen ware">Kitchen ware</a>
+                            <ul class="level1">
+                              <li class="level2">
+                                <a href="/products/kitchen-ware/placemats" title="Placemats & coasters"
+                                  >Placemats & coasters</a
+                                >
+                              </li>
+
+                              <li class="level2">
+                                <a href="/products/kitchen-ware/tray" title="Tray & trugs">Tray & trugs</a>
+                              </li>
+
+                              <li class="level2">
+                                <a href="/products/kitchen-ware/bowls" title="Bowls & banneton baskets"
+                                  >Bowls & banneton baskets</a
+                                >
+                              </li>
+
+                              <li class="level2">
+                                <a href="/products/kitchen-ware/kitchen-utensils" title="Kitchen utensils"
+                                  >Kitchen utensils</a
+                                >
+                              </li>
+
+                              <li class="level2">
+                                <a href="/products/kitchen-ware/cutlery" title="Cutlery trays & baskets"
+                                  >Cutlery trays & baskets</a
+                                >
+                              </li>
+
+                              <li class="level2">
+                                <a href="/products/kitchen-ware/lunch-boxes" title="Lunch boxes">Lunch boxes</a>
+                              </li>
+                            </ul>
+                          </li>
+
+                          <li class="level1 parent item fix-navs" data-title="Lights" data-link="/noi-su-duong-sinh">
+                            <a class="hmega" href="/products/lights" title="Lights">Lights</a>
+                          </li>
+
+                          <li
+                            class="level1 parent item fix-navs"
+                            data-title="Phụ kiện bàn ăn"
+                            data-link="/phu-kien-ban-an">
+                            <a class="hmega" href="/products/handbags" title="Handbags">Handbags</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col-lg-4 col-12">
+                        <a href="collections/all.html" title="Banner">
+                          <img
+                            width="414"
+                            height="414"
+                            class="lazyload"
+                            src="/assets/100/485/241/themes/911577/assets/lazye387.png"
+                            data-src="/assets/100/485/241/themes/911577/assets/danhmuc_5.jpg"
+                            alt="Banner" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <ul class="item_small d-lg-none d-block">
+                    <li>
+                      <a class="caret-down" href="/baskets" title="Baskets">Baskets</a>
+                      <i class="fa fa-caret-down"></i>
+                      <ul>
+                        <li>
+                          <a href="/baskets/laundry" title="Laundry" class="a3">Laundry</a>
+                        </li>
+
+                        <li>
+                          <a href="/baskets/Store" title="Store" class="a3">Store</a>
+                        </li>
+
+                        <li>
+                          <a href="/baskets/Boxes" title="Boxes" class="a3">Boxes</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <a class="caret-down" href="/products/home-decors" title="Home Decors">Home Decors</a>
+                      <i class="fa fa-caret-down"></i>
+                      <ul>
+                        <li>
+                          <a href="/products/home-decors/mirrors" title="Mirrors">Mirrors</a>
+                        </li>
+                        <li>
+                          <a href="/products/home-decors/wall-shelves" title="Wall Shelves">Wall Shelves</a>
+                        </li>
+                        <li>
+                          <a href="/products/home-decors/clothes-hangers" title="Clothes Hangers">Clothes Hangers</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <a class="caret-down" href="/products/kitchen-ware" title="Kitchen ware"> Kitchen ware </a>
+                      <i class="fa fa-caret-down"></i>
+                      <ul>
+                        <li>
+                          <a href="/products/kitchen-ware/placemats" title="Placemats & coasters" class="a3"
+                            >Placemats & coasters</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/products/kitchen-ware/tray" title="Tray & trugs" class="a3">Tray & trugs</a>
+                        </li>
+                        <li>
+                          <a href="/products/kitchen-ware/bowls" title="Bowls & banneton baskets" class="a3"
+                            >Bowls & banneton baskets</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/products/kitchen-ware/kitchen-utensils" title="Kitchen utensils" class="a3"
+                            >Kitchen utensils</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/products/kitchen-ware/cutlery" title="Cutlery trays & baskets" class="a3"
+                            >Cutlery trays & baskets</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/products/kitchen-ware/lunch-boxes" title="Lunch boxes" class="a3">Lunch boxes</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <a class="caret-down" href="/products/lights" title="Lights">Lights</a>
+                    </li>
+
+                    <li>
+                      <a class="caret-down" href="/products/handbags" title="Handbags">Handbags</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item float-child-li"><a class="a-img a-index" href="/news" title="News"> News </a></li>
+                <li class="nav-item float-child-li"><a class="a-img a-index" href="/contact" title="Contact"> Contact </a></li>
+                <li class="nav-item float-child-li"><a class="a-img a-index" href="/catalogue" title="Catalogue"> Catalogue </a>
+                </li>
+
+              </ul>
+              <ul class="item-big tabcontent" id="Paris" style="display: none;">
+                <li class="nav-item has-mega float-child-li"><a class="a-img caret-down a-index" href="/products" title="Products"> Products </a>
+                  <i class="fa fa-caret-down"></i>
+                  <ul class="item_small d-lg-none d-block">
+                    <li>
+                      <a class="caret-down" href="/baskets" title="Baskets">Baskets</a>
+                      <i class="fa fa-caret-down"></i>
+                      <ul>
+                        <li>
+                          <a href="/baskets/laundry" title="Laundry" class="a3">Laundry</a>
+                        </li>
+
+                        <li>
+                          <a href="/baskets/Store" title="Store" class="a3">Store</a>
+                        </li>
+
+                        <li>
+                          <a href="/baskets/Boxes" title="Boxes" class="a3">Boxes</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <a class="caret-down" href="/products/home-decors" title="Home Decors">Home Decors</a>
+                      <i class="fa fa-caret-down"></i>
+                      <ul>
+                        <li>
+                          <a href="/products/home-decors/mirrors" title="Mirrors">Mirrors</a>
+                        </li>
+                        <li>
+                          <a href="/products/home-decors/wall-shelves" title="Wall Shelves">Wall Shelves</a>
+                        </li>
+                        <li>
+                          <a href="/products/home-decors/clothes-hangers" title="Clothes Hangers">Clothes Hangers</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <a class="caret-down" href="/products/kitchen-ware" title="Kitchen ware"> Kitchen ware </a>
+                      <i class="fa fa-caret-down"></i>
+                      <ul>
+                        <li>
+                          <a href="/products/kitchen-ware/placemats" title="Placemats & coasters" class="a3"
+                            >Placemats & coasters</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/products/kitchen-ware/tray" title="Tray & trugs" class="a3">Tray & trugs</a>
+                        </li>
+                        <li>
+                          <a href="/products/kitchen-ware/bowls" title="Bowls & banneton baskets" class="a3"
+                            >Bowls & banneton baskets</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/products/kitchen-ware/kitchen-utensils" title="Kitchen utensils" class="a3"
+                            >Kitchen utensils</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/products/kitchen-ware/cutlery" title="Cutlery trays & baskets" class="a3"
+                            >Cutlery trays & baskets</a
+                          >
+                        </li>
+                        <li>
+                          <a href="/products/kitchen-ware/lunch-boxes" title="Lunch boxes" class="a3">Lunch boxes</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <a class="caret-down" href="/products/lights" title="Lights">Lights</a>
+                    </li>
+
+                    <li>
+                      <a class="caret-down" href="/products/handbags" title="Handbags">Handbags</a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </nav>
@@ -436,4 +719,18 @@
       return false
     }
   )
+
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
 </script>
