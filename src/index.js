@@ -14,6 +14,10 @@ let server
 //   })
 // })
 
+server = app.listen(config.port, () => {
+  logger.info('Port Nodejs: http://localhost:' + config.port)
+})
+
 const exitHandler = () => {
   if (server) {
     server.close(() => {
