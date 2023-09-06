@@ -23,7 +23,7 @@
   font-size: 24px;
   text-transform: uppercase;
   font-weight: 700;
-  color: #ca6f04;
+  color: #a59076;
 }
 @media (max-width: 767px) {
   .title-page span,
@@ -230,7 +230,7 @@
   border-radius: 5px;
   padding: 5px 20px;
   border: 1px solid #e6e6e6;
-  border-bottom: 2px solid #ca6f04;
+  border-bottom: 2px solid #a59076;
 }
 .article-main .form-group input::placeholder {
   color: #7c7c7c;
@@ -249,7 +249,7 @@
   border-radius: 5px;
   padding: 5px 20px;
   border: 1px solid #e6e6e6;
-  border-bottom: 2px solid #ca6f04;
+  border-bottom: 2px solid #a59076;
 }
 .article-main .form-group textarea::placeholder {
   color: #7c7c7c;
@@ -265,18 +265,18 @@
   height: 40px;
   line-height: 38px;
   padding: 0 25px;
-  background: #ca6f04;
+  background: #a59076;
   font-size: 14px;
   color: #fff;
-  border: solid 1px #ca6f04;
+  border: solid 1px #a59076;
   font-weight: 400;
   margin-top: 10px;
   border-radius: 5px;
 }
 .article-main .button_45:hover {
   background: #fff;
-  border-color: #009b50;
-  color: #009b50;
+  border-color: #ca6f04;
+  color: #ca6f04;
 }
 .article-main .title-form-coment {
   font-size: 16px;
@@ -577,7 +577,7 @@
   color: #ca6f04;
 }
 .item-blog .see {
-  color: #ca6f04;
+  color: #a59076;
   font-size: 16px;
   position: relative;
   padding-bottom: 5px;
@@ -590,7 +590,7 @@
   position: absolute;
   bottom: 3px;
   left: 0;
-  background: #ca6f04;
+  background: #a59076;
   transition: all 200ms linear 0s;
 }
 .item-blog .see:hover:before {
