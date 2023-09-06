@@ -464,7 +464,7 @@ ul {
   border: 1px solid #fff;
 }
 .backtop:hover {
-  background: #7f4603;
+  background: #ca6f04;
 }
 .backtop svg {
   width: 30px;
@@ -1392,6 +1392,9 @@ ul {
   .header-nav .item_big .nav-item .item_small ul li .fa-caret-down:after {
     width: 1px;
     height: 11px;
+  }
+  .header-nav .item_big .nav-item .item_small div a img {
+    margin: 10px 0 10px 0;
   }
   .header-nav .item_big .nav-item.danhmuc a {
     padding-left: 40px !important;
