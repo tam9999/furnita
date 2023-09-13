@@ -22,9 +22,29 @@
         >
       </li>
 
-      <% if (locals.title_category) { %>
+      <% if (locals.title_menu) { %>
       <li>
-        <a class="changeurl" href="<%=url %>"> <span><%= title_category %></span></a>
+        <a class="changeurl" href="/<%= toLowerCase(title_menu) %>"> <span><%= title_menu %></span></a>
+        <span class="mr_lr"
+          >&nbsp;<svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="chevron-right"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 320 512"
+            class="svg-inline--fa fa-chevron-right fa-w-10">
+            <path
+              fill="currentColor"
+              d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"
+              class=""></path></svg
+          >&nbsp;</span
+        >
+      </li>
+      <% } if (locals.title_category) { %>
+      <li>
+        <a class="changeurl" href="<%= url %>"> <span><%= title_category %></span></a>
         <span class="mr_lr"
           >&nbsp;<svg
             aria-hidden="true"
@@ -56,12 +76,7 @@
               <div class="swiper-slide">
                 <a href="noi-su-duong-sinh.html" title="Baskets"></a>
                 <div class="danhmuc-thumb">
-                  <img
-                    width="200"
-                    height="200"
-                    class="lazyload"
-                    src="/assets/100/485/241/themes/911577/assets/danhmuc_1.jpg"
-                    alt="Baskets" />
+                  <img width="200" height="200" class="lazyload" src="/assets/danhmuc_1.jpg" alt="Baskets" />
                   <span class="image-shadow"></span>
                 </div>
                 <div class="danhmuc-info">
@@ -73,12 +88,7 @@
               <div class="swiper-slide">
                 <a href="phong-an.html" title="Home decors"></a>
                 <div class="danhmuc-thumb">
-                  <img
-                    width="200"
-                    height="200"
-                    class="lazyload"
-                    src="/assets/100/485/241/themes/911577/assets/danhmuc_2.jpg"
-                    alt="Home decors" />
+                  <img width="200" height="200" class="lazyload" src="/assets/danhmuc_2.jpg" alt="Home decors" />
                   <span class="image-shadow"></span>
                 </div>
                 <div class="danhmuc-info">
@@ -90,12 +100,7 @@
               <div class="swiper-slide">
                 <a href="su-duong-sinh.html" title="Kitchen ware"></a>
                 <div class="danhmuc-thumb">
-                  <img
-                    width="200"
-                    height="200"
-                    class="lazyload"
-                    src="/assets/100/485/241/themes/911577/assets/danhmuc_3.jpg"
-                    alt="Kitchen ware" />
+                  <img width="200" height="200" class="lazyload" src="/assets/danhmuc_3.jpg" alt="Kitchen ware" />
                   <span class="image-shadow"></span>
                 </div>
                 <div class="danhmuc-info">
@@ -107,12 +112,7 @@
               <div class="swiper-slide">
                 <a href="tra-ca-phe.html" title="Lights"></a>
                 <div class="danhmuc-thumb">
-                  <img
-                    width="200"
-                    height="200"
-                    class="lazyload"
-                    src="/assets/100/485/241/themes/911577/assets/danhmuc_4.jpg"
-                    alt="Lights" />
+                  <img width="200" height="200" class="lazyload" src="/assets/danhmuc_4.jpg" alt="Lights" />
                   <span class="image-shadow"></span>
                 </div>
                 <div class="danhmuc-info">
@@ -124,12 +124,7 @@
               <div class="swiper-slide">
                 <a href="phu-kien-ban-an.html" title="Handbags"></a>
                 <div class="danhmuc-thumb">
-                  <img
-                    width="200"
-                    height="200"
-                    class="lazyload"
-                    src="/assets/100/485/241/themes/911577/assets/danhmuc_5.jpg"
-                    alt="Handbags" />
+                  <img width="200" height="200" class="lazyload" src="/assets/danhmuc_5.jpg" alt="Handbags" />
                   <span class="image-shadow"></span>
                 </div>
                 <div class="danhmuc-info">

@@ -1,10 +1,201 @@
-<link
-  href="/assets/100/485/241/themes/911577/assets/product_style.scsse387.css"
-  rel="stylesheet"
-  type="text/css"
-  media="all" />
+<link href="/assets/product_style.css" rel="stylesheet" type="text/css" media="all" />
 <div class="bodywrap">
-  <%- include("../components/bread-crumb") %>
+  <section class="bread-crumb" style="background-color: #e2d0c0">
+    <div class="container">
+      <div class="title-bread-crumb"><%= product.title %></div>
+      <ul class="breadcrumb">
+        <li class="home">
+          <a href="/index"><span>Home</span></a>
+          <span class="mr_lr"
+            >&nbsp;<svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="chevron-right"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 320 512"
+              class="svg-inline--fa fa-chevron-right fa-w-10">
+              <path
+                fill="currentColor"
+                d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"
+                class=""></path></svg
+            >&nbsp;</span
+          >
+        </li>
+
+        <li>
+          <a class="changeurl" href="/product"> <span>Products</span></a>
+          <span class="mr_lr"
+            >&nbsp;<svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="chevron-right"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 320 512"
+              class="svg-inline--fa fa-chevron-right fa-w-10">
+              <path
+                fill="currentColor"
+                d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"
+                class=""></path></svg
+            >&nbsp;</span
+          >
+        </li>
+
+        <li>
+          <a class="changeurl" href="<%= url %>"> <span><%= product.category %></span></a>
+          <span class="mr_lr"
+            >&nbsp;<svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="chevron-right"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 320 512"
+              class="svg-inline--fa fa-chevron-right fa-w-10">
+              <path
+                fill="currentColor"
+                d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"
+                class=""></path></svg
+            >&nbsp;</span
+          >
+        </li>
+
+        <li>
+          <strong><span><%= product.id %></span></strong>
+        </li>
+      </ul>
+      <div class="danhmuc-breadcrumb">
+        <section class="section_danhmuc">
+          <div class="container">
+            <div class="danhmuc-swiper swiper-container">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <a href="noi-su-duong-sinh.html" title="Baskets"></a>
+                  <div class="danhmuc-thumb">
+                    <img
+                      width="200"
+                      height="200"
+                      class="lazyload"
+                      src="/assets/danhmuc_1.jpg"
+                      alt="Baskets" />
+                    <span class="image-shadow"></span>
+                  </div>
+                  <div class="danhmuc-info">
+                    <h3>Baskets</h3>
+                    <span>+ 0 products</span>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <a href="phong-an.html" title="Home decors"></a>
+                  <div class="danhmuc-thumb">
+                    <img
+                      width="200"
+                      height="200"
+                      class="lazyload"
+                      src="/assets/danhmuc_2.jpg"
+                      alt="Home decors" />
+                    <span class="image-shadow"></span>
+                  </div>
+                  <div class="danhmuc-info">
+                    <h3>Home decors</h3>
+                    <span>+ 30 products</span>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <a href="su-duong-sinh.html" title="Kitchen ware"></a>
+                  <div class="danhmuc-thumb">
+                    <img
+                      width="200"
+                      height="200"
+                      class="lazyload"
+                      src="/assets/danhmuc_3.jpg"
+                      alt="Kitchen ware" />
+                    <span class="image-shadow"></span>
+                  </div>
+                  <div class="danhmuc-info">
+                    <h3>Kitchen ware</h3>
+                    <span>+ 0 products</span>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <a href="tra-ca-phe.html" title="Lights"></a>
+                  <div class="danhmuc-thumb">
+                    <img
+                      width="200"
+                      height="200"
+                      class="lazyload"
+                      src="/assets/danhmuc_4.jpg"
+                      alt="Lights" />
+                    <span class="image-shadow"></span>
+                  </div>
+                  <div class="danhmuc-info">
+                    <h3>Lights</h3>
+                    <span>+ 21 products</span>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <a href="phu-kien-ban-an.html" title="Handbags"></a>
+                  <div class="danhmuc-thumb">
+                    <img
+                      width="200"
+                      height="200"
+                      class="lazyload"
+                      src="/assets/danhmuc_5.jpg"
+                      alt="Handbags" />
+                    <span class="image-shadow"></span>
+                  </div>
+                  <div class="danhmuc-info">
+                    <h3>Handbags</h3>
+                    <span>+ 0 products</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <script>
+          var swiperdanhmuc = new Swiper('.danhmuc-swiper', {
+            slidesPerView: 3,
+            loop: false,
+            grabCursor: true,
+            roundLengths: true,
+            slideToClickedSlide: false,
+            slidesPerColumn: 1,
+            spaceBetween: 30,
+            autoplay: false,
+            breakpoints: {
+              300: {
+                slidesPerView: 2,
+              },
+              500: {
+                slidesPerView: 2,
+              },
+              640: {
+                slidesPerView: 2,
+              },
+              768: {
+                slidesPerView: 4,
+              },
+              991: {
+                slidesPerView: 5,
+              },
+              1200: {
+                slidesPerView: 5,
+              },
+            },
+          })
+        </script>
+      </div>
+    </div>
+  </section>
 
   <section class="product layout-product" itemscope itemtype="https://schema.org/Product">
     <div class="container">
@@ -14,39 +205,39 @@
             <div class="product-image-block relative">
               <div class="swiper-container gallery-top">
                 <div class="swiper-wrapper" id="lightgallery">
-                  <a class="swiper-slide" data-hash="0" href="/assets/100/485/241/themes/911577/assets/danhmuc_1.jpg">
+                  <a class="swiper-slide" data-hash="0" href="<%= product.images[0] %>">
                     <img
                       class="img-responsive mx-auto d-block swiper-lazy"
                       height="400"
                       width="400"
-                      src="/assets/100/485/241/themes/911577/assets/danhmuc_1.jpg"
+                      src="<%= product.images[0] %>"
                       alt="" />
                   </a>
 
-                  <a class="swiper-slide" data-hash="1" href="/assets/100/485/241/themes/911577/assets/danhmuc_2.jpg">
+                  <a class="swiper-slide" data-hash="1" href="<%= product.images[1] %>">
                     <img
                       class="img-responsive mx-auto d-block swiper-lazy"
                       height="400"
                       width="400"
-                      src="/assets/100/485/241/themes/911577/assets/danhmuc_2.jpg"
+                      src="<%= product.images[1] %>"
                       alt="" />
                   </a>
 
-                  <a class="swiper-slide" data-hash="2" href="/assets/100/485/241/themes/911577/assets/danhmuc_4.jpg">
+                  <a class="swiper-slide" data-hash="2" href="<%= product.images[2] %>">
                     <img
                       class="img-responsive mx-auto d-block swiper-lazy"
                       height="400"
                       width="400"
-                      src="/assets/100/485/241/themes/911577/assets/danhmuc_4.jpg"
+                      src="<%= product.images[2] %>"
                       alt="" />
                   </a>
 
-                  <a class="swiper-slide" data-hash="3" href="/assets/100/485/241/themes/911577/assets/danhmuc_5.jpg">
+                  <a class="swiper-slide" data-hash="3" href="<%= product.images[3] %>">
                     <img
                       class="img-responsive mx-auto d-block swiper-lazy"
                       height="400"
                       width="400"
-                      src="/assets/100/485/241/themes/911577/assets/danhmuc_5.jpg"
+                      src="<%= product.images[3] %>"
                       alt="" />
                   </a>
                 </div>
@@ -59,7 +250,7 @@
                         class="swiper-lazy"
                         height="80"
                         width="80"
-                        src="/assets/100/485/241/themes/911577/assets/danhmuc_1.jpg"
+                        src="<%= product.images[0] %>"
                         alt="" />
                     </div>
                   </div>
@@ -70,7 +261,7 @@
                         class="swiper-lazy"
                         height="80"
                         width="80"
-                        src="/assets/100/485/241/themes/911577/assets/danhmuc_2.jpg"
+                        src="<%= product.images[1] %>"
                         alt="" />
                     </div>
                   </div>
@@ -81,7 +272,7 @@
                         class="swiper-lazy"
                         height="80"
                         width="80"
-                        src="/assets/100/485/241/themes/911577/assets/danhmuc_4.jpg"
+                        src="<%= product.images[2] %>"
                         alt="" />
                     </div>
                   </div>
@@ -92,7 +283,7 @@
                         class="swiper-lazy"
                         height="80"
                         width="80"
-                        src="/assets/100/485/241/themes/911577/assets/danhmuc_5.jpg"
+                        src="<%= product.images[3] %>"
                         alt="" />
                     </div>
                   </div>
@@ -104,9 +295,15 @@
           </div>
           <div class="col-12 col-md-12 col-lg-6">
             <div class="details-pro">
-              <h1 class="title-product">Bộ trà 1.3 L - Hoàng Cung - Sen Vàng</h1>
+              <h1 class="title-product"><%= product.name %></h1>
               <div class="reviews_details_product">
-                <div class="sapo-product-reviews-badge sapo-product-reviews-badge-detail" data-id="31264781"></div>
+                <div class="sapo-product-reviews-badge sapo-product-reviews-badge-detail">
+                  <p>
+                    <strong style="font-size: 18px">Description:</strong> <%= product.description %>
+                  </p>
+                  <p><strong style="font-size: 18px">Material:</strong></p>
+                  <p><strong style="font-size: 18px">Size:</strong></p>
+                </div>
               </div>
             </div>
           </div>
@@ -129,13 +326,14 @@
           <div id="tab-1" class="tab-content active content_extab">
             <div class="rte product_getcontent">
               <p>
-                Khoác lên vẻ truyền thống, nền nã của loài hoa Á Đông nhưng lại không kém phần tinh tế hiện đại, những
-                cánh sen bung tròn, phúc hậu ôm lấy nhụy đã được tái hiện sống động bằng màu xanh cobalt đặc trưng của
-                cung đình Huế. Bức tranh chân thực và sống động về lá, cỏ và hoa sen như đưa người ngắm về với một làng
-                quê Việt Nam vốn yên bình, trù phú... &nbsp;Nghệ nhân cũng khéo léo tạo nét vương giả bằng những chi
-                tiết vẽ vàng 24k uyển chuyển trên từng cánh hoa, vành, tay cầm và nắp tạo nên sắc màu lấp lánh dưới sự
-                phản chiếu của ánh sáng. Bộ sản phẩm thích hợp cho những buổi sum họp thân tình trong không gian yên
-                bình, thư giãn vừa gần gũi vừa sang trọng.<br />
+                Khoác lên vẻ truyền thống, nền nã của loài hoa Á Đông nhưng lại không kém phần tinh
+                tế hiện đại, những cánh sen bung tròn, phúc hậu ôm lấy nhụy đã được tái hiện sống
+                động bằng màu xanh cobalt đặc trưng của cung đình Huế. Bức tranh chân thực và sống
+                động về lá, cỏ và hoa sen như đưa người ngắm về với một làng quê Việt Nam vốn yên
+                bình, trù phú... &nbsp;Nghệ nhân cũng khéo léo tạo nét vương giả bằng những chi tiết
+                vẽ vàng 24k uyển chuyển trên từng cánh hoa, vành, tay cầm và nắp tạo nên sắc màu lấp
+                lánh dưới sự phản chiếu của ánh sáng. Bộ sản phẩm thích hợp cho những buổi sum họp
+                thân tình trong không gian yên bình, thư giãn vừa gần gũi vừa sang trọng.<br />
                 <br />
                 Bộ trà 1.3 L bao gồm:<br />
                 - 01 Bình cà phê 1.3 L + Nắp<br />
@@ -145,47 +343,49 @@
                 - 01 Rót sữa 0.22 L
               </p>
               <p>
-                Gốm sứ luôn là một trong những sản phẩm truyền thống được yêu thích bởi khách hàng trên toàn thế giới.
-                Với độ bền cao và tính thẩm mỹ, gốm sứ đã trở thành vật dụng không thể thiếu trong cuộc sống hằng ngày
-                của mọi gia đình. Thật tuyệt vời khi một sản phẩm có thể vừa có tính nghệ thuật vừa mang lại lợi ích cho
-                cuộc sống.
+                Gốm sứ luôn là một trong những sản phẩm truyền thống được yêu thích bởi khách hàng
+                trên toàn thế giới. Với độ bền cao và tính thẩm mỹ, gốm sứ đã trở thành vật dụng
+                không thể thiếu trong cuộc sống hằng ngày của mọi gia đình. Thật tuyệt vời khi một
+                sản phẩm có thể vừa có tính nghệ thuật vừa mang lại lợi ích cho cuộc sống.
               </p>
               <p>
-                Nếu bạn đang tìm kiếm một bộ đồ ăn hoàn hảo làm tặng người thân, bạn bè hay muốn tạo bộ đồ ăn đẹp mắt
-                cho gia đình mình, thì bộ đồ gốm sứ sẽ là một sự lựa chọn tuyệt vời để thể hiện tình cảm của bạn đến
-                những người thân yêu của mình.
+                Nếu bạn đang tìm kiếm một bộ đồ ăn hoàn hảo làm tặng người thân, bạn bè hay muốn tạo
+                bộ đồ ăn đẹp mắt cho gia đình mình, thì bộ đồ gốm sứ sẽ là một sự lựa chọn tuyệt vời
+                để thể hiện tình cảm của bạn đến những người thân yêu của mình.
               </p>
               <p>
-                &nbsp;Sản phẩm này được sản xuất với chất liệu gốm sứ cao cấp, với độ bền cao và khả năng chịu nhiệt
-                tốt, cho phép bạn sử dụng trong nhiều năm liền mà không sợ hư hỏng. Đồng thời, gốm sứ cũng là một loại
-                vật liệu không gây hại cho sức khỏe, nên bạn có thể yên tâm sử dụng khi dùng để nấu ăn và trang
-                trí.&nbsp;
+                &nbsp;Sản phẩm này được sản xuất với chất liệu gốm sứ cao cấp, với độ bền cao và khả
+                năng chịu nhiệt tốt, cho phép bạn sử dụng trong nhiều năm liền mà không sợ hư hỏng.
+                Đồng thời, gốm sứ cũng là một loại vật liệu không gây hại cho sức khỏe, nên bạn có
+                thể yên tâm sử dụng khi dùng để nấu ăn và trang trí.&nbsp;
               </p>
 
               <p>
-                Mỗi bộ đồ ăn gốm sứ được thiết kế rất tinh tế với nhiều họa tiết và cấu trúc khác nhau, mang lại sự tươi
-                trẻ và phong cách độc đáo cho bàn ăn của bạn. Bạn sẽ có nhiều sự lựa chọn để chọn cho mình bộ đồ ăn ưng
-                ý nhất với phong cách hiện đại, thanh lịch hoặc truyền thống...
+                Mỗi bộ đồ ăn gốm sứ được thiết kế rất tinh tế với nhiều họa tiết và cấu trúc khác
+                nhau, mang lại sự tươi trẻ và phong cách độc đáo cho bàn ăn của bạn. Bạn sẽ có nhiều
+                sự lựa chọn để chọn cho mình bộ đồ ăn ưng ý nhất với phong cách hiện đại, thanh lịch
+                hoặc truyền thống...
               </p>
               <p>
-                Ngoài ra, sản phẩm còn được thiết kế rất sang trọng và đẹp mắt, giúp bạn trang trí cho bàn ăn của mình
-                hoàn hảo. Bộ đồ ăn gốm sứ không chỉ là một vật dụng thiết yếu, mà nó còn mang lại nét đẹp đặc biệt cho
-                căn bếp và chính nhà bạn.&nbsp;
+                Ngoài ra, sản phẩm còn được thiết kế rất sang trọng và đẹp mắt, giúp bạn trang trí
+                cho bàn ăn của mình hoàn hảo. Bộ đồ ăn gốm sứ không chỉ là một vật dụng thiết yếu,
+                mà nó còn mang lại nét đẹp đặc biệt cho căn bếp và chính nhà bạn.&nbsp;
               </p>
               <p>
-                Trọn bộ đồ ăn gốm sứ gồm có đĩa, tô, đĩa dĩa, chén, ly và các vật dụng khác, giúp bạn có thể tổ chức một
-                bữa tiệc đặc biệt cho gia đình và bạn bè của mình. Bộ sản phẩm này có thể làm quà tặng cho người thân
-                trong ngày sinh nhật, Giáng sinh, lễ kỉ niệm hoặc đơn giản là món quà để thể hiện tình cảm của bạn đến
-                những người thân yêu nhất.
+                Trọn bộ đồ ăn gốm sứ gồm có đĩa, tô, đĩa dĩa, chén, ly và các vật dụng khác, giúp
+                bạn có thể tổ chức một bữa tiệc đặc biệt cho gia đình và bạn bè của mình. Bộ sản
+                phẩm này có thể làm quà tặng cho người thân trong ngày sinh nhật, Giáng sinh, lễ kỉ
+                niệm hoặc đơn giản là món quà để thể hiện tình cảm của bạn đến những người thân yêu
+                nhất.
               </p>
               <p>
-                Với lòng đam mê và kỹ năng chuyên môn, những sản phẩm gốm sứ của chúng tôi luôn mang đến sự hài lòng cho
-                khách hàng. Tất cả sản phẩm đều được thiết kế và làm thủ công bởi các thợ thủ công có nhiều kinh nghiệm
-                để đảm bảo chất lượng sản phẩm tốt nhất...
+                Với lòng đam mê và kỹ năng chuyên môn, những sản phẩm gốm sứ của chúng tôi luôn mang
+                đến sự hài lòng cho khách hàng. Tất cả sản phẩm đều được thiết kế và làm thủ công
+                bởi các thợ thủ công có nhiều kinh nghiệm để đảm bảo chất lượng sản phẩm tốt nhất...
               </p>
               <p>
-                Hãy đến với chúng tôi để trang trí cho ngôi nhà của bạn bằng những sản phẩm gốm sứ độc đáo và đẹp mắt
-                nhất. Chúng tôi luôn sẵn sàng cung cấp cho bạn
+                Hãy đến với chúng tôi để trang trí cho ngôi nhà của bạn bằng những sản phẩm gốm sứ
+                độc đáo và đẹp mắt nhất. Chúng tôi luôn sẵn sàng cung cấp cho bạn
               </p>
             </div>
           </div>
@@ -194,33 +394,42 @@
             <div class="rte">
               <p><strong>Bước 1:</strong> Truy cập website và lựa chọn sản phẩm cần mua</p>
               <p>
-                <strong>Bước 2:</strong> Click và sản phẩm muốn mua, màn hình hiển thị ra pop up với các lựa chọn sau
+                <strong>Bước 2:</strong> Click và sản phẩm muốn mua, màn hình hiển thị ra pop up với
+                các lựa chọn sau
               </p>
               <p>
-                Nếu bạn muốn tiếp tục mua hàng: Bấm vào phần tiếp tục mua hàng để lựa chọn thêm sản phẩm vào giỏ hàng
+                Nếu bạn muốn tiếp tục mua hàng: Bấm vào phần tiếp tục mua hàng để lựa chọn thêm sản
+                phẩm vào giỏ hàng
               </p>
               <p>Nếu bạn muốn xem giỏ hàng để cập nhật sản phẩm: Bấm vào xem giỏ hàng</p>
-              <p>Nếu bạn muốn đặt hàng và thanh toán cho sản phẩm này vui lòng bấm vào: Đặt hàng và thanh toán</p>
+              <p>
+                Nếu bạn muốn đặt hàng và thanh toán cho sản phẩm này vui lòng bấm vào: Đặt hàng và
+                thanh toán
+              </p>
               <p><strong>Bước 3:</strong> Lựa chọn thông tin tài khoản thanh toán</p>
               <p>
-                Nếu bạn đã có tài khoản vui lòng nhập thông tin tên đăng nhập là email và mật khẩu vào mục đã có tài
-                khoản trên hệ thống
+                Nếu bạn đã có tài khoản vui lòng nhập thông tin tên đăng nhập là email và mật khẩu
+                vào mục đã có tài khoản trên hệ thống
               </p>
               <p>
-                Nếu bạn chưa có tài khoản và muốn đăng ký tài khoản vui lòng điền các thông tin cá nhân để tiếp tục đăng
-                ký tài khoản. Khi có tài khoản bạn sẽ dễ dàng theo dõi được đơn hàng của mình
+                Nếu bạn chưa có tài khoản và muốn đăng ký tài khoản vui lòng điền các thông tin cá
+                nhân để tiếp tục đăng ký tài khoản. Khi có tài khoản bạn sẽ dễ dàng theo dõi được
+                đơn hàng của mình
               </p>
               <p>
-                Nếu bạn muốn mua hàng mà không cần tài khoản vui lòng nhấp chuột vào mục đặt hàng không cần tài khoản
+                Nếu bạn muốn mua hàng mà không cần tài khoản vui lòng nhấp chuột vào mục đặt hàng
+                không cần tài khoản
               </p>
               <p>
-                <strong>Bước 4:</strong> Điền các thông tin của bạn để nhận đơn hàng, lựa chọn hình thức thanh toán và
-                vận chuyển cho đơn hàng của mình
+                <strong>Bước 4:</strong> Điền các thông tin của bạn để nhận đơn hàng, lựa chọn hình
+                thức thanh toán và vận chuyển cho đơn hàng của mình
               </p>
-              <p><strong>Bước 5:</strong> Xem lại thông tin đặt hàng, điền chú thích và gửi đơn hàng</p>
               <p>
-                Sau khi nhận được đơn hàng bạn gửi chúng tôi sẽ liên hệ bằng cách gọi điện lại để xác nhận lại đơn hàng
-                và địa chỉ của bạn.
+                <strong>Bước 5:</strong> Xem lại thông tin đặt hàng, điền chú thích và gửi đơn hàng
+              </p>
+              <p>
+                Sau khi nhận được đơn hàng bạn gửi chúng tôi sẽ liên hệ bằng cách gọi điện lại để
+                xác nhận lại đơn hàng và địa chỉ của bạn.
               </p>
               <p>Trân trọng cảm ơn.</p>
             </div>
@@ -236,14 +445,24 @@
           <div class="thump-control">
             <div class="button-control">
               <div class="section-prev">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="17" viewBox="0 0 25 17" fill="none">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="17"
+                  viewBox="0 0 25 17"
+                  fill="none">
                   <path
                     d="M23.7836 7.28677L3.87185 7.28677L7.60226 3.10543C8.67378 1.90441 7.0665 0.102942 5.99497 1.30396L2.59757 5.11792L0.329633 7.66398C-0.109914 8.15959 -0.109914 8.96002 0.329632 9.45563L5.99497 15.8132C6.21052 16.0614 6.50721 16.2007 6.81633 16.1978C7.83671 16.1977 8.33747 14.8046 7.60226 14.0115L3.863 9.83019L23.8422 9.83019C25.4137 9.7428 25.2964 7.19909 23.7836 7.28677Z"
                     fill="#AAAAAA" />
                 </svg>
               </div>
               <div class="section-next">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="17" viewBox="0 0 26 17" fill="none">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="26"
+                  height="17"
+                  viewBox="0 0 26 17"
+                  fill="none">
                   <path
                     d="M2.01746 9.81882H21.9292L18.1988 14.0002C17.1272 15.2012 18.7345 17.0026 19.8061 15.8016L23.2035 11.9877L25.4714 9.44161C25.9109 8.946 25.9109 8.14557 25.4714 7.64996L19.8061 1.29244C19.5905 1.04418 19.2938 0.904877 18.9847 0.907759C17.9643 0.907903 17.4636 2.30096 18.1988 3.09405L21.938 7.2754H1.95879C0.3873 7.36279 0.504637 9.9065 2.01746 9.81882Z"
                     fill="black" />
@@ -258,7 +477,9 @@
             <% for (let i = 0; i < 6; i++) {%>
             <div class="swiper-slide">
               <div class="item_product_main">
-                <div class="variants product-action"><%- include('../components/product-card.ejs') %></div>
+                <div class="variants product-action">
+                  <%- include('../components/product-card.ejs') %>
+                </div>
               </div>
             </div>
             <% } %>
@@ -394,10 +615,6 @@
   </script>
 </div>
 
-<link
-  href="/assets/100/485/241/themes/911577/assets/picbox.scsse387.css"
-  rel="stylesheet"
-  type="text/css"
-  media="all" />
+<link href="/assets/picbox.css" rel="stylesheet" type="text/css" media="all" />
 
-<script src="/assets/100/485/241/themes/911577/assets/picboxe387.js" type="text/javascript"></script>
+<script src="/assets/picbox.js" type="text/javascript"></script>

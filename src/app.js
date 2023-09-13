@@ -7,7 +7,6 @@ const mongoSanitize = require('express-mongo-sanitize')
 const compression = require('compression')
 const cors = require('cors')
 const passport = require('passport')
-const httpStatus = require('http-status')
 const path = require('path')
 const routes = require('./routes')
 const config = require('./config/config')
@@ -15,6 +14,9 @@ const morgan = require('./config/morgan')
 const { jwtStrategy } = require('./config/passport')
 
 const app = express()
+
+// parse json request body
+app.use(express.json())
 
 // Set the view engine to ejs
 app.set('view engine', 'ejs')
@@ -30,9 +32,6 @@ if (config.env !== 'test') {
 
 // set security HTTP headers
 app.use(helmet())
-
-// parse json request body
-app.use(express.json())
 
 // parse urlencoded request body
 app.use(express.urlencoded({ extended: true }))
