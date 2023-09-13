@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   res.render('index', { view_content: 'products', title: 'All Products' })
 })
 
-router.get('/details', ProductController.getProduct)
+router.get('/details', ProductController.getAllProduct)
 
 router
   .route('/create-product')
