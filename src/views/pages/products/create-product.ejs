@@ -9,6 +9,12 @@
           <h1>Create Product</h1>
           <div id="pagelogin">
             <form method="post" enctype="multipart/form-data" method="POST">
+              <% if (locals.errors) { for (const error of errors) { %>
+              <div class="alert alert-danger" role="alert"><%= error.msg %></div>
+              <% }} else if (locals.status) { %>
+              <div class="alert alert-success" role="alert">Create product success</div>
+              <% } %>
+
               <div class="group_contact">
                 <input
                   placeholder="Product code"
@@ -61,12 +67,6 @@
                   id="description"
                   class="form-control content-area form-control-lg"
                   rows="5"></textarea>
-
-                <% if (locals.errors) { for (const error of errors) { %>
-                <div class="alert alert-danger" role="alert"><%= error.msg %></div>
-                <% }} else if (locals.status) { %>
-                <div class="alert alert-success" role="alert">Create product success</div>
-                <% } %>
 
                 <button type="submit" class="btn-create">Create</button>
               </div>

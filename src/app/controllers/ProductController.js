@@ -17,6 +17,7 @@ const ProductController = {
     try {
       //Validation
       const { errors } = validationResult(req)
+      const images = []
 
       if (errors.length > 0) {
         return res.render('index', {
@@ -28,11 +29,8 @@ const ProductController = {
         })
       }
 
-      const images = []
-
       for (const file of req.files) {
         const path = file.path.split('public')[1]
-
         images.push(path.replace(/\\/g, '/'))
       }
 
@@ -40,6 +38,8 @@ const ProductController = {
         id: req.body.id,
         title: req.body.title,
         category: req.body.category,
+        material: req.body.material,
+        size: req.body.size,
         images,
         description: req.body.description,
       })

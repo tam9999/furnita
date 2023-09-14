@@ -53,11 +53,15 @@ $(window).on('scroll  mousemove touchstart', function () {
           },
           CountBack: function (secs, self) {
             if (secs < 0) {
-              self.element.innerHTML = '<div class="lof-labelexpired"> ' + self.options.FinishMessage + '</div>'
+              self.element.innerHTML =
+                '<div class="lof-labelexpired"> ' + self.options.FinishMessage + '</div>'
               return
             }
             clearInterval(self.timer)
-            DisplayStr = self.options.DisplayFormat.replace(/%%D%%/g, self.calculateDate(secs, 86400, 365))
+            DisplayStr = self.options.DisplayFormat.replace(
+              /%%D%%/g,
+              self.calculateDate(secs, 86400, 365)
+            )
             DisplayStr = DisplayStr.replace(/%%H%%/g, self.calculateDate(secs, 3600, 24))
             DisplayStr = DisplayStr.replace(/%%M%%/g, self.calculateDate(secs, 60, 60))
             DisplayStr = DisplayStr.replace(/%%S%%/g, self.calculateDate(secs, 1, 60))
@@ -75,7 +79,18 @@ $(window).on('scroll  mousemove touchstart', function () {
             var $this = $(this)
             var $date = $this.data('date').split('-')
             $this.Dqdt_CountDown({
-              TargetDate: $date[0] + '/' + $date[1] + '/' + $date[2] + ' ' + $date[3] + ':' + $date[4] + ':' + $date[5],
+              TargetDate:
+                $date[0] +
+                '/' +
+                $date[1] +
+                '/' +
+                $date[2] +
+                ' ' +
+                $date[3] +
+                ':' +
+                $date[4] +
+                ':' +
+                $date[5],
               DisplayFormat:
                 '<div class="block-timer"><p>%%D%%Ngày</p></div><span>:</span><div class="block-timer"><p>%%H%%Giờ</p></div><span class="mobile">:</span><div class="block-timer"><p>%%M%%Phút</p></div><span>:</span><div class="block-timer"><p>%%S%%Giây</p></div>',
               FinishMessage: 'Chương trình đã kết thúc, hẹn gặp lại trong thời gian sớm nhất!',
@@ -283,7 +298,8 @@ $(window).on('scroll  mousemove touchstart', function () {
 
       function getContentTab(url, selector) {
         url = url + '?view=ajaxload4'
-        var loading = '<div style="width: 100%; margin-top: 20px" class="text-center">Đang tải dữ liệu...</div>'
+        var loading =
+          '<div style="width: 100%; margin-top: 20px" class="text-center">Loading...</div>'
         var fill = $(selector)
         $.ajax({
           type: 'GET',
@@ -312,7 +328,9 @@ $(window).on('scroll  mousemove touchstart', function () {
                   dataType: 'json',
                   beforeSend: function () {},
                   success: function (line_item) {
-                    $('.cart-popup-name').html(line_item.title).attr('href', line_item.url, 'title', line_item.title)
+                    $('.cart-popup-name')
+                      .html(line_item.title)
+                      .attr('href', line_item.url, 'title', line_item.title)
                     ajaxCart.load()
 
                     $('.popup-cart-mobile, .backdrop__body-backdrop___1rvky').addClass('active')
