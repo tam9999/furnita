@@ -1,12 +1,13 @@
 'use strict'
 
 const Product = require('../models/Product')
+const { validationResult } = require('express-validator')
 
 const ProductController = {
   // Show form create product
   formCreate: (req, res) => {
     console.log('====== Form create product =====')
-    res.render('index', { view_content: 'create-product', title: 'Create Product' })
+    res.render('index', { view_content: 'products/create-product', title: 'Create Product' })
   },
 
   // Create product
@@ -14,6 +15,19 @@ const ProductController = {
     console.log('====== Create product =====')
 
     try {
+      //Validation
+      const { errors } = validationResult(req)
+
+      if (errors.length > 0) {
+        return res.render('index', {
+          view_content: 'products/create-product',
+          title: 'Create Product',
+          status: false,
+          errors,
+          body: req.body,
+        })
+      }
+
       const images = []
 
       for (const file of req.files) {
@@ -32,7 +46,11 @@ const ProductController = {
 
       await product.save()
 
-      return res.redirect('/product/create-product')
+      return res.render('index', {
+        view_content: 'products/create-product',
+        title: 'Create Product',
+        status: true,
+      })
     } catch (error) {
       console.log(error)
     }
@@ -46,7 +64,7 @@ const ProductController = {
       const product = await Product.findOne({ id: 'BA-L-01' })
 
       return res.render('index', {
-        view_content: 'product-details',
+        view_content: 'products/details-product',
         title: product.title,
         url: '/product/baskets',
         product,

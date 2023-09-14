@@ -1,0 +1,79 @@
+<div class="bodywrap">
+  <%- include("../../components/bread-crumb") %>
+
+  <h1 class="title-head-contact a-left d-none">Create Product</h1>
+  <div class="layout-contact">
+    <div class="container">
+      <div class="row">
+        <div class="form-contact">
+          <h1>Create Product</h1>
+          <div id="pagelogin">
+            <form method="post" enctype="multipart/form-data" method="POST">
+              <div class="group_contact">
+                <input
+                  placeholder="Product code"
+                  type="text"
+                  value="<%= locals.body?.id %>"
+                  class="form-control form-control-lg"
+                  required=""
+                  name="id" />
+
+                <input
+                  placeholder="Title"
+                  type="text"
+                  value="<%= locals.body?.title %>"
+                  class="form-control form-control-lg"
+                  required=""
+                  name="title" />
+
+                <input
+                  placeholder="Category"
+                  type="text"
+                  value="<%= locals.body?.category %>"
+                  class="form-control form-control-lg"
+                  name="category" />
+
+                <input
+                  placeholder="Material"
+                  type="text"
+                  value="<%= locals.body?.material %>"
+                  class="form-control form-control-lg"
+                  name="material" />
+
+                <input
+                  placeholder="Size"
+                  type="text"
+                  value="<%= locals.body?.size %>"
+                  class="form-control form-control-lg"
+                  name="size" />
+
+                <input
+                  placeholder="Images"
+                  class="form-control form-control-lg"
+                  type="file"
+                  name="images"
+                  multiple />
+
+                <textarea
+                  placeholder="Description"
+                  value="<%= locals.body?.description %>"
+                  name="description"
+                  id="description"
+                  class="form-control content-area form-control-lg"
+                  rows="5"></textarea>
+
+                <% if (locals.errors) { for (const error of errors) { %>
+                <div class="alert alert-danger" role="alert"><%= error.msg %></div>
+                <% }} else if (locals.status) { %>
+                <div class="alert alert-success" role="alert">Create product success</div>
+                <% } %>
+
+                <button type="submit" class="btn-create">Create</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

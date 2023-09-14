@@ -12,6 +12,9 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  material: {
+    type: String,
+  },
   size: {
     type: String,
   },

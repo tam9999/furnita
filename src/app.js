@@ -8,6 +8,8 @@ const compression = require('compression')
 const cors = require('cors')
 const passport = require('passport')
 const path = require('path')
+const bodyParser = require('body-parser')
+const session = require('express-session')
 const routes = require('./routes')
 const config = require('./config/config')
 const morgan = require('./config/morgan')
@@ -16,7 +18,8 @@ const { jwtStrategy } = require('./config/passport')
 const app = express()
 
 // parse json request body
-app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 // Set the view engine to ejs
 app.set('view engine', 'ejs')
@@ -33,15 +36,22 @@ if (config.env !== 'test') {
 // set security HTTP headers
 app.use(helmet())
 
-// parse urlencoded request body
-app.use(express.urlencoded({ extended: true }))
-
 // sanitize request data
 app.use(xss())
 app.use(mongoSanitize())
 
 // gzip compression
 app.use(compression())
+
+// Middle basic
+app.use(express.urlencoded({ extended: false }))
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: 'secret robin furnita',
+  })
+)
 
 // enable cors
 app.use(cors())
