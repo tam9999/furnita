@@ -4,6 +4,19 @@ const Product = require('../models/Product')
 const { validationResult } = require('express-validator')
 
 const ProductController = {
+  // Show index page
+  index: async (req, res) => {
+    console.log('===== Show index page =====')
+
+    try {
+      const products = await Product.find().limit(8)
+      const customizes = await Product.find().limit(10)
+      res.render('index', { view_content: 'index', title: 'Robin Furnita', products, customizes })
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
   // Show form create product
   formCreate: (req, res) => {
     console.log('====== Form create product =====')
@@ -57,11 +70,12 @@ const ProductController = {
   },
 
   // Get a product
-  getProduct: async (req, res) => {
-    console.log('======  Get product =====')
+  renderProduct: async (req, res) => {
+    console.log('====== Render product detail =====')
 
     try {
-      const product = await Product.findOne({ id: 'BA-L-01' })
+      const id = req.params.id
+      const product = await Product.findOne({ id })
 
       return res.render('index', {
         view_content: 'products/details-product',
@@ -69,6 +83,37 @@ const ProductController = {
         url: '/product/baskets',
         product,
       })
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  // Get a product
+  getProduct: async (req, res) => {
+    console.log('======  Get a product =====')
+
+    try {
+      const id = req.params.id
+      const product = await Product.findOne({ id })
+      return res.status(200).send(product)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  // Get list product
+  getAllProduct: async (req, res) => {
+    console.log('====== Get all product =====')
+
+    try {
+      const category = req.params.category
+      if (category === 'all') {
+        const products = await Product.find().limit(8)
+        return res.status(200).send(products)
+      } else {
+        const products = await Product.find({ category }).limit(8)
+        return res.status(200).send(products)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -93,28 +138,6 @@ const ProductController = {
         res.status(500).json({
           success: false,
           message: 'Server error. Please try again.',
-        })
-      })
-  },
-
-  // Get list product
-  getAllProduct: (req, res) => {
-    console.log('====== Get all product =====')
-
-    Product.find()
-      .select()
-      .then((allProduct) => {
-        return res.status(200).json({
-          success: true,
-          message: 'A list of all product',
-          Products: allProduct,
-        })
-      })
-      .catch((err) => {
-        res.status(500).json({
-          success: false,
-          message: 'Server error. Please try again.',
-          error: err.message,
         })
       })
   },

@@ -2,11 +2,10 @@
 
 const ProductRouter = require('./product')
 const ArticlesRouter = require('./articles')
+const ProductController = require('../app/controllers/ProductController')
 
 const routes = (app) => {
-  app.get('/', (req, res) => {
-    res.render('index', { view_content: 'index', title: 'Robin Furnita' })
-  })
+  app.get('/', ProductController.index)
 
   app.get('/about', (req, res) => {
     res.render('index', { view_content: 'about', title: 'About Us' })

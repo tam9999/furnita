@@ -297,71 +297,44 @@ $(window).on('scroll  mousemove touchstart', function () {
       })
 
       function getContentTab(url, selector) {
-        url = url + '?view=ajaxload4'
         var loading =
           '<div style="width: 100%; margin-top: 20px" class="text-center">Loading...</div>'
-        var fill = $(selector)
-        $.ajax({
-          type: 'GET',
-          url: url,
-          beforeSend: function () {
-            $(selector).html(loading)
-          },
-          success: function (data) {
-            var content = $(data)
-            setTimeout(function () {
-              $(selector).html(content.html())
+        // $.ajax({
+        //   type: 'GET',
+        //   url: url,
+        //   beforeSend: function () {
+        //     $(selector).html(loading)
+        //   },
+        //   success: function (data) {
+        //     var content = $(data)
+        //     setTimeout(function () {
+        //       $(selector).html(content.html())
 
-              awe_lazyloadImage()
+        //       awe_lazyloadImage()
 
-              favoriBean.Wishlist.wishlistProduct()
+        //       $(document).ready(function () {
+        //         var modal = $('.quickview-product')
+        //         var btn = $('.quick-view')
+        //         var span = $('.quickview-close')
 
-              $(selector + ' .add_to_cart').click(function (e) {
-                e.preventDefault()
-                var $this = $(this)
-                var form = $this.parents('form')
-                $.ajax({
-                  type: 'POST',
-                  url: '/cart/add.js',
-                  async: false,
-                  data: form.serialize(),
-                  dataType: 'json',
-                  beforeSend: function () {},
-                  success: function (line_item) {
-                    $('.cart-popup-name')
-                      .html(line_item.title)
-                      .attr('href', line_item.url, 'title', line_item.title)
-                    ajaxCart.load()
+        //         btn.click(function () {
+        //           modal.show()
+        //         })
 
-                    $('.popup-cart-mobile, .backdrop__body-backdrop___1rvky').addClass('active')
-                    AddCartMobile(line_item)
-                  },
-                  cache: false,
-                })
-              })
-              $(document).ready(function () {
-                var modal = $('.quickview-product')
-                var btn = $('.quick-view')
-                var span = $('.quickview-close')
+        //         span.click(function () {
+        //           modal.hide()
+        //         })
 
-                btn.click(function () {
-                  modal.show()
-                })
-
-                span.click(function () {
-                  modal.hide()
-                })
-
-                $(window).on('click', function (e) {
-                  if ($(e.target).is('.modal')) {
-                    modal.hide()
-                  }
-                })
-              })
-            }, 300)
-          },
-          dataType: 'html',
-        })
+        //         $(window).on('click', function (e) {
+        //           if ($(e.target).is('.modal')) {
+        //             modal.hide()
+        //           }
+        //         })
+        //       })
+        //     }, 300)
+        //   },
+        //   dataType: 'html',
+        // })
       }
     }
   } catch (e) {

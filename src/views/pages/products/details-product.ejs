@@ -300,6 +300,7 @@
                 <div
                   class="sapo-product-reviews-badge sapo-product-reviews-badge-detail"
                   style="font-size: 16px">
+                  <p><strong>Product code:</strong> <%= product.id %></p>
                   <p><strong>Material:</strong> <%= product.material %></p>
                   <p><strong>Size:</strong> <%= product.size %></p>
                   <p><strong>Description:</strong> <%= product.description %></p>
@@ -445,7 +446,6 @@
     setTimeout(function () {
       var ch = $('.product_getcontent').height(),
         smore = $('.show-more')
-      console.log(ch)
       if (ch > 700) {
         $('.ba-text-fpt').addClass('has-height')
         smore.removeClass('d-none')
