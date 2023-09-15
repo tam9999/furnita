@@ -2,6 +2,7 @@
 
 const Product = require('../models/Product')
 const { validationResult } = require('express-validator')
+const utils = require('../../utils')
 
 const ProductController = {
   // Show index page
@@ -11,7 +12,13 @@ const ProductController = {
     try {
       const products = await Product.find().limit(8)
       const customizes = await Product.find().limit(10)
-      res.render('index', { view_content: 'index', title: 'Robin Furnita', products, customizes })
+
+      res.render('index', {
+        view_content: 'index',
+        title: 'Robin Furnita',
+        products,
+        customizes,
+      })
     } catch (error) {
       console.log(error)
     }
@@ -20,7 +27,11 @@ const ProductController = {
   // Show form create product
   formCreate: (req, res) => {
     console.log('====== Form create product =====')
-    res.render('index', { view_content: 'products/create-product', title: 'Create Product' })
+
+    res.render('index', {
+      view_content: 'products/create-product',
+      title: 'Create Product',
+    })
   },
 
   // Create product
@@ -37,8 +48,8 @@ const ProductController = {
           view_content: 'products/create-product',
           title: 'Create Product',
           status: false,
-          errors,
           body: req.body,
+          errors,
         })
       }
 
@@ -65,7 +76,8 @@ const ProductController = {
         status: true,
       })
     } catch (error) {
-      console.log(error)
+      console.error(error)
+      return res.status(500).send('Internal Server Error')
     }
   },
 
@@ -77,14 +89,29 @@ const ProductController = {
       const id = req.params.id
       const product = await Product.findOne({ id })
 
+      const categories = {
+        Baskets: 'baskets',
+        'Home decors': 'home-decors',
+        'Kitchen ware': 'kitchen-ware',
+        Lights: 'lights',
+        Handbags: 'handbags',
+      }
+
+      const categoryName = categories[product.category]
+      const item = utils.fillItemProduct(id)
+      const urlItem = utils.fillUrl[item]
+
       return res.render('index', {
         view_content: 'products/details-product',
+        url: `/product?category=${categoryName}`,
         title: product.title,
-        url: '/product/baskets',
+        urlItem,
+        item,
         product,
       })
     } catch (error) {
-      console.log(error)
+      console.error(error)
+      return res.status(500).send('Internal Server Error')
     }
   },
 
@@ -93,29 +120,66 @@ const ProductController = {
     console.log('======  Get a product =====')
 
     try {
-      const id = req.params.id
-      const product = await Product.findOne({ id })
+      const product = await Product.findOne({ id: req.params.id })
+
       return res.status(200).send(product)
     } catch (error) {
-      console.log(error)
+      console.error(error)
+      return res.status(500).send('Internal Server Error')
     }
   },
 
-  // Get list product
-  getAllProduct: async (req, res) => {
-    console.log('====== Get all product =====')
+  // Get category product data
+  getCategoryProductData: async (req, res) => {
+    console.log('====== Get category product data =====')
 
     try {
       const category = req.params.category
-      if (category === 'all') {
-        const products = await Product.find().limit(8)
-        return res.status(200).send(products)
-      } else {
-        const products = await Product.find({ category }).limit(8)
-        return res.status(200).send(products)
-      }
+      let query = category === 'all' ? {} : { category }
+      const products = await Product.find(query).limit(8)
+
+      return res.status(200).send(products)
     } catch (error) {
-      console.log(error)
+      console.error(error)
+      return res.status(500).send('Internal Server Error')
+    }
+  },
+
+  // Render category products
+  renderProductCategory: async (req, res) => {
+    console.log('====== Render category products =====')
+
+    try {
+      const categoryParam = req.query.category
+      const itemParam = req.query.item
+      const categories = {
+        baskets: 'Baskets',
+        'home-decors': 'Home decors',
+        'kitchen-ware': 'Kitchen ware',
+        lights: 'Lights',
+        handbags: 'Handbags',
+      }
+      const categoryName = categories[categoryParam] || 'All Products'
+      const query = categoryParam ? { category: categoryName } : {}
+      const item = utils.items[itemParam]
+
+      if (itemParam) {
+        query.id = { $regex: item, $options: 'i' }
+      }
+
+      const products = await Product.find(query).limit(12)
+
+      return res.render('index', {
+        view_content: 'products/products',
+        url: `/product?category=${categoryName}`,
+        category: categoryName,
+        item: utils.fillItem[item],
+        title: categoryName,
+        products,
+      })
+    } catch (error) {
+      console.error(error)
+      return res.status(500).send('Internal Server Error')
     }
   },
 

@@ -110,12 +110,19 @@
 
     $(selector).attr('src', src)
   }
+
+  function clear() {
+    $('.text2line').empty()
+    $('.quickview-id').empty()
+    $('.quickview-info').empty()
+    $('.product-summary').empty()
+    $('.product-description').empty()
+  }
 </script>
 <script>
   var thumbsListQuickview = new Swiper('.thumbs_list_quickview', {
     spaceBetween: 5,
     slidesPerView: 20,
-    freeMode: true,
     lazy: true,
     watchSlidesVisibility: true,
     watchSlidesProgress: true,
@@ -160,11 +167,7 @@
     '.quickview-close, #quick-view-product .quickview-overlay, .fancybox-overlay',
     function (e) {
       $('#quick-view-product').fadeOut(0)
-      $('.text2line').empty()
-      $('.quickview-id').empty()
-      $('.quickview-info').empty()
-      $('.product-summary').empty()
-      $('.product-description').empty()
+      clear()
       awe_hidePopup()
     }
   )
@@ -196,21 +199,13 @@
   })
 
   span.click(function () {
-    $('.text2line').empty()
-    $('.quickview-id').empty()
-    $('.quickview-info').empty()
-    $('.product-summary').empty()
-    $('.product-description').empty()
+    clear()
     modal.hide()
   })
 
   $(window).on('click', function (e) {
     if ($(e.target).is('.modal')) {
-      $('.text2line').empty()
-      $('.quickview-id').empty()
-      $('.quickview-info').empty()
-      $('.product-summary').empty()
-      $('.product-description').empty()
+      clear()
       modal.hide()
     }
   })
