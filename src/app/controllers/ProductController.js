@@ -29,7 +29,7 @@ const ProductController = {
     console.log('====== Form create product =====')
 
     res.render('index', {
-      view_content: 'products/create-product',
+      view_content: 'products/admin/create',
       title: 'Create Product',
     })
   },
@@ -45,7 +45,7 @@ const ProductController = {
 
       if (errors.length > 0) {
         return res.render('index', {
-          view_content: 'products/create-product',
+          view_content: 'products/admin/create',
           title: 'Create Product',
           status: false,
           body: req.body,
@@ -71,7 +71,7 @@ const ProductController = {
       await product.save()
 
       return res.render('index', {
-        view_content: 'products/create-product',
+        view_content: 'products/admin/create',
         title: 'Create Product',
         status: true,
       })

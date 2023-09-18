@@ -1,0 +1,96 @@
+<%- include("../../components/bread-crumb") %>
+
+<section class="section">
+  <div class="container">
+    <div class="wrap_background_aside page_login">
+      <div class="row">
+        <div
+          style="margin: auto"
+          class="col-lg-4 col-md-6 col-sm-12 col-12 col-xl-4 offset-xl-4 offset-lg-4 offset-md-3 offset-xl-3">
+          <div
+            class="row no-margin align-items-center"
+            style="background: #fff; border-radius: 5px">
+            <div class="page-login pagecustome clearfix no-padding">
+              <div class="wpx">
+                <h1 class="title_heads a-center"><span>Login</span></h1>
+                <div id="login" class="section">
+                  <form method="post" action="/admin/login" id="login" accept-charset="UTF-8">
+                    <input name="FormType" type="hidden" value="login" /><input
+                      name="utf8"
+                      type="hidden"
+                      value="true" />
+                    <span class="form-signup" style="color: red"> </span>
+
+                    <div class="form-signup clearfix">
+                      <fieldset class="form-group">
+                        <input
+                          type="email"
+                          class="form-control form-control-lg"
+                          value=""
+                          name="email"
+                          id="email"
+                          placeholder="Email"
+                          Required />
+                      </fieldset>
+
+                      <fieldset class="form-group">
+                        <input
+                          type="password"
+                          class="form-control form-control-lg"
+                          value=""
+                          name="password"
+                          id="password"
+                          placeholder="Password"
+                          Required />
+                      </fieldset>
+
+                      <div
+                        class="alert alert-danger"
+                        style="display: none"
+                        id="error"
+                        role="alert"></div>
+
+                      <div class="pull-xs-left">
+                        <input class="btn btn-style btn_50" type="submit" value="Login" />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  $('form').submit((event) => {
+    event.preventDefault()
+    let form = $(event.currentTarget)
+    $('#error').empty()
+    $.ajax({
+      url: form.attr('action'),
+      type: form.attr('method'),
+      dataType: 'json',
+      data: form.serialize(),
+      success: function (data) {
+        Swal.fire({
+          title: data.title,
+          text: data.message,
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+        })
+        window.location.href = '/admin'
+      },
+      error: function (error) {
+        if (error.status === 400) {
+          $.each(error.responseJSON.messages, (key, item) => {
+            $('#error').append(item.msg).show()
+          })
+        }
+      },
+    })
+  })
+</script>

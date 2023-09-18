@@ -1,0 +1,137 @@
+<div class="bodywrap">
+  <div class="layout-collection">
+    <%- include("../../../components/bread-crumb") %>
+
+    <div class="container">
+      <h1 class="title-page d-none">
+        <span>All products</span>
+      </h1>
+
+      <div class="block-collection">
+        <div class="category-products">
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn btn-info dropdown-toggle"
+              style="background-color: #75aebd"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false">
+              Product
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/admin/product">Data Tables</a></li>
+              <li><a class="dropdown-item" href="/product/create">Create Product</a></li>
+            </ul>
+          </div>
+
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn btn-info dropdown-toggle"
+              style="background-color: #b0b486"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false">
+              New
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/admin/new">Data Tables</a></li>
+              <li><a class="dropdown-item" href="/new/create">Create New</a></li>
+            </ul>
+          </div>
+
+          <div
+            style="margin-top: 20px"
+            class="products-view products-view-grid list_hover_pro"
+            role="alert">
+            <h1
+              class="title-head-contact a-left"
+              style="font-size: 30px; line-height: 30px; margin-bottom: 20px">
+              <strong>Products Lists</strong>
+            </h1>
+            <div class="layout-contact">
+              <div class="container">
+                <table class="table table-hover align-middle mb-0 bg-white text-nowrap">
+                  <thead class="bg-light text-center">
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Material</th>
+                      <th scope="col">Size</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Images</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-center">
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                      <th>1</th>
+                      <td>Mark</td>
+                      <td>
+                        <button type="button" class="btn btn-info btn-rounded">Change</button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-info btn-rounded">Edit</button>
+                        <button type="button" class="btn btn-danger btn-rounded">DELETE</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Jacob</td>
+                      <td>Thornton</td>
+                      <td>@fat</td>
+                      <th>2</th>
+                      <td>Jacob</td>
+                      <td>
+                        <button type="button" class="btn btn-info btn-rounded">Change</button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-info btn-rounded">Edit</button>
+                        <button type="button" class="btn btn-danger btn-rounded">DELETE</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <nav aria-label="Page navigation product">
+                  <ul class="pagination justify-content-end mt-4">
+                    <li class="page-item">
+                      <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link active" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="opacity_sidebar"></div>
+  <script>
+    var colName = 'All products'
+
+    var colId = 0
+
+    var selectedViewData = 'data'
+  </script>
+  <script src="/assets/col.js" type="text/javascript"></script>
+</div>
+
+<link rel="preload" as="script" href="/assets/main.js" />
+<link href="/assets/css/mdb.min.css" rel="stylesheet" />
+<script type="text/javascript" src="/assets/js/mdb.min.js"></script>

@@ -143,14 +143,14 @@
         <div class="container">
           <div class="danhmuc-swiper swiper-container">
             <div class="swiper-wrapper">
-              <% const categoryData = [
-                { name: 'Baskets', imageSrc: '/assets/danhmuc_1.jpg', url: '/product?category=baskets' },
-                { name: 'Home decors', imageSrc: '/assets/danhmuc_2.jpg', url: '/product?category=home-decors' },
-                { name: 'Lights', imageSrc: '/assets/danhmuc_4.jpg', url: '/product?category=lights' },
-                { name: 'Handbags', imageSrc: '/assets/danhmuc_5.jpg', url: '/product?category=handbags' },
-                { name: 'Kitchen ware', imageSrc: '/assets/danhmuc_3.jpg', url: '/product?category=kitchen-ware' },
-              ]; %>
-              <% categoryData.forEach((categoryItem) => { %>
+              <% const categoryData = [ { name: 'Baskets', imageSrc: '/assets/danhmuc_1.jpg', url:
+              '/product?category=baskets' }, { name: 'Home decors', imageSrc:
+              '/assets/danhmuc_2.jpg', url: '/product?category=home-decors' }, { name: 'Lights',
+              imageSrc: '/assets/danhmuc_4.jpg', url: '/product?category=lights' }, { name:
+              'Handbags', imageSrc: '/assets/danhmuc_5.jpg', url: '/product?category=handbags' }, {
+              name: 'Kitchen ware', imageSrc: '/assets/danhmuc_3.jpg', url:
+              '/product?category=kitchen-ware' }, ]; %> <% categoryData.forEach((categoryItem) => {
+              %>
               <div class="swiper-slide">
                 <a href="<%= categoryItem.url %>" title="<%= categoryItem.name %>"></a>
                 <div class="danhmuc-thumb">

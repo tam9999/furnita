@@ -1,6 +1,6 @@
 var selectedSortby
 var tt = 'Thứ tự'
-var filter = new Robin.SearchFilter()
+var filter = ''
 
 if (colId > 0) {
   filter.addValue('collection', 'collections', colId, 'AND')
@@ -71,7 +71,7 @@ function removeFilteredItem(id) {
   $('.filter-container #' + id).trigger('click')
 }
 function clearAllFiltered() {
-  filter = new Robin.SearchFilter()
+  filter = 'Robin.SearchFilte'
 
   $('.filter-container__selected-filter-list ul').html('')
   $('.filter-container input[type=checkbox]').attr('checked', false)

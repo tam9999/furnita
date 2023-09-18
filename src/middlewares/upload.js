@@ -13,6 +13,15 @@ let count = 0
 
 const setPath = (category, type, id) => {
   const dir = type ? `${category}/${type}/${id}` : `${category}/${id}`
+
+  if (!fs.existsSync(category)) {
+    fs.mkdirSync(category)
+  }
+
+  if (type && !fs.existsSync(`${category}/${type}`)) {
+    fs.mkdirSync(`${category}/${type}`)
+  }
+
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir)
   }
