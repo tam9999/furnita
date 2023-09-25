@@ -7,6 +7,7 @@ const AuthValidator = require('../middlewares/validators/user.validator')
 
 router.route('/').get(auth.user, AuthController.getProductsList)
 router.route('/product').get(auth.user, AuthController.getProductsList)
+router.route('/product/search').get(auth.user, AuthController.searchProduct)
 
 router
   .route('/login')

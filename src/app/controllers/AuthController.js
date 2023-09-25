@@ -1,8 +1,10 @@
 'use strict'
 
 const { validationResult } = require('express-validator')
-const User = require('../models/User')
 const jwToken = require('../../utils/jwToken')
+const User = require('../models/User')
+const Product = require('../models/Product')
+const pagination = require('../../utils/pagination')
 
 const AuthController = {
   login: async (req, res) => {
@@ -63,13 +65,53 @@ const AuthController = {
   },
 
   // Product
-  getProductsList: (req, res) => {
+  getProductsList: async (req, res) => {
     console.log('===== AuthController.getProductsList => START =====')
 
-    res.render('index', {
-      view_content: 'products/admin/table',
-      title: 'Products List',
-    })
+    try {
+      const { query: querySearch, originalUrl } = req
+      const query = querySearch.id ? { id: { $regex: querySearch.id, $options: 'i' } } : {}
+      const { perPage, currentPage, offset } = pagination.config(12, querySearch.page)
+      const products = await Product.find(query).limit(perPage).skip(offset)
+      const total = await Product.countDocuments(query)
+      const paginationResult = pagination.paginationCover(
+        originalUrl,
+        querySearch,
+        total,
+        perPage,
+        currentPage
+      )
+
+      res.render('index', {
+        view_content: 'products/admin/table',
+        title: 'Products List',
+        pagination: paginationResult.html,
+        products,
+        url: originalUrl,
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  },
+
+  // Search product
+  searchProduct: async (req, res) => {
+    console.log('===== AuthController.searchProduct => START =====')
+
+    try {
+      if (!req.query.id) {
+        return res.status(404).send({
+          status: false,
+          message: 'Id is required',
+        })
+      }
+
+      const products = await Product.find({ id: { $regex: req.query.id, $options: 'i' } })
+
+      return res.status(200).send(products)
+    } catch (error) {
+      console.error(error)
+    }
   },
 }
 

@@ -3,6 +3,7 @@
 const Product = require('../models/Product')
 const { validationResult } = require('express-validator')
 const utils = require('../../utils')
+const pagination = require('../../utils/pagination')
 
 const ProductController = {
   // Show index page
@@ -10,8 +11,8 @@ const ProductController = {
     console.log('===== Show index page =====')
 
     try {
-      const products = await Product.find().limit(8)
-      const customizes = await Product.find().limit(10)
+      const products = await Product.aggregate([{ $sample: { size: 8 } }])
+      const customizes = await Product.aggregate([{ $sample: { size: 10 } }])
 
       res.render('index', {
         view_content: 'index',
@@ -20,7 +21,7 @@ const ProductController = {
         customizes,
       })
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   },
 
@@ -89,15 +90,7 @@ const ProductController = {
       const id = req.params.id
       const product = await Product.findOne({ id })
 
-      const categories = {
-        Baskets: 'baskets',
-        'Home decors': 'home-decors',
-        'Kitchen ware': 'kitchen-ware',
-        Lights: 'lights',
-        Handbags: 'handbags',
-      }
-
-      const categoryName = categories[product.category]
+      const categoryName = utils.categories[product.category]
       const item = utils.fillItemProduct(id)
       const urlItem = utils.fillUrl[item]
 
@@ -137,8 +130,12 @@ const ProductController = {
       const category = req.params.category
       let query = category === 'all' ? {} : { category }
       const products = await Product.find(query).limit(8)
+      const data = {
+        products,
+        pathCategory: utils.categories[category],
+      }
 
-      return res.status(200).send(products)
+      return res.status(200).send(data)
     } catch (error) {
       console.error(error)
       return res.status(500).send('Internal Server Error')
@@ -150,8 +147,10 @@ const ProductController = {
     console.log('====== Render category products =====')
 
     try {
-      const categoryParam = req.query.category
-      const itemParam = req.query.item
+      const { query: querySearch, originalUrl } = req
+      const { perPage, currentPage, offset } = pagination.config(12, querySearch.page)
+
+      const { category, item } = req.query
       const categories = {
         baskets: 'Baskets',
         'home-decors': 'Home decors',
@@ -159,22 +158,31 @@ const ProductController = {
         lights: 'Lights',
         handbags: 'Handbags',
       }
-      const categoryName = categories[categoryParam] || 'All Products'
-      const query = categoryParam ? { category: categoryName } : {}
-      const item = utils.items[itemParam]
+      const categoryName = categories[category] || 'All Products'
+      const query = category ? { category: categoryName } : {}
+      const itemFill = utils.items[item]
 
-      if (itemParam) {
-        query.id = { $regex: item, $options: 'i' }
+      if (itemFill) {
+        query.id = { $regex: itemFill, $options: 'i' }
       }
 
-      const products = await Product.find(query).limit(12)
+      const products = await Product.find(query).limit(perPage).skip(offset)
+      const total = await Product.countDocuments(query)
+      const paginationResult = pagination.paginationCover(
+        originalUrl,
+        querySearch,
+        total,
+        perPage,
+        currentPage
+      )
 
       return res.render('index', {
         view_content: 'products/products',
         url: `/product?category=${categoryName}`,
         category: categoryName,
-        item: utils.fillItem[item],
+        item: utils.fillItem[itemFill],
         title: categoryName,
+        pagination: paginationResult.html,
         products,
       })
     } catch (error) {
@@ -183,27 +191,73 @@ const ProductController = {
     }
   },
 
-  // Update product
-  update: (req, res) => {
-    console.log('====== Update product =====')
+  // Form update the product
+  formUpdate: async (req, res) => {
+    console.log('====== ProductController.formUpdate =====')
 
-    const id = req.params.productId
-    const updateObject = req.body
-    Product.update({ id: id }, { $set: updateObject })
-      .exec()
-      .then(() => {
-        res.status(200).json({
-          success: true,
-          message: 'Product is updated',
-          updateProduct: updateObject,
-        })
+    try {
+      const id = req.params.id
+      const data = await Product.findOne({ id: id })
+
+      if (!data) {
+        return res.status(404).send('Product not found')
+      }
+
+      console.log(data)
+
+      return res.render('index', {
+        view_content: 'products/admin/edit',
+        title: 'Edit Product',
+        data,
       })
-      .catch((err) => {
-        res.status(500).json({
-          success: false,
-          message: 'Server error. Please try again.',
-        })
+    } catch (error) {
+      console.error(error)
+    }
+  },
+
+  // Update product
+  update: async (req, res) => {
+    console.log('====== ProductController.update =====')
+
+    try {
+      const id = req.params.id
+      const updateObject = req.body
+      await Product.findOneAndUpdate({ id: id }, { $set: updateObject })
+
+      return res.render('index', {
+        view_content: 'products/admin/edit',
+        title: 'Edit Product',
+        data: updateObject,
+        status: true,
       })
+    } catch (error) {
+      console.error(error)
+    }
+  },
+
+  // Update images product
+  updateImg: async (req, res) => {
+    console.log('====== ProductController.updateImg =====')
+
+    try {
+      const { id } = req.body
+      const images = []
+
+      for (const file of req.files) {
+        const path = file.path.split('public')[1]
+        images.push(path.replace(/\\/g, '/'))
+      }
+
+      await Product.findOneAndUpdate({ id }, { $set: { images } })
+
+      return res.redirect('/admin')
+    } catch (error) {
+      return res.status(500).send({
+        title: 'Update images',
+        message: 'Update images fail',
+        console: error.message,
+      })
+    }
   },
 
   // Delete a product

@@ -17,6 +17,10 @@ const { jwtStrategy } = require('./config/passport')
 
 const app = express()
 
+// Send mail
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+
 // Middle basic
 app.use(
   sessions({

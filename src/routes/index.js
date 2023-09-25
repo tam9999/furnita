@@ -4,6 +4,7 @@ const AuthRouter = require('./auth')
 const ProductRouter = require('./product')
 const ArticlesRouter = require('./articles')
 const ProductController = require('../app/controllers/ProductController')
+const SendMailController = require('../app/controllers/SendMailController')
 
 const routes = (app) => {
   app.get('/', ProductController.index)
@@ -25,6 +26,12 @@ const routes = (app) => {
   app.use('/new', ArticlesRouter)
 
   app.use('/product', ProductRouter)
+
+  app.use((req, res) => {
+    return res.status(404).render('pages/error')
+  })
+
+  app.post('/send-mail', SendMailController.sendMail)
 }
 
 module.exports = routes

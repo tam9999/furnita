@@ -17,4 +17,13 @@ router
   .get(auth.user, ProductController.formCreate)
   .post([upload.array('images', 5), auth.user, ProductValidator.create], ProductController.create)
 
+router
+  .route('/edit/:id')
+  .get(auth.user, ProductController.formUpdate)
+  .post([auth.user, ProductValidator.update], ProductController.update)
+
+router
+  .route('/update-img')
+  .post([upload.array('images', 5), auth.user], ProductController.updateImg)
+
 module.exports = router

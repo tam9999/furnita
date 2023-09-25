@@ -67,7 +67,7 @@ const storage = multer.diskStorage({
 
     callback(null, fileName)
     count += 1
-    if (count > 3) count = 0
+    if (count > 4) count = 0
   },
 })
 

@@ -2,6 +2,7 @@ const loading = '<div style="width: 100%; margin-top: 20px" class="text-center">
 
 $('.tab-link').click(function () {
   const category = $(this).attr('data-category')
+
   $.ajax({
     url: `/product/get-data-category/${category}`,
     type: 'GET',
@@ -10,9 +11,10 @@ $('.tab-link').click(function () {
     beforeSend: function () {
       $('.tab-content').html(loading)
     },
-    success: (products) => {
+    success: (data) => {
       const selector = '.tab-content'
       let html = '<div><div class="row row-fix">'
+      const { products, pathCategory } = data
 
       if (products.length > 0) {
         for (const product of products) {
@@ -52,6 +54,10 @@ $('.tab-link').click(function () {
             `
         }
 
+        html += ` </div><div class="see-more">
+                    <a title="See all" href="/product?category=${pathCategory}">See all</a>
+                  </div></div> `
+
         function awe_lazyloadImage() {
           var ll = new LazyLoad({
             elements_selector: '.lazyload',
@@ -68,8 +74,6 @@ $('.tab-link').click(function () {
           $('.product-summary').empty()
           $('.product-description').empty()
         }
-
-        html += '</div></div>'
 
         const content = $(html)
         setTimeout(function () {

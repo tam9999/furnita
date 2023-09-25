@@ -415,39 +415,7 @@ function switchView(view) {
   }
 }
 
-function selectFilterByCurrentQuery() {
-  var isFilter = false
-  var url = window.location.href
-  var queryString = decodeURI(window.location.search)
-  var filters = queryString.match(/\(.*?\)/g)
-  var page = 0
-  if (queryString) {
-    isFilter = true
-    $.urlParam = function (name) {
-      var results = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.href)
-      return results[1] || 0
-    }
-    page = $.urlParam('page')
-  }
-  if (filters && filters.length > 0) {
-    filters.forEach(function (item) {
-      item = item.replace(/\(\(/g, '(')
-      var element = $(".aside-content input[value='" + item + "']")
-      element.attr('checked', 'checked')
-      _toggleFilter(element)
-    })
-
-    isFilter = true
-  }
-  var sortOrder = getParameter(url, 'sortby')
-  if (sortOrder) {
-    _selectSortby(sortOrder)
-  }
-  if (isFilter) {
-    doSearch(page)
-    renderFilterdItems()
-  }
-}
+function selectFilterByCurrentQuery() {}
 function getParameter(url, name) {
   name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
   var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),

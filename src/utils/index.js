@@ -59,4 +59,12 @@ const fillItemProduct = (id) => {
   }
 }
 
-module.exports = { items, fillItem, fillUrl, fillItemProduct }
+const categories = {
+  Baskets: 'baskets',
+  'Home decors': 'home-decors',
+  'Kitchen ware': 'kitchen-ware',
+  Lights: 'lights',
+  Handbags: 'handbags',
+}
+
+module.exports = { items, fillItem, fillUrl, fillItemProduct, categories }
