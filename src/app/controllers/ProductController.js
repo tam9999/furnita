@@ -203,8 +203,6 @@ const ProductController = {
         return res.status(404).send('Product not found')
       }
 
-      console.log(data)
-
       return res.render('index', {
         view_content: 'products/admin/edit',
         title: 'Edit Product',
@@ -220,9 +218,32 @@ const ProductController = {
     console.log('====== ProductController.update =====')
 
     try {
+      //Validation
+      const { errors } = validationResult(req)
       const id = req.params.id
-      const updateObject = req.body
-      await Product.findOneAndUpdate({ id: id }, { $set: updateObject })
+
+      if (errors.length > 0) {
+        return res.render('index', {
+          view_content: 'products/admin/edit',
+          title: 'Edit Product',
+          status: false,
+          data: req.body,
+          errors,
+        })
+      }
+
+      const updateObject = {
+        id: req.body.id,
+        title: req.body.title,
+        category: req.body.category,
+        material: req.body.material,
+        size: req.body.size,
+        description: req.body.description,
+      }
+
+      await Product.findOneAndUpdate({ id }, { $set: updateObject })
+
+      updateObject._id = req.body._id
 
       return res.render('index', {
         view_content: 'products/admin/edit',
@@ -232,6 +253,7 @@ const ProductController = {
       })
     } catch (error) {
       console.error(error)
+      return res.status(500).send({ message: 'Server error' })
     }
   },
 

@@ -8,6 +8,22 @@ const lights = `${path}/lights`
 const homeDecors = `${path}/home-decors`
 const kitchenWare = `${path}/kitchen-ware`
 const handbags = `${path}/handbags`
+const arr = [
+  'BA-L',
+  'BA-S',
+  'BA-B',
+  'HD-W',
+  'HD-M',
+  'HD-F',
+  'CK-P',
+  'CK-T',
+  'CK-B',
+  'CK-K',
+  'CK-C',
+  'CK-C',
+  'LI',
+  'HBAG',
+]
 
 let count = 0
 
@@ -55,6 +71,20 @@ const getStoragePath = (id) => {
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     const id = req.body.id
+    // let count = 0
+
+    // arr.forEach((item) => {
+    //   const words = id.split(item)
+
+    //   if (words.length > 1) {
+    //     count++
+    //   }
+    // })
+
+    // if (count === 0) {
+    //   throw new Error('Id product is not syntactically correct!')
+    // }
+
     const storagePath = getStoragePath(id)
 
     callback(null, storagePath)
