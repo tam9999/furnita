@@ -414,40 +414,38 @@
               <div class="col-6 col-md-4 col-xl-3 col-fix">
                 <div class="item_product_main">
                   <div class="variants product-action">
-                    <div class="variants product-action">
-                      <div class="product-thumbnail">
-                        <a class="image_thumb" href="/product/details/<%= product.id %>">
-                          <img
-                            width="234"
-                            height="234"
-                            class="lazyload"
-                            src="/assets/lazy.png"
-                            data-src="<%= product.images[0] %>" />
+                    <div class="product-thumbnail">
+                      <a class="image_thumb" href="/product/details/<%= product.id %>">
+                        <img
+                          width="234"
+                          height="234"
+                          class="lazyload"
+                          src="/assets/lazy.png"
+                          data-src="<%= product.images[0] %>" />
+                      </a>
+
+                      <div class="action">
+                        <a
+                          title="Quick view"
+                          data-id="<%= product.id %>"
+                          class="quick-view btn-views">
+                          <svg class="icon">
+                            <use
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              xlink:href="#icon-quickview"></use>
+                          </svg>
                         </a>
-
-                        <div class="action">
-                          <a
-                            title="Quick view"
-                            data-id="<%= product.id %>"
-                            class="quick-view btn-views">
-                            <svg class="icon">
-                              <use
-                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                xlink:href="#icon-quickview"></use>
-                            </svg>
-                          </a>
-                        </div>
                       </div>
+                    </div>
 
-                      <div class="product-info">
-                        <h3 class="product-name">
-                          <a
-                            class="line-clamp line-clamp-2"
-                            href="/product/details/<%= product.id %>">
-                            <%= product.title %>
-                          </a>
-                        </h3>
-                      </div>
+                    <div class="product-info">
+                      <h3 class="product-name">
+                        <a
+                          class="line-clamp line-clamp-2"
+                          href="/product/details/<%= product.id %>">
+                          <%= product.title %>
+                        </a>
+                      </h3>
                     </div>
                   </div>
                 </div>

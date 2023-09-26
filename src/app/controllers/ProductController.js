@@ -1,5 +1,7 @@
 'use strict'
 
+const fs = require('fs')
+const path = require('path')
 const Product = require('../models/Product')
 const { validationResult } = require('express-validator')
 const utils = require('../../utils')
@@ -89,10 +91,18 @@ const ProductController = {
     try {
       const id = req.params.id
       const product = await Product.findOne({ id })
-
       const categoryName = utils.categories[product.category]
       const item = utils.fillItemProduct(id)
       const urlItem = utils.fillUrl[item]
+      const products = await await Product.aggregate([
+        {
+          $match: {
+            category: product.category,
+            // id: { $regex: itemFill, $options: 'i' },
+          },
+        },
+        { $sample: { size: 8 } },
+      ])
 
       return res.render('index', {
         view_content: 'products/details-product',
@@ -101,6 +111,7 @@ const ProductController = {
         urlItem,
         item,
         product,
+        products,
       })
     } catch (error) {
       console.error(error)
@@ -283,22 +294,42 @@ const ProductController = {
   },
 
   // Delete a product
-  delete: (req, res) => {
-    console.log('====== Delete a product =====')
+  delete: async (req, res) => {
+    console.log('====== ProductController.detele =====')
 
-    const id = req.params.productId
-    Product.findByIdAndRemove(id)
-      .exec()
-      .then(() =>
-        res.status(204).json({
-          success: true,
-        })
-      )
-      .catch((err) =>
-        res.status(500).json({
-          success: false,
-        })
-      )
+    try {
+      const id = req.params.id
+      let pathFolder
+
+      await Product.findOneAndRemove({ id })
+
+      for (const key in utils.paths) {
+        if (id.includes(key)) {
+          pathFolder = `../../public/img/products/${utils.paths[key]}/${id}`
+        }
+      }
+
+      fs.rmdir(path.join(__dirname, pathFolder), { recursive: true, force: true }, (err) => {
+        if (err) {
+          console.log('Error occurred in deleting directory', err)
+        }
+      })
+
+      return res.status(200).send({
+        title: 'Delete',
+        message: 'Delete product success!',
+        success: true,
+      })
+    } catch (error) {
+      console.error(error)
+
+      return res.status(500).json({
+        title: 'Delete',
+        message: 'Delete product fail!',
+        console: error.message,
+        success: false,
+      })
+    }
   },
 }
 

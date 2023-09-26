@@ -26,4 +26,6 @@ router
   .route('/update-img')
   .post([upload.array('images', 5), auth.user], ProductController.updateImg)
 
+router.delete('/delete/:id', auth.user, ProductController.delete)
+
 module.exports = router

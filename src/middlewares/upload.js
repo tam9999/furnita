@@ -2,40 +2,27 @@
 
 const multer = require('multer')
 const fs = require('fs')
+const utils = require('../utils')
 const path = 'src/public/img/products'
-const baskets = `${path}/baskets`
-const lights = `${path}/lights`
-const homeDecors = `${path}/home-decors`
-const kitchenWare = `${path}/kitchen-ware`
-const handbags = `${path}/handbags`
-const arr = [
-  'BA-L',
-  'BA-S',
-  'BA-B',
-  'HD-W',
-  'HD-M',
-  'HD-F',
-  'CK-P',
-  'CK-T',
-  'CK-B',
-  'CK-K',
-  'CK-C',
-  'CK-C',
-  'LI',
-  'HBAG',
-]
-
 let count = 0
 
-const setPath = (category, type, id) => {
-  const dir = type ? `${category}/${type}/${id}` : `${category}/${id}`
+const getStoragePath = (id) => {
+  let dir
 
-  if (!fs.existsSync(category)) {
-    fs.mkdirSync(category)
-  }
+  for (const key in utils.paths) {
+    if (id.includes(key)) {
+      const pathFolder = `${path}/${utils.paths[key]}`
+      const category = utils.paths[key].split('/')[0]
+      dir = `${pathFolder}/${id}`
 
-  if (type && !fs.existsSync(`${category}/${type}`)) {
-    fs.mkdirSync(`${category}/${type}`)
+      if (category && !fs.existsSync(`${path}/${category}`)) {
+        fs.mkdirSync(`${path}/${category}`)
+      }
+
+      if (!fs.existsSync(pathFolder)) {
+        fs.mkdirSync(pathFolder)
+      }
+    }
   }
 
   if (!fs.existsSync(dir)) {
@@ -45,46 +32,9 @@ const setPath = (category, type, id) => {
   return dir
 }
 
-const getStoragePath = (id) => {
-  if (id.includes('BA')) {
-    if (id.includes('BA-L')) return setPath(baskets, 'laundry', id)
-    if (id.includes('BA-S')) return setPath(baskets, 'store', id)
-    if (id.includes('BA-B')) return setPath(baskets, 'box', id)
-  } else if (id.includes('LI')) {
-    return setPath(lights, null, id)
-  } else if (id.includes('HD')) {
-    if (id.includes('HD-W')) return setPath(homeDecors, 'wall-shelves', id)
-    if (id.includes('HD-M')) return setPath(homeDecors, 'mirrors', id)
-    if (id.includes('HD-F')) return setPath(homeDecors, 'flower-box', id)
-  } else if (id.includes('CK')) {
-    if (id.includes('CK-P')) return setPath(kitchenWare, 'placemats', id)
-    if (id.includes('CK-T')) return setPath(kitchenWare, 'tray', id)
-    if (id.includes('CK-B')) return setPath(kitchenWare, 'bowls', id)
-    if (id.includes('CK-K')) return setPath(kitchenWare, 'kitchen-utensils', id)
-    if (id.includes('CK-C')) return setPath(kitchenWare, 'cutlery-tray', id)
-    if (id.includes('CK-L')) return setPath(kitchenWare, 'lunch-boxes', id)
-  } else if (id.includes('HBAG')) {
-    return setPath(handbags, null, id)
-  }
-}
-
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     const id = req.body.id
-    // let count = 0
-
-    // arr.forEach((item) => {
-    //   const words = id.split(item)
-
-    //   if (words.length > 1) {
-    //     count++
-    //   }
-    // })
-
-    // if (count === 0) {
-    //   throw new Error('Id product is not syntactically correct!')
-    // }
-
     const storagePath = getStoragePath(id)
 
     callback(null, storagePath)

@@ -67,4 +67,23 @@ const categories = {
   Handbags: 'handbags',
 }
 
-module.exports = { items, fillItem, fillUrl, fillItemProduct, categories }
+;('../../public/img/products/baskets/laundry/BA-L-31')
+
+const paths = {
+  'BA-L': 'baskets/laundry',
+  'BA-S': 'baskets/store',
+  'BA-B': 'baskets/box',
+  'HD-W': 'home-decors/wall-shelves',
+  'HD-M': 'home-decors/mirrors',
+  'HD-F': 'home-decors/flower-box',
+  'CK-P': 'kitchen-ware/placemats',
+  'CK-T': 'kitchen-ware/tray',
+  'CK-B': 'kitchen-ware/bowls',
+  'CK-K': 'kitchen-ware/kitchen-utensils',
+  'CK-C': 'kitchen-ware/cutlery-tray',
+  'CK-L': 'kitchen-ware/lunch-boxes',
+  LI: 'lights',
+  HBAG: 'handbags',
+}
+
+module.exports = { items, fillItem, fillUrl, fillItemProduct, categories, paths }
