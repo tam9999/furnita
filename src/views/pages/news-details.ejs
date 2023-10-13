@@ -7,7 +7,9 @@
         <meta itemprop="mainEntityOfPage" content="/meo-phat-hien-ly-coc-bat-dia-nhiem-doc" />
         <meta itemprop="description" content="" />
         <meta itemprop="author" content="Huỳnh Nguyễn Hồng Liêm" />
-        <meta itemprop="headline" content="Mẹo phát hiện ly cốc bát đĩa nhiễm độc và cách phòng tránh" />
+        <meta
+          itemprop="headline"
+          content="Mẹo phát hiện ly cốc bát đĩa nhiễm độc và cách phòng tránh" />
         <meta itemprop="image" content="/assets/danhmuc_1.jpg" />
         <meta itemprop="datePublished" content="10-06-2023" />
         <meta itemprop="dateModified" content="11-05-2023" />
@@ -24,7 +26,7 @@
           <div class="row">
             <div class="right-content col-lg-8 col-12">
               <div class="article-details clearfix">
-                <h1 class="article-title">Mẹo phát hiện ly cốc bát đĩa nhiễm độc và cách phòng tránh</h1>
+                <h1 class="article-title"><%= locals.article?.title %></h1>
                 <div class="posts">
                   <div class="time-post f">
                     <svg
@@ -41,7 +43,7 @@
                         d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm216 248c0 118.7-96.1 216-216 216-118.7 0-216-96.1-216-216 0-118.7 96.1-216 216-216 118.7 0 216 96.1 216 216zm-148.9 88.3l-81.2-59c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h14c6.6 0 12 5.4 12 12v146.3l70.5 51.3c5.4 3.9 6.5 11.4 2.6 16.8l-8.2 11.3c-3.9 5.3-11.4 6.5-16.8 2.6z"
                         class=""></path>
                     </svg>
-                    June 10, 2023
+                    <%= locals.article?.publishDate %>
                   </div>
                   <div class="time-post">
                     <svg
@@ -58,82 +60,21 @@
                         d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
                         class=""></path>
                     </svg>
-                    <span>Huỳnh Nguyễn Hồng Liêm</span>
+                    <span><%= locals.article?.author %></span>
                   </div>
                 </div>
                 <div class="rte">
+                  <% article.content.forEach(item => { %> <% if(item[0] == "!" && item[1] == "["){
+                  let separator; for(let i = 0; i <= item.length; i++){ if(item[i] == "]" && item[i
+                  + 1] == "(" && item[item.length - 1] == ")"){ separator = i; } } let alt =
+                  item.slice(2, separator); let src = item.slice(separator + 2, item.length -
+                  1).split('src/public')[1]; %>
                   <p>
-                    <strong
-                      >Mẹo nhận biết ly cốc bát đĩa nhiễm độc: Hoa văn càng sặc sỡ thì hàm lượng chì càng lớn</strong
-                    >
+                    <img alt="<%= alt %>" src="<%= src %>" />
                   </p>
-                  <p>
-                    Bởi thuỷ tinh nung trên 1.000 độ C thường không có màu. Thông thường, ly cốc tách đẹp rực rỡ là do
-                    nhà sản xuất cho thêm chì vào vừa tạo màu, vừa giảm nhiệt độ nung để tiết kiệm năng lượng. Chì còn
-                    được tráng bên ngoài để nhờ tính chất truyền sáng làm đồ thủy tinh đẹp long lanh. Nguy hiểm nhất là
-                    những sản phẩm có hình in sát mép cốc vì chì dễ xâm nhập vào cơ thể khi người sử dụng ăn, uống, đặc
-                    biệt là trẻ nhỏ
-                  </p>
-                  <p>
-                    Ngoài ra, đồ gốm sứ tráng men thủ công nếu nung ở nhiệt độ thấp cũng có thể gây nhiễm độc chì cho
-                    người dùng. Nguyên nhân là vì thông thường, gốm phải nung ở nhiệt độ từ 1.200 - 1.500 độ C. Nhưng
-                    nếu pha thêm chì chỉ cần nung ở 800 - 1.100 độ C đã được một lô thành phẩm, vừa tiết kiệm được năng
-                    lượng, vừa có sản phẩm hoa văn đẹp mắt.
-                  </p>
-                  <p>
-                    Vì vậy, những sản phẩm nung thủ công càng rẻ tiền thì quy trình càng không chuẩn, thậm chí bị cắt
-                    giảm để tiết kiệm thời gian, chi phí nên món đồ càng dễ chứa nhiều&nbsp;độc tố gây hại cho người
-                    dùng. Những sản phẩm độc hại này càng thôi nhiễm chì cao nếu chứa&nbsp;thực phẩm&nbsp;nóng, chua,
-                    nước hoa quả... bởi ở nhiệt độ cao, có axít, kiềm muối sẽ làm chì nhanh chóng giải phóng, thôi nhiễm
-                    vào thức ăn và gây độc cho cơ thể
-                  </p>
-                  <p><strong>Cách nhận biết ly côc bá đĩa nhiễm độc: Hãy thử độ độc với giấm và nước</strong></p>
-                  <p>
-                    Hàm lượng chì trong đồ thủy tinh lớn, gặp điều kiện thuận lợi có thể thôi ra, thâm nhập và tích lũy
-                    trong cơ thể, làm ảnh hưởng đến hệ thần kinh, máu, gây nhiễm độc nặng, thậm chí tử vong. Nếu tiếp
-                    xúc với môi trường axít, kiềm, hoặc nhiệt độ cao các nguyên tử bề mặt có xu hướng tách ra hòa lẫn
-                    vào thực phẩm, nước. Ở nhiệt độ càng cao, chì càng bị kích hoạt tách ra nhiều hơn.
-                  </p>
-                  <p>
-                    <img alt="noritake-3" src="/assets/danhmuc_1.jpg" />
-                  </p>
-                  <p>
-                    Hàm lượng chì ở ly, cốc, bát đĩa có thể xâm nhập vào cơ thể qua đường hô hấp, tiêu hóa và qua da khi
-                    người cầm, nắm sản phẩm.&nbsp;
-                  </p>
-                  <p>
-                    Để đảm bảo an toàn cho sức khoẻ, khuyến cáo nên mua bát đĩa gốm sứ chất lượng cao, màu trắng, ít hoa
-                    văn, trơn nhưng không quá bóng loáng.&nbsp;
-                  </p>
-                  <p>
-                    Hạn chế dùng bát đĩa tráng men màu trong lòng bát. Khi thấy bát đĩa sần sùi, bong tróc lớp men bóng,
-                    hoặc rạn thì nên mua bát mới (bởi men chì nhanh bị mài mòn, hàng chợ càng chóng bị bong tróc men,
-                    phai màu và hàm lượng chì thoát ra nhiều và ngấm hết vào thức ăn, rất nguy hiểm cho người dùng).
-                  </p>
-                  <p>
-                    Không dùng bát đĩa gốm sứ để làm chín thức ăn trong lò vi sóng vì nhiệt độ trong lò làm chất độc
-                    trong gốm sứ dễ tan hơn. Không nên để dưa chua trong đồ gốm sứ, mà nên để trong lọ thủy tinh
-                  </p>
-                  <p>&nbsp;</p>
-                  <p>
-                    Với đồ thủy tinh, tránh những đồ long lanh, bắt mắt. Chỉ nên dùng sản phẩm thủy tinh không có lớp
-                    sơn bọc lòe loẹt ở ngoài (vì lớp tráng có thể nhiễm chì). Nên dùng hàng có thương hiệu, nguồn gốc rõ
-                    ràng, ghi rõ hàm lượng chì (nếu có) trên bề mặt.
-                  </p>
-                  <p>
-                    <img alt="noritake-2" src="/assets/danhmuc_2.jpg" />
-                  </p>
-                  <p><em>Spigelau&nbsp;của Noritake.</em></p>
-                  <p>
-                    Ngoài ra, người tiêu dùng cũng có thể kiểm tra độ nung và kim loại nặng độc của bát đĩa gốm sứ bằng
-                    cách: Ngâm bát vào dung dịch dấm ăn, nếu bát có dấu hiệu trắng ra hoặc giấm đổi màu thì không nên
-                    dùng. Hoặc đổ một ít nước vào chỗ không tráng men (có thể là đế bát), nếu hút nước nhanh tức là
-                    xương bát nung không đủ nhiệt. Nếu bát không hút nước là bát tốt.&nbsp;
-                  </p>
-                  <p>
-                    Với đồ thủy tinh, sản phẩm chứa chì độc hại thường khi gõ vào nghe tiếng rất vang như đồ kim khí còn
-                    hàng thủy tinh nguyên chất không có tiếng kêu coong coong.
-                  </p>
+                  <% } else { %>
+                  <p><%= item %></p>
+                  <% }}) %>
                 </div>
               </div>
             </div>
@@ -174,7 +115,9 @@
                     </div>
                     <div class="contentright">
                       <h3>
-                        <a title="Tinh hoa nghề gốm xưa và nay" href="tinh-hoa-nghe-gom-xua-va-nay.html"
+                        <a
+                          title="Tinh hoa nghề gốm xưa và nay"
+                          href="tinh-hoa-nghe-gom-xua-va-nay.html"
                           >Tinh hoa nghề gốm xưa và nay</a
                         >
                       </h3>
@@ -254,7 +197,10 @@
                   <input name="FormType" type="hidden" value="article_comments" /><input
                     name="utf8"
                     type="hidden"
-                    value="true" /><input type="hidden" id="Token-ec8e410fb5a54c3795855cf08a5075f7" name="Token" />
+                    value="true" /><input
+                    type="hidden"
+                    id="Token-ec8e410fb5a54c3795855cf08a5075f7"
+                    name="Token" />
 
                   <div class="form-coment">
                     <div class="margin-top-0 margin-bottom-30 w-100">
@@ -327,14 +273,19 @@
                             >
                           </h3>
                           <p class="justify line-clamp line-clamp-3">
-                            Mẹo nhận biết ly cốc bát đĩa nhiễm độc: Hoa văn càng sặc sỡ thì hàm lượng chì càng lớn Bởi
-                            thuỷ tinh nung trên 1.000 độ C thường không có màu. Thông thường, ly cốc tách đẹp rực rỡ là
-                            do nhà sản xuất cho thêm chì vào vừa tạo màu, vừa giảm nhiệt độ nung để tiết kiệm năng
-                            lượng. Chì còn được tráng bên ngoài để nhờ tính chất truyền sáng làm đồ thủy tinh đẹp long
-                            lanh. Nguy hiểm nhất là những sản phẩm có hình in sát mép cốc vì chì dễ xâm nhập vào cơ...
+                            Mẹo nhận biết ly cốc bát đĩa nhiễm độc: Hoa văn càng sặc sỡ thì hàm
+                            lượng chì càng lớn Bởi thuỷ tinh nung trên 1.000 độ C thường không có
+                            màu. Thông thường, ly cốc tách đẹp rực rỡ là do nhà sản xuất cho thêm
+                            chì vào vừa tạo màu, vừa giảm nhiệt độ nung để tiết kiệm năng lượng. Chì
+                            còn được tráng bên ngoài để nhờ tính chất truyền sáng làm đồ thủy tinh
+                            đẹp long lanh. Nguy hiểm nhất là những sản phẩm có hình in sát mép cốc
+                            vì chì dễ xâm nhập vào cơ...
                           </p>
 
-                          <a class="see" href="meo-phat-hien-ly-coc-bat-dia-nhiem-doc.html" title="Read more">
+                          <a
+                            class="see"
+                            href="meo-phat-hien-ly-coc-bat-dia-nhiem-doc.html"
+                            title="Read more">
                             Read more
                           </a>
                         </div>
@@ -350,20 +301,25 @@
                         <div class="time-post">June 10, 2023</div>
                         <div class="info">
                           <h3>
-                            <a href="tinh-hoa-nghe-gom-xua-va-nay.html" title="Tinh hoa nghề gốm xưa và nay"
+                            <a
+                              href="tinh-hoa-nghe-gom-xua-va-nay.html"
+                              title="Tinh hoa nghề gốm xưa và nay"
                               >Tinh hoa nghề gốm xưa và nay</a
                             >
                           </h3>
                           <p class="justify line-clamp line-clamp-3">
-                            Xuất hiện cách đây hàng ngàn năm, nghề Gốm không chỉ cho thấy tiến bộ vượt bậc trong thiết
-                            kế sản xuất ra những công cụ phục vụ cuộc sống mà còn cho thấy trí sáng tạo và đôi bàn tay
-                            khéo léo của người thợ gốm Việt Nam. Trải qua bao thăng trầm cùng với thời gian, những làng
-                            gốm nổi tiếng xưa vẫn được gìn giữ và lưu truyền tới ngày nay như: Làng Gốm Bát Tràng, làng
-                            Gốm Chu Đậu, làng Gốm Bàu Trúc Tinh hoa Gốm xưa Gốm cổ truyền Việt Nam có cách đây hàng ngàn
-                            năm....
+                            Xuất hiện cách đây hàng ngàn năm, nghề Gốm không chỉ cho thấy tiến bộ
+                            vượt bậc trong thiết kế sản xuất ra những công cụ phục vụ cuộc sống mà
+                            còn cho thấy trí sáng tạo và đôi bàn tay khéo léo của người thợ gốm Việt
+                            Nam. Trải qua bao thăng trầm cùng với thời gian, những làng gốm nổi
+                            tiếng xưa vẫn được gìn giữ và lưu truyền tới ngày nay như: Làng Gốm Bát
+                            Tràng, làng Gốm Chu Đậu, làng Gốm Bàu Trúc Tinh hoa Gốm xưa Gốm cổ
+                            truyền Việt Nam có cách đây hàng ngàn năm....
                           </p>
 
-                          <a class="see" href="tinh-hoa-nghe-gom-xua-va-nay.html" title="Read more"> Read more </a>
+                          <a class="see" href="tinh-hoa-nghe-gom-xua-va-nay.html" title="Read more">
+                            Read more
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -384,12 +340,13 @@
                             >
                           </h3>
                           <p class="justify line-clamp line-clamp-3">
-                            Các bộ ấm trà được làm từ sứ cao cấp, sứ mạ vàng luôn là lựa chọn hàng đầu của rất nhiều
-                            khách hàng trung và thượng lưu hiện nay, bởi chất lượng vượt trội cũng như mẫu mã đẹp mắt,
-                            sang trọng. Tuy nhiên, không phải người dùng nào cũng biết cách vệ sinh và bảo quản bộ ấm
-                            trà đúng cách. Để giúp bạn luôn giữ được độ sáng bóng như mới của bộ ấm tách trà, bài viết
-                            hôm nay chúng tôi chia sẻ đến bạn một vài mẹo nhỏ. &nbsp; Nguyên nhân gây ra các vết hoen ố
-                            trên...
+                            Các bộ ấm trà được làm từ sứ cao cấp, sứ mạ vàng luôn là lựa chọn hàng
+                            đầu của rất nhiều khách hàng trung và thượng lưu hiện nay, bởi chất
+                            lượng vượt trội cũng như mẫu mã đẹp mắt, sang trọng. Tuy nhiên, không
+                            phải người dùng nào cũng biết cách vệ sinh và bảo quản bộ ấm trà đúng
+                            cách. Để giúp bạn luôn giữ được độ sáng bóng như mới của bộ ấm tách trà,
+                            bài viết hôm nay chúng tôi chia sẻ đến bạn một vài mẹo nhỏ. &nbsp;
+                            Nguyên nhân gây ra các vết hoen ố trên...
                           </p>
 
                           <a
@@ -418,14 +375,19 @@
                             >
                           </h3>
                           <p class="justify line-clamp line-clamp-3">
-                            Cách bảo quản đồ gốm sứ đúng cách tại nhà đơn giản nhất định phải biết. Chỉ với các mẹo vặt
-                            cùng nguyên liệu đơn giản sẽ giúp chúng ta có các sản phẩm gốm như mới theo thời gian. Khi
-                            đồ gốm sứ nói chung và&nbsp;Gốm Sứ Bát Tràng&nbsp;nói riêng bị xước lâu ngày, lớp bụi có thể
-                            tạo thành vết ố trên bề mặt bình. Để loại bỏ những vết bẩn này, bạn cần biết cách vệ sinh đồ
-                            gốm sứ đúng cách. Bạn có thể đun với hỗn hợp muối và giấm, dùng khăn ẩm phủ lên vết...
+                            Cách bảo quản đồ gốm sứ đúng cách tại nhà đơn giản nhất định phải biết.
+                            Chỉ với các mẹo vặt cùng nguyên liệu đơn giản sẽ giúp chúng ta có các
+                            sản phẩm gốm như mới theo thời gian. Khi đồ gốm sứ nói chung và&nbsp;Gốm
+                            Sứ Bát Tràng&nbsp;nói riêng bị xước lâu ngày, lớp bụi có thể tạo thành
+                            vết ố trên bề mặt bình. Để loại bỏ những vết bẩn này, bạn cần biết cách
+                            vệ sinh đồ gốm sứ đúng cách. Bạn có thể đun với hỗn hợp muối và giấm,
+                            dùng khăn ẩm phủ lên vết...
                           </p>
 
-                          <a class="see" href="cach-bao-quan-do-gom-su-dung-cach-tai-nha.html" title="Read more">
+                          <a
+                            class="see"
+                            href="cach-bao-quan-do-gom-su-dung-cach-tai-nha.html"
+                            title="Read more">
                             Read more
                           </a>
                         </div>
@@ -448,11 +410,13 @@
                             >
                           </h3>
                           <p class="justify line-clamp line-clamp-3">
-                            Cuộc sống hiện đại đã đưa đến các dụng cụ nấu nướng tiện lợi nhưng tiềm ẩn nhiều nguy cơ về
-                            sức khỏe được ủ mầm qua thời gian dài. Nồi bằng nhôm hay nồi tráng men chống dính khi không
-                            được sử dụng và bảo quản đúng cách có thể tạo ra các mầm bệnh ung thư trực tiếp vào cơ thể
-                            con người. &nbsp; Từ nồi đất đến nồi sứ dưỡng sinh Đi theo xu thế chung người tiêu dùng đang
-                            có thiên hướng quay về sử dụng các đồ dùng bằng đất nung để giữ hương vị món ăn ngon...
+                            Cuộc sống hiện đại đã đưa đến các dụng cụ nấu nướng tiện lợi nhưng tiềm
+                            ẩn nhiều nguy cơ về sức khỏe được ủ mầm qua thời gian dài. Nồi bằng nhôm
+                            hay nồi tráng men chống dính khi không được sử dụng và bảo quản đúng
+                            cách có thể tạo ra các mầm bệnh ung thư trực tiếp vào cơ thể con người.
+                            &nbsp; Từ nồi đất đến nồi sứ dưỡng sinh Đi theo xu thế chung người tiêu
+                            dùng đang có thiên hướng quay về sử dụng các đồ dùng bằng đất nung để
+                            giữ hương vị món ăn ngon...
                           </p>
 
                           <a

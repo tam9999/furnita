@@ -56,6 +56,7 @@ const ProductValidator = {
       .withMessage('Id should not be left empty')
       .bail()
       .custom(async (id, { req }) => {
+        console.log(req.body)
         const existingProduct = await Product.findOne({ _id: req.body._id })
 
         if (existingProduct.id !== id) {

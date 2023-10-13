@@ -10,6 +10,7 @@ const passport = require('passport')
 const path = require('path')
 const bodyParser = require('body-parser')
 const sessions = require('express-session')
+const fileupload = require('express-fileupload')
 const routes = require('./routes')
 const config = require('./config/config')
 const morgan = require('./config/morgan')
@@ -20,6 +21,7 @@ const app = express()
 // Send mail
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(fileupload())
 
 // Middle basic
 app.use(

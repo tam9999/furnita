@@ -243,7 +243,7 @@
   "resolved" "https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz"
   "version" "1.1.2"
 
-"busboy@^1.0.0":
+"busboy@^1.0.0", "busboy@^1.6.0":
   "integrity" "sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA=="
   "resolved" "https://registry.npmjs.org/busboy/-/busboy-1.6.0.tgz"
   "version" "1.6.0"
@@ -541,6 +541,13 @@
   "integrity" "sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg=="
   "resolved" "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz"
   "version" "1.8.1"
+
+"express-fileupload@^1.4.1":
+  "integrity" "sha512-9F6SkbxbEOA9cYOBZ8tnn238jL+bGfacQuUO/JqPWp5t+piUcoDcESvKwAXsQV7IHGxmI5bMj3QxMWOKOIsMCg=="
+  "resolved" "https://registry.npmjs.org/express-fileupload/-/express-fileupload-1.4.1.tgz"
+  "version" "1.4.1"
+  dependencies:
+    "busboy" "^1.6.0"
 
 "express-mongo-sanitize@^2.2.0":
   "integrity" "sha512-PZBs5nwhD6ek9ZuP+W2xmpvcrHwXZxD5GdieX2dsjPbAbH4azOkrHbycBud2QRU+YQF1CT+pki/lZGedHgo/dQ=="
@@ -1045,6 +1052,11 @@
   "integrity" "sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw=="
   "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   "version" "1.0.4"
+
+"moment@^2.29.4":
+  "integrity" "sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w=="
+  "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.4.tgz"
+  "version" "2.29.4"
 
 "mongodb-connection-string-url@^2.6.0":
   "integrity" "sha512-WvTZlI9ab0QYtTYnuMLgobULWhokRjtC7db9LtcVfJ+Hsnyr5eo6ZtNAt3Ly24XZScGMelOcGtm7lSn0332tPQ=="

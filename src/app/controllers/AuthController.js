@@ -5,6 +5,7 @@ const jwToken = require('../../utils/jwToken')
 const User = require('../models/User')
 const Product = require('../models/Product')
 const pagination = require('../../utils/pagination')
+const Articles = require('../models/Articles')
 
 const AuthController = {
   login: async (req, res) => {
@@ -109,6 +110,56 @@ const AuthController = {
       const products = await Product.find({ id: { $regex: req.query.id, $options: 'i' } })
 
       return res.status(200).send(products)
+    } catch (error) {
+      console.error(error)
+    }
+  },
+
+  // Articles
+  articlesList: async (req, res) => {
+    console.log('===== AuthController.articlesList => START =====')
+
+    try {
+      const { query: querySearch, originalUrl } = req
+      const query = querySearch.id ? { _id: { $regex: querySearch.id, $options: 'i' } } : {}
+      const { perPage, currentPage, offset } = pagination.config(12, querySearch.page)
+      const articles = await Articles.find(query).limit(perPage).skip(offset)
+      const total = await Articles.countDocuments(query)
+      const paginationResult = pagination.paginationCover(
+        originalUrl,
+        querySearch,
+        total,
+        perPage,
+        currentPage
+      )
+
+      res.render('index', {
+        view_content: 'articles/index',
+        title: 'Articles List',
+        pagination: paginationResult.html,
+        articles,
+        url: originalUrl,
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  },
+
+  // Search articles
+  searchArticle: async (req, res) => {
+    console.log('===== AuthController.searchArticle => START =====')
+
+    try {
+      if (!req.query.id) {
+        return res.status(404).send({
+          status: false,
+          message: 'Id is required',
+        })
+      }
+
+      const articles = await Articles.find({ _id: { $regex: req.query.id, $options: 'i' } })
+
+      return res.status(200).send(articles)
     } catch (error) {
       console.error(error)
     }

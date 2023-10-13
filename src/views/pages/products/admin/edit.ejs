@@ -40,77 +40,86 @@
             class="products-view products-view-grid list_hover_pro"
             role="alert">
             <h1
-              class="title-head-contact a-left"
+              class="title-head-contact a-left d-flex justify-content-center"
               style="font-size: 30px; line-height: 30px; margin-bottom: 20px">
-              <strong>Edit Product</strong>
+              <strong>Create Product</strong>
             </h1>
             <div class="layout-contact">
               <div class="container">
                 <div class="row">
                   <div class="form-contact">
-                    <form action="/product/edit/<%= data.id %>" method="post">
-                      <% if (locals.errors) { for (const error of errors) { %>
-                      <div class="alert alert-danger" role="alert"><%= error.msg %></div>
-                      <% }} else if (locals.status) { %>
-                      <div class="alert alert-success" role="alert">Edit product success</div>
-                      <% } %>
-
+                    <form
+                      method="post"
+                      action="/product/create"
+                      enctype="multipart/form-data"
+                      method="POST">
                       <div class="group_contact">
-                        <input
-                          placeholder="Product code"
-                          type="text"
-                          value="<%= data._id %>"
-                          class="form-control form-control-lg d-none"
-                          required=""
-                          name="_id"
-                          readonly />
+                        <div class="form-outline">
+                          <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            required=""
+                            name="id"
+                            id="id" />
+                          <label class="form-label" for="form12">Product code</label>
+                        </div>
 
-                        <input
-                          placeholder="Product code"
-                          type="text"
-                          value="<%= data.id %>"
-                          class="form-control form-control-lg"
-                          required=""
-                          name="id" />
+                        <div class="form-outline">
+                          <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            required=""
+                            name="title"
+                            id="title" />
+                          <label class="form-label" for="form12">Title</label>
+                        </div>
 
-                        <input
-                          placeholder="Title"
-                          type="text"
-                          value="<%= data.title %>"
-                          class="form-control form-control-lg"
-                          required=""
-                          name="title" />
+                        <div class="form-outline">
+                          <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            name="category"
+                            id="category" />
+                          <label class="form-label" for="form12">Category</label>
+                        </div>
 
-                        <input
-                          placeholder="Category"
-                          type="text"
-                          value="<%= data.category %>"
-                          class="form-control form-control-lg"
-                          name="category" />
+                        <div class="form-outline">
+                          <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            name="material"
+                            id="material" />
+                          <label class="form-label" for="form12">Material</label>
+                        </div>
 
-                        <input
-                          placeholder="Material"
-                          type="text"
-                          value="<%= data.material %>"
-                          class="form-control form-control-lg"
-                          name="material" />
+                        <div class="form-outline">
+                          <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            name="size"
+                            id="size" />
+                          <label class="form-label" for="form12">Size</label>
+                        </div>
 
-                        <input
-                          placeholder="Size"
-                          type="text"
-                          value="<%= data.size %>"
-                          class="form-control form-control-lg"
-                          name="size" />
+                        <div class="form-outline">
+                          <input
+                            class="form-control form-control-lg"
+                            type="file"
+                            name="images"
+                            id="images"
+                            multiple />
+                        </div>
 
-                        <textarea
-                          placeholder="Description"
-                          name="description"
-                          class="form-control content-area form-control-lg"
-                          rows="5">
-<%= data.description %></textarea
-                        >
+                        <div class="form-outline">
+                          <textarea
+                            name="description"
+                            id="description"
+                            class="form-control content-area form-control-lg"
+                            style="height: 250px"></textarea>
+                          <label class="form-label" for="form12">Description</label>
+                        </div>
 
-                        <button type="submit" class="btn-create">Edit</button>
+                        <button type="submit" class="btn-create">Create</button>
                       </div>
                     </form>
                   </div>
@@ -123,6 +132,7 @@
     </div>
   </div>
   <div class="opacity_sidebar"></div>
+
   <script>
     var colName = 'All products'
 
@@ -136,3 +146,51 @@
 <link rel="preload" as="script" href="/assets/main.js" />
 <link href="/assets/css/mdb.min.css" rel="stylesheet" />
 <script type="text/javascript" src="/assets/js/mdb.min.js"></script>
+<script type="text/javascript" src="/assets/js/product.js"></script>
+
+<script>
+  // Edit product
+  $('form').submit(function (event) {
+    event.preventDefault()
+    $('.is-invalid').removeClass('is-invalid')
+    let data = new FormData(this)
+    let form = $(event.currentTarget)
+    $.ajax({
+      url: form.attr('action'),
+      type: form.attr('method'),
+      data: data,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: (result) => {
+        Swal.fire({
+          title: result.title,
+          text: result.message,
+          icon: 'success',
+          showConfirmButton: false,
+          time: 1500,
+        })
+        window.location = '/admin/product'
+      },
+      error: (error) => {
+        if (error.status === 400) {
+          $.each(error.responseJSON.errors, function (key, item) {
+            $(`#${item.path}`).addClass('is-invalid')
+            showToast(item.msg)
+          })
+          $(`#${error.responseJSON.errors[0].path}`).focus()
+        } else if (error.status === 500) {
+          Swal.fire({
+            title: error.responseJSON.title,
+            text: error.responseJSON.message,
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1500,
+          })
+        } else {
+          console.log(error)
+        }
+      },
+    })
+  })
+</script>

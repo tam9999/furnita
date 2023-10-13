@@ -7,16 +7,12 @@ const logger = require('./config/logger')
 
 // Connect To MongoDB
 let server
-mongoose.connect(process.env.MONGODB_CONNECT_URI).then(() => {
+mongoose.connect(process.env.MONGODB_URL).then(() => {
   logger.info('Connected to MongoDB')
   server = app.listen(config.port, () => {
     logger.info('Port Nodejs: http://localhost:' + config.port)
   })
 })
-
-// server = app.listen(config.port, () => {
-//   logger.info('Port Nodejs: http://localhost:' + config.port)
-// })
 
 const exitHandler = () => {
   if (server) {

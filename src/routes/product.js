@@ -5,27 +5,28 @@ const router = express.Router()
 const auth = require('../middlewares/auth')
 const ProductController = require('../app/controllers/ProductController')
 const ProductValidator = require('../middlewares/validators/product.validator')
-const upload = require('../middlewares/upload')
 
 router.get('/', ProductController.renderProductCategory)
 router.get('/details/:id', ProductController.renderProduct)
 router.get('/quick-view/:id', ProductController.getProduct)
 router.get('/get-data-category/:category', ProductController.getCategoryProductData)
 
+// Create Product
 router
   .route('/create')
-  .get(auth.user, ProductController.formCreate)
-  .post([upload.array('images', 5), auth.user, ProductValidator.create], ProductController.create)
+  .get(ProductController.formCreate)
+  .post([ProductValidator.create], ProductController.create)
 
+// Update Product
 router
   .route('/edit/:id')
-  .get(auth.user, ProductController.formUpdate)
-  .post([auth.user, ProductValidator.update], ProductController.update)
+  .get(ProductController.formUpdate)
+  .post([ProductValidator.update], ProductController.update)
 
-router
-  .route('/update-img')
-  .post([upload.array('images', 5), auth.user], ProductController.updateImg)
+// Update images
+router.route('/update-img').post(ProductController.updateImg)
 
-router.delete('/delete/:id', auth.user, ProductController.delete)
+// Delete Product
+router.delete('/delete/:id', ProductController.delete)
 
 module.exports = router

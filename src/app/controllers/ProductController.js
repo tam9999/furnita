@@ -6,6 +6,7 @@ const Product = require('../models/Product')
 const { validationResult } = require('express-validator')
 const utils = require('../../utils')
 const pagination = require('../../utils/pagination')
+const upload = require('../../utils/upload')
 
 const ProductController = {
   // Show index page
@@ -44,23 +45,16 @@ const ProductController = {
     try {
       //Validation
       const { errors } = validationResult(req)
-      const images = []
 
-      if (errors.length > 0) {
-        return res.render('index', {
-          view_content: 'products/admin/create',
+      if (errors.length) {
+        return res.status(400).send({
           title: 'Create Product',
-          status: false,
-          body: req.body,
-          errors,
+          message: 'Create product fail',
+          errors: errors,
         })
       }
 
-      for (const file of req.files) {
-        const path = file.path.split('public')[1]
-        images.push(path.replace(/\\/g, '/'))
-      }
-
+      const images = await upload(req, res)
       const product = new Product({
         id: req.body.id,
         title: req.body.title,
@@ -73,14 +67,17 @@ const ProductController = {
 
       await product.save()
 
-      return res.render('index', {
-        view_content: 'products/admin/create',
+      return res.status(200).send({
         title: 'Create Product',
-        status: true,
+        message: 'Create Product Success!',
       })
     } catch (error) {
       console.error(error)
-      return res.status(500).send('Internal Server Error')
+      return res.status(500).send({
+        title: 'Create Product',
+        message: 'Create product fail',
+        console: error.message,
+      })
     }
   },
 
@@ -234,12 +231,10 @@ const ProductController = {
       const id = req.params.id
 
       if (errors.length > 0) {
-        return res.render('index', {
-          view_content: 'products/admin/edit',
-          title: 'Edit Product',
-          status: false,
-          data: req.body,
-          errors,
+        return res.status(400).send({
+          title: 'Update Product',
+          message: 'Update product fail',
+          errors: errors,
         })
       }
 
@@ -254,17 +249,17 @@ const ProductController = {
 
       await Product.findOneAndUpdate({ id }, { $set: updateObject })
 
-      updateObject._id = req.body._id
-
-      return res.render('index', {
-        view_content: 'products/admin/edit',
-        title: 'Edit Product',
-        data: updateObject,
-        status: true,
+      return res.status(200).send({
+        title: 'Update Product',
+        message: 'Update Product Success!',
       })
     } catch (error) {
       console.error(error)
-      return res.status(500).send({ message: 'Server error' })
+      return res.status(500).send({
+        title: 'Update Product',
+        message: 'Update product fail',
+        console: error.message,
+      })
     }
   },
 
@@ -274,12 +269,7 @@ const ProductController = {
 
     try {
       const { id } = req.body
-      const images = []
-
-      for (const file of req.files) {
-        const path = file.path.split('public')[1]
-        images.push(path.replace(/\\/g, '/'))
-      }
+      const images = await upload(req, res)
 
       await Product.findOneAndUpdate({ id }, { $set: { images } })
 
@@ -318,16 +308,13 @@ const ProductController = {
       return res.status(200).send({
         title: 'Delete',
         message: 'Delete product success!',
-        success: true,
       })
     } catch (error) {
       console.error(error)
-
       return res.status(500).json({
         title: 'Delete',
         message: 'Delete product fail!',
         console: error.message,
-        success: false,
       })
     }
   },

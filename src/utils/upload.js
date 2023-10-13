@@ -1,10 +1,8 @@
 'use strict'
 
-const multer = require('multer')
 const fs = require('fs')
-const utils = require('../utils')
+const utils = require('./')
 const path = 'src/public/img/products'
-let count = 0
 
 const getStoragePath = (id) => {
   let dir
@@ -32,25 +30,26 @@ const getStoragePath = (id) => {
   return dir
 }
 
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    const id = req.body.id
-    const storagePath = getStoragePath(id)
+const upload = (req, res) => {
+  const files = req.files.images
+  const images = []
 
-    callback(null, storagePath)
-  },
+  files.forEach(async (file, index) => {
+    try {
+      const fileFormat = file.mimetype.split('/')[1]
+      const storagePath = getStoragePath(req.body.id) + `/${req.body.id}-${index}.${fileFormat}`
 
-  filename: (req, file, callback) => {
-    const filetype = file.mimetype
-    const fileformate = filetype.split('/')[1]
-    const fileName = `${req.body.id}-${count}.${fileformate}`
+      images.push(storagePath.split('src/public')[1])
 
-    callback(null, fileName)
-    count += 1
-    if (count > 4) count = 0
-  },
-})
+      // Create upload
+      await file.mv(storagePath)
+    } catch (err) {
+      console.error(err)
+      return res.send(err)
+    }
+  })
 
-const upload = multer({ storage: storage })
+  return images
+}
 
 module.exports = upload
