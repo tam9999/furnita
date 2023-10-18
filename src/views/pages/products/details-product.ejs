@@ -1,4 +1,4 @@
-<link href="/assets/product_style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/assets/css/product_style.css" rel="stylesheet" type="text/css" media="all" />
 <div class="bodywrap">
   <%- include("../../components/bread-crumb") %>
 
@@ -230,7 +230,7 @@
                           width="234"
                           height="234"
                           class="lazyload"
-                          src="/assets/lazy.png"
+                          src="/img/logo/lazy.png"
                           data-src="<%= product.images[0] %>" />
                       </a>
 
@@ -256,6 +256,7 @@
                           <%= product.title %>
                         </a>
                       </h3>
+                      <div class="price-box"><%= product.price %>$</div>
                     </div>
                   </div>
                 </div>
@@ -393,6 +394,6 @@
   </script>
 </div>
 
-<link href="/assets/picbox.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/assets/css/picbox.css" rel="stylesheet" type="text/css" media="all" />
 
-<script src="/assets/picbox.js" type="text/javascript"></script>
+<script src="/assets/js/picbox.js" type="text/javascript"></script>

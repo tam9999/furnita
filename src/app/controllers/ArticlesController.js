@@ -117,8 +117,6 @@ const ArticlesController = {
         message: 'Create article success!',
       })
     } catch (error) {
-      console.error(error)
-
       const images = req.body.images.split(',')
 
       if (images.length > 1) {
@@ -131,6 +129,7 @@ const ArticlesController = {
         })
       }
 
+      console.error(error)
       return res.status(500).send({
         title: 'Create article',
         message: 'Create article fail!',

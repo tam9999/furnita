@@ -1,27 +1,10 @@
 'use strict'
 
 const fs = require('fs')
-const utils = require('./')
 const path = 'src/public/img/products'
 
 const getStoragePath = (id) => {
-  let dir
-
-  for (const key in utils.paths) {
-    if (id.includes(key)) {
-      const pathFolder = `${path}/${utils.paths[key]}`
-      const category = utils.paths[key].split('/')[0]
-      dir = `${pathFolder}/${id}`
-
-      if (category && !fs.existsSync(`${path}/${category}`)) {
-        fs.mkdirSync(`${path}/${category}`)
-      }
-
-      if (!fs.existsSync(pathFolder)) {
-        fs.mkdirSync(pathFolder)
-      }
-    }
-  }
+  const dir = `${path}/${id}`
 
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir)
@@ -44,7 +27,6 @@ const upload = (req, res) => {
       // Create upload
       await file.mv(storagePath)
     } catch (err) {
-      console.error(err)
       return res.send(err)
     }
   })

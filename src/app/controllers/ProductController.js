@@ -59,8 +59,10 @@ const ProductController = {
         id: req.body.id,
         title: req.body.title,
         category: req.body.category,
+        subcategory: req.body.subcategory,
         material: req.body.material,
         size: req.body.size,
+        price: req.body.price,
         images,
         description: req.body.description,
       })
@@ -72,7 +74,17 @@ const ProductController = {
         message: 'Create Product Success!',
       })
     } catch (error) {
-      console.error(error)
+      const dir = `../../public/img/products/${req.body.id}`
+      const product = await Product.find({ id: req.body.id })
+
+      if (!product.length) {
+        fs.rmdir(path.join(__dirname, dir), { recursive: true, force: true }, (err) => {
+          if (err) {
+            console.log('Error occurred in deleting directory', err)
+          }
+        })
+      }
+
       return res.status(500).send({
         title: 'Create Product',
         message: 'Create product fail',
@@ -205,7 +217,7 @@ const ProductController = {
 
     try {
       const id = req.params.id
-      const data = await Product.findOne({ id: id })
+      const data = await Product.findOne({ id })
 
       if (!data) {
         return res.status(404).send('Product not found')
@@ -242,8 +254,10 @@ const ProductController = {
         id: req.body.id,
         title: req.body.title,
         category: req.body.category,
+        subcategory: req.body.subcategory,
         material: req.body.material,
         size: req.body.size,
+        price: req.body.price,
         description: req.body.description,
       }
 
@@ -289,21 +303,16 @@ const ProductController = {
 
     try {
       const id = req.params.id
-      let pathFolder
+      const product = await Product.findOneAndRemove({ id })
 
-      await Product.findOneAndRemove({ id })
-
-      for (const key in utils.paths) {
-        if (id.includes(key)) {
-          pathFolder = `../../public/img/products/${utils.paths[key]}/${id}`
-        }
+      if (product) {
+        const dir = `../../public/img/products/${req.params.id}`
+        fs.rmdir(path.join(__dirname, dir), { recursive: true, force: true }, (err) => {
+          if (err) {
+            console.log('Error occurred in deleting directory', err)
+          }
+        })
       }
-
-      fs.rmdir(path.join(__dirname, pathFolder), { recursive: true, force: true }, (err) => {
-        if (err) {
-          console.log('Error occurred in deleting directory', err)
-        }
-      })
 
       return res.status(200).send({
         title: 'Delete',

@@ -226,7 +226,7 @@ $(window).on('scroll  mousemove touchstart', function () {
       var swiperins = new Swiper('.instagram-swiper', {
         spaceBetween: 20,
         centeredSlides: true,
-        freeMode: true,
+        freeMode: false,
         loop: true,
         on: {
           init: function () {
@@ -299,42 +299,6 @@ $(window).on('scroll  mousemove touchstart', function () {
       function getContentTab(url, selector) {
         var loading =
           '<div style="width: 100%; margin-top: 20px" class="text-center">Loading...</div>'
-        // $.ajax({
-        //   type: 'GET',
-        //   url: url,
-        //   beforeSend: function () {
-        //     $(selector).html(loading)
-        //   },
-        //   success: function (data) {
-        //     var content = $(data)
-        //     setTimeout(function () {
-        //       $(selector).html(content.html())
-
-        //       awe_lazyloadImage()
-
-        //       $(document).ready(function () {
-        //         var modal = $('.quickview-product')
-        //         var btn = $('.quick-view')
-        //         var span = $('.quickview-close')
-
-        //         btn.click(function () {
-        //           modal.show()
-        //         })
-
-        //         span.click(function () {
-        //           modal.hide()
-        //         })
-
-        //         $(window).on('click', function (e) {
-        //           if ($(e.target).is('.modal')) {
-        //             modal.hide()
-        //           }
-        //         })
-        //       })
-        //     }, 300)
-        //   },
-        //   dataType: 'html',
-        // })
       }
     }
   } catch (e) {

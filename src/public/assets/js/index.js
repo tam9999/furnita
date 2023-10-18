@@ -27,7 +27,7 @@ $('.tab-link').click(function () {
                       width="234"
                       height="234"
                       class="lazyload"
-                      src="/assets/lazy.png"
+                      src="/img/logo/lazy.png"
                       data-src="${product.images[0]}" />
                   </a>
 
@@ -48,6 +48,7 @@ $('.tab-link').click(function () {
                       ${product.title}
                     </a>
                   </h3>
+                  <div class="price-box"><%= product.price %>$</div>
                 </div>
               </div>
             </div>
