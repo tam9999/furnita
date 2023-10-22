@@ -10,105 +10,165 @@
             <div class="product-image-block relative">
               <div class="swiper-container gallery-top">
                 <div class="swiper-wrapper" id="lightgallery">
-                  <a class="swiper-slide" data-hash="0" href="<%= product.images[0] %>">
+                  <% for (let i = 0; i < product.images.length; i++) { %>
+                  <a class="swiper-slide" data-hash="<%= i %>" href="<%= product.images[i] %>">
                     <img
                       class="img-responsive mx-auto d-block swiper-lazy"
                       height="400"
                       width="400"
-                      src="<%= product.images[0] %>"
+                      src="<%= product.images[i] %>"
                       alt="" />
                   </a>
-
-                  <a class="swiper-slide" data-hash="1" href="<%= product.images[1] %>">
-                    <img
-                      class="img-responsive mx-auto d-block swiper-lazy"
-                      height="400"
-                      width="400"
-                      src="<%= product.images[1] %>"
-                      alt="" />
-                  </a>
-
-                  <a class="swiper-slide" data-hash="2" href="<%= product.images[2] %>">
-                    <img
-                      class="img-responsive mx-auto d-block swiper-lazy"
-                      height="400"
-                      width="400"
-                      src="<%= product.images[2] %>"
-                      alt="" />
-                  </a>
-
-                  <a class="swiper-slide" data-hash="3" href="<%= product.images[3] %>">
-                    <img
-                      class="img-responsive mx-auto d-block swiper-lazy"
-                      height="400"
-                      width="400"
-                      src="<%= product.images[3] %>"
-                      alt="" />
-                  </a>
+                  <% } %>
                 </div>
+                <a
+                  href="javascript:void(0)"
+                  class="setWishlist btn-wishlist"
+                  data-wish="<%= product?.id %>"
+                  tabindex="0"
+                  title="Add to wish">
+                  <svg class="icon">
+                    <use
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xlink:href="#icon-wishlist"></use>
+                  </svg>
+                </a>
               </div>
               <div class="swiper-container gallery-thumbs">
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide" data-hash="0">
+                  <% for (let i = 0; i < product.images.length; i++) { %>
+                  <div class="swiper-slide" data-hash="<%= i %>">
                     <div class="p-100">
                       <img
                         class="swiper-lazy"
                         height="80"
                         width="80"
-                        src="<%= product.images[0] %>"
+                        src="<%= product.images[i] %>"
                         alt="" />
                     </div>
                   </div>
-
-                  <div class="swiper-slide" data-hash="1">
-                    <div class="p-100">
-                      <img
-                        class="swiper-lazy"
-                        height="80"
-                        width="80"
-                        src="<%= product.images[1] %>"
-                        alt="" />
-                    </div>
-                  </div>
-
-                  <div class="swiper-slide" data-hash="2">
-                    <div class="p-100">
-                      <img
-                        class="swiper-lazy"
-                        height="80"
-                        width="80"
-                        src="<%= product.images[2] %>"
-                        alt="" />
-                    </div>
-                  </div>
-
-                  <div class="swiper-slide" data-hash="3">
-                    <div class="p-100">
-                      <img
-                        class="swiper-lazy"
-                        height="80"
-                        width="80"
-                        src="<%= product.images[3] %>"
-                        alt="" />
-                    </div>
-                  </div>
+                  <% } %>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
               </div>
             </div>
           </div>
+
           <div class="col-12 col-md-12 col-lg-6">
             <div class="details-pro">
-              <h1 class="title-product"><%= product.title %></h1>
-              <div class="reviews_details_product">
-                <div
-                  class="sapo-product-reviews-badge sapo-product-reviews-badge-detail"
-                  style="font-size: 16px">
-                  <p><strong>Product code:</strong> <%= product.id %></p>
-                  <p><strong>Material:</strong> <%= product.material %></p>
-                  <p><strong>Size:</strong> <%= product.size %></p>
-                  <p><strong>Description:</strong> <%= product.description %></p>
+              <div class="details-pro">
+                <h1 class="title-product"><%= product?.title %></h1>
+                <div class="reviews_details_product">
+                  <div
+                    class="sapo-product-reviews-badge sapo-product-reviews-badge-detail"
+                    data-id="31264840"></div>
+                </div>
+                <div class="inventory_quantity">
+                  <div class="thump-break">
+                    <span class="mb-break inventory">
+                      <span class="stock-brand-title">Status:</span>
+                      <span class="a-stock"> In stock </span>
+                    </span>
+                  </div>
+                </div>
+                <div class="price-box clearfix">
+                  <span class="special-price">
+                    <span class="price product-price"><%= product?.price %></span>
+                    <meta itemprop="price" content="<%= product?.price %>" />
+                    <meta itemprop="priceCurrency" content="$" />
+                  </span>
+                </div>
+                <form
+                  enctype="multipart/form-data"
+                  data-cart-form=""
+                  id="add-to-cart-form"
+                  action="/cart/add"
+                  method="post"
+                  class="form-inline">
+                  <div class="form-product">
+                    <div class="box-variant clearfix d-none">
+                      <input type="hidden" id="one_variant" name="variantId" value="90208306" />
+                    </div>
+                    <div class="clearfix form-group">
+                      <div class="flex-quantity">
+                        <div class="custom custom-btn-number show">
+                          <label class="sl section">Amount:</label>
+                          <div class="input_number_product form-control">
+                            <button
+                              class="btn_num num_1 button button_qty"
+                              onclick="var result = document.getElementById('qtym');var qtypro = result.value;if (!isNaN(qtypro) && qtypro > 1) {result.value--;}return false;"
+                              type="button">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="10"
+                                height="8"
+                                viewBox="0 0 10 8"
+                                fill="none">
+                                <path
+                                  d="M10 2.08954L8.82082 0.9104L5 4.73122L1.17918 0.9104L-5.15419e-08 2.08954L5 7.08954L10 2.08954Z"
+                                  fill="#FFA336"></path>
+                              </svg>
+                            </button>
+                            <input
+                              type="text"
+                              id="qtym"
+                              name="quantity"
+                              value="1"
+                              maxlength="3"
+                              class="form-control prd_quantity"
+                              onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;"
+                              onchange="if(this.value == 0)this.value=1;" />
+                            <button
+                              class="btn_num num_2 button button_qty"
+                              onclick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro )) result.value++;return false;"
+                              type="button">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="10"
+                                height="8"
+                                viewBox="0 0 10 8"
+                                fill="none">
+                                <path
+                                  d="M-5.15419e-08 5.91046L1.17918 7.0896L5 3.26878L8.82082 7.0896L10 5.91046L5 0.910458L-5.15419e-08 5.91046Z"
+                                  fill="#FFA336"></path>
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="btn-mua button_actions clearfix">
+                          <button
+                            type="submit"
+                            class="btn btn_base normal_button btn_add_cart add_to_cart btn-cart">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="30"
+                              height="28"
+                              viewBox="0 0 30 28"
+                              fill="none">
+                              <path
+                                d="M8.67209 21.2256C7.36141 21.1587 7.38609 19.3152 8.67203 19.2512C12.3147 19.2638 21.9225 19.2546 25.681 19.2572C26.709 19.2572 27.5885 18.5576 27.8197 17.5561L29.9539 8.3144C30.0761 7.78525 29.9527 7.23758 29.6155 6.8119C29.2783 6.38623 28.7735 6.13865 28.2305 6.13865C26.7185 6.13865 13.884 6.08055 7.31023 6.05435L6.26817 2.18786C6.01802 1.26388 5.17482 0.618591 4.21759 0.618591H0.879373C0.393725 0.618591 0 1.01232 0 1.49796C0 1.98361 0.393725 2.37734 0.879373 2.37734H4.21759C4.38239 2.37734 4.52748 2.48843 4.57034 2.64654L8.57237 17.4948C7.86869 17.5204 7.21327 17.8066 6.71624 18.3109C6.19401 18.8408 5.91355 19.5424 5.92651 20.2862C5.95242 21.774 7.18407 22.9843 8.67209 22.9843H9.95433C9.76374 23.3844 9.65675 23.8316 9.65675 24.3035C9.65675 26.0006 11.0375 27.3814 12.7347 27.3814C14.4319 27.3814 15.8126 26.0006 15.8126 24.3035C15.8126 23.8316 15.7056 23.3844 15.515 22.9843H21.0677C20.8773 23.3843 20.7703 23.8313 20.7703 24.303C20.7703 26.0002 22.1511 27.3809 23.8482 27.3809C25.5454 27.3809 26.9262 26.0001 26.9262 24.303C26.9262 23.8129 26.8105 23.3496 26.6059 22.9379C26.9538 22.8207 27.2048 22.4925 27.2048 22.105C27.2048 21.6194 26.811 21.2256 26.3254 21.2256H8.67209ZM14.0538 24.3035C14.0538 25.0309 13.462 25.6227 12.7346 25.6227C12.0072 25.6227 11.4154 25.0309 11.4154 24.3035C11.4154 23.5765 12.0066 22.985 12.7335 22.9844H12.7357C13.4626 22.985 14.0538 23.5765 14.0538 24.3035ZM23.8483 25.6222C23.1209 25.6222 22.5291 25.0304 22.5291 24.303C22.5291 23.5828 23.1093 22.9959 23.8269 22.9844H23.8697C24.5873 22.9959 25.1675 23.5828 25.1675 24.303C25.1675 25.0304 24.5757 25.6222 23.8483 25.6222ZM28.2369 7.90385C28.2421 7.91041 28.2414 7.91352 28.2403 7.91856L27.341 11.8127H24.2959L24.8145 7.88351L28.2234 7.89722C28.2286 7.89734 28.2318 7.89734 28.2369 7.90385ZM19.1709 17.4984V13.5715H22.2898L21.7716 17.4984H19.1709ZM14.8102 17.4984L14.2878 13.5715H17.4121V17.4984H14.8102ZM10.762 17.4984H10.7593C10.5449 17.4983 10.3561 17.3538 10.3003 17.1478L9.33642 13.5715H12.5135L13.0359 17.4984H10.762ZM14.0537 11.8128L13.5249 7.83807L17.4121 7.85372V11.8128H14.0537ZM19.1709 11.8128V7.86082L23.0414 7.87641L22.5219 11.8128H19.1709ZM11.7497 7.83086L12.2795 11.8127H8.86238L7.78486 7.81486L11.7497 7.83086ZM25.681 17.4984H23.5455L24.0638 13.5715H26.9348L26.106 17.1603C26.0601 17.3594 25.8853 17.4984 25.681 17.4984Z"
+                                fill="#FFA336"></path>
+                            </svg>
+                            Add to cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+                <p><strong>Product code:</strong> <%= product?.id %></p>
+
+                <div class="banner-prod">
+                  <a href="#" title="Banner" class="thump-image">
+                    <img
+                      class="lazyload loaded"
+                      src="/img/sliders/slider_1.jpg"
+                      data-src="/img/sliders/slider_1.jpg"
+                      alt="Banner"
+                      data-was-processed="true" />
+                  </a>
                 </div>
               </div>
             </div>
@@ -131,7 +191,10 @@
         <div class="tab-float">
           <div id="tab-1" class="tab-content active content_extab">
             <div class="rte product_getcontent">
-              <p><%= product.description %></p>
+              <p><strong>Product code:</strong> <%= product?.id %></p>
+              <p><strong>Material:</strong> <%= product?.material %></p>
+              <p><strong>Size:</strong> <%= product?.size %></p>
+              <p><strong>Description:</strong> <%= product?.description %></p>
             </div>
           </div>
 
@@ -236,8 +299,32 @@
 
                       <div class="action">
                         <a
+                          href="javascript:void(0)"
+                          class="btn-cart btn-views add_to_cart is-added"
+                          title="Add to cart">
+                          <svg class="icon">
+                            <use
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              xlink:href="#icon-cart"></use>
+                          </svg>
+                        </a>
+
+                        <a
+                          href="javascript:void(0)"
+                          class="setWishlist btn-wishlist btn-views"
+                          data-wish="bo-tra-0-35-l-ifp-chi-vang"
+                          tabindex="0"
+                          title="Add to wish">
+                          <svg class="icon">
+                            <use
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              xlink:href="#icon-wishlist"></use>
+                          </svg>
+                        </a>
+
+                        <a
                           title="Quick view"
-                          data-id="<%= product.id %>"
+                          data-id="<%= product?.id %>"
                           class="quick-view btn-views">
                           <svg class="icon">
                             <use
@@ -395,5 +482,4 @@
 </div>
 
 <link href="/assets/css/picbox.css" rel="stylesheet" type="text/css" media="all" />
-
 <script src="/assets/js/picbox.js" type="text/javascript"></script>

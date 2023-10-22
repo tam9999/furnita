@@ -32,6 +32,28 @@ $('.tab-link').click(function () {
                   </a>
 
                   <div class="action">
+                    <a
+                      href="javascript:void(0)"
+                      class="btn-cart btn-views add_to_cart is-added"
+                      title="Add to cart">
+                      <svg class="icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-cart"></use>
+                      </svg>
+                    </a>
+
+                    <a
+                      href="javascript:void(0)"
+                      class="setWishlist btn-wishlist btn-views"
+                      data-wish="bo-tra-0-35-l-ifp-chi-vang"
+                      tabindex="0"
+                      title="Add to wish">
+                      <svg class="icon">
+                        <use
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          xlink:href="#icon-wishlist"></use>
+                      </svg>
+                    </a>
+
                     <a title="Quick view" data-id="${product.id}" class="quick-view btn-views">
                       <svg class="icon">
                         <use
@@ -48,7 +70,7 @@ $('.tab-link').click(function () {
                       ${product.title}
                     </a>
                   </h3>
-                  <div class="price-box"><%= product.price %>$</div>
+                  <div class="price-box">${product.price}</div>
                 </div>
               </div>
             </div>

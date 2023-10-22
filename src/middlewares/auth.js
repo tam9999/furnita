@@ -2,50 +2,24 @@
 
 const jwToken = require('../utils/jwToken')
 
-const auth = {
-  admin: (req, res, next) => {
-    const token = req.session.accessAdmin
+module.exports = (req, res, next) => {
+  const token = req.cookies['ACCESS_TOKEN']
 
-    if (!token) {
-      console.log('Access token not found')
-      return res.redirect('/login')
-    }
+  if (!token) {
+    console.error('Access token not found')
+    return res.redirect('/admin/login')
+  }
 
-    jwToken.verify(token, (err, decoded) => {
-      const user = decode
+  jwToken.verify(token, (err, decoded) => {
+    const user = decoded
 
-      // 1 is admin role
-      if (err || user.role != 1) {
-        console.log('You do not have access to this feature')
-        return res.redirect('/login')
-      }
-
-      res.locals.auth = { user }
-      next()
-    })
-  },
-
-  user: (req, res, next) => {
-    const token = req.session.accessUser
-
-    if (!token) {
-      console.log('Access token not found')
+    if (err) {
+      console.error('You do not have access to this feature')
       return res.redirect('/admin/login')
     }
 
-    jwToken.verify(token, (err, decoded) => {
-      const user = decoded
-
-      if (err) {
-        console.log('You do not have access to this feature')
-        return res.redirect('/admin/login')
-      }
-
-      res.locals.auth = { user }
-      req.auth = { user }
-      next()
-    })
-  },
+    res.locals.auth = { user }
+    req.auth = { user }
+    next()
+  })
 }
-
-module.exports = auth

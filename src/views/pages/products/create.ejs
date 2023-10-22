@@ -1,6 +1,6 @@
 <div class="bodywrap">
   <div class="layout-collection">
-    <%- include("../../../components/bread-crumb") %>
+    <%- include("../../components/bread-crumb") %>
 
     <div class="container">
       <div class="block-collection">
@@ -42,7 +42,7 @@
             <h1
               class="title-head-contact a-left d-flex justify-content-center"
               style="font-size: 30px; line-height: 30px; margin-bottom: 20px">
-              <strong>Edit Product</strong>
+              <strong>Create Product</strong>
             </h1>
             <div class="layout-contact">
               <div class="container">
@@ -50,7 +50,7 @@
                   <div class="form-contact">
                     <form
                       method="post"
-                      action="/product/edit/<%= locals.data?.id %>"
+                      action="/product/create"
                       enctype="multipart/form-data"
                       method="POST">
                       <div class="group_contact">
@@ -60,8 +60,7 @@
                             class="form-control form-control-lg"
                             required=""
                             name="id"
-                            id="id"
-                            value="<%= locals.data?.id %>" />
+                            id="id" />
                           <label class="form-label" for="form12">Product code</label>
                         </div>
 
@@ -71,8 +70,7 @@
                             class="form-control form-control-lg"
                             required=""
                             name="title"
-                            id="title"
-                            value="<%= locals.data?.title %>" />
+                            id="title" />
                           <label class="form-label" for="form12">Title</label>
                         </div>
 
@@ -81,8 +79,7 @@
                             type="text"
                             class="form-control form-control-lg"
                             name="category"
-                            id="category"
-                            value="<%= locals.data?.category %>" />
+                            id="category" />
                           <label class="form-label" for="form12">Category</label>
                         </div>
 
@@ -91,8 +88,7 @@
                             type="text"
                             class="form-control form-control-lg"
                             name="subcategory"
-                            id="subcategory"
-                            value="<%= locals.data?.subcategory %>" />
+                            id="subcategory" />
                           <label class="form-label" for="form12">Subcategory</label>
                         </div>
 
@@ -101,8 +97,7 @@
                             type="text"
                             class="form-control form-control-lg"
                             name="material"
-                            id="material"
-                            value="<%= locals.data?.material %>" />
+                            id="material" />
                           <label class="form-label" for="form12">Material</label>
                         </div>
 
@@ -111,8 +106,7 @@
                             type="text"
                             class="form-control form-control-lg"
                             name="size"
-                            id="size"
-                            value="<%= locals.data?.size %>" />
+                            id="size" />
                           <label class="form-label" for="form12">Size</label>
                         </div>
 
@@ -121,9 +115,17 @@
                             type="text"
                             class="form-control form-control-lg"
                             name="price"
-                            id="price"
-                            value="<%= locals.data?.price %>" />
+                            id="price" />
                           <label class="form-label" for="form12">Price</label>
+                        </div>
+
+                        <div class="form-outline">
+                          <input
+                            class="form-control form-control-lg"
+                            type="file"
+                            name="images"
+                            id="images"
+                            multiple />
                         </div>
 
                         <div class="form-outline">
@@ -131,22 +133,11 @@
                             name="description"
                             id="description"
                             class="form-control content-area form-control-lg"
-                            style="height: 250px">
-<%= locals.data?.description %></textarea
-                          >
+                            style="height: 250px"></textarea>
                           <label class="form-label" for="form12">Description</label>
                         </div>
 
-                        <input
-                          type="text"
-                          class="form-control form-control-lg"
-                          required=""
-                          name="_id"
-                          id="_id"
-                          value="<%= locals.data?._id %>"
-                          hidden />
-
-                        <button type="submit" class="btn-create">Update</button>
+                        <button type="submit" class="btn-create">Create</button>
                       </div>
                     </form>
                   </div>
@@ -176,7 +167,7 @@
 <script type="text/javascript" src="/assets/js/product.js"></script>
 
 <script>
-  // Edit product
+  // Create product
   $('form').submit(function (event) {
     event.preventDefault()
     $('.is-invalid').removeClass('is-invalid')

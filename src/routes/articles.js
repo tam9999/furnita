@@ -7,7 +7,7 @@ const ArticlesController = require('../app/controllers/ArticlesController')
 
 router.get('/', (req, res) => {
   res.render('index', {
-    view_content: 'news',
+    view_content: 'articles/news',
     title: 'News',
   })
 })

@@ -14,8 +14,13 @@ const ProductController = {
     console.log('===== Show index page =====')
 
     try {
-      const products = await Product.aggregate([{ $sample: { size: 8 } }])
-      const customizes = await Product.aggregate([{ $sample: { size: 10 } }])
+      const products = (await Product.aggregate([{ $sample: { size: 8 } }])).map((doc) =>
+        Product.hydrate(doc)
+      )
+
+      const customizes = (await Product.aggregate([{ $sample: { size: 10 } }])).map((doc) =>
+        Product.hydrate(doc)
+      )
 
       res.render('index', {
         view_content: 'index',
@@ -33,7 +38,7 @@ const ProductController = {
     console.log('====== Form create product =====')
 
     res.render('index', {
-      view_content: 'products/admin/create',
+      view_content: 'products/create',
       title: 'Create Product',
     })
   },
@@ -55,6 +60,7 @@ const ProductController = {
       }
 
       const images = await upload(req, res)
+      const price = req.body.price.split(',')
       const product = new Product({
         id: req.body.id,
         title: req.body.title,
@@ -62,7 +68,7 @@ const ProductController = {
         subcategory: req.body.subcategory,
         material: req.body.material,
         size: req.body.size,
-        price: req.body.price,
+        price,
         images,
         description: req.body.description,
       })
@@ -93,124 +99,6 @@ const ProductController = {
     }
   },
 
-  // Get a product
-  renderProduct: async (req, res) => {
-    console.log('====== Render product detail =====')
-
-    try {
-      const id = req.params.id
-      const product = await Product.findOne({ id })
-      const categoryName = utils.categories[product.category]
-      const item = utils.fillItemProduct(id)
-      const urlItem = utils.fillUrl[item]
-      const products = await await Product.aggregate([
-        {
-          $match: {
-            category: product.category,
-            // id: { $regex: itemFill, $options: 'i' },
-          },
-        },
-        { $sample: { size: 8 } },
-      ])
-
-      return res.render('index', {
-        view_content: 'products/details-product',
-        url: `/product?category=${categoryName}`,
-        title: product.title,
-        urlItem,
-        item,
-        product,
-        products,
-      })
-    } catch (error) {
-      console.error(error)
-      return res.status(500).send('Internal Server Error')
-    }
-  },
-
-  // Get a product
-  getProduct: async (req, res) => {
-    console.log('======  Get a product =====')
-
-    try {
-      const product = await Product.findOne({ id: req.params.id })
-
-      return res.status(200).send(product)
-    } catch (error) {
-      console.error(error)
-      return res.status(500).send('Internal Server Error')
-    }
-  },
-
-  // Get category product data
-  getCategoryProductData: async (req, res) => {
-    console.log('====== Get category product data =====')
-
-    try {
-      const category = req.params.category
-      let query = category === 'all' ? {} : { category }
-      const products = await Product.find(query).limit(8)
-      const data = {
-        products,
-        pathCategory: utils.categories[category],
-      }
-
-      return res.status(200).send(data)
-    } catch (error) {
-      console.error(error)
-      return res.status(500).send('Internal Server Error')
-    }
-  },
-
-  // Render category products
-  renderProductCategory: async (req, res) => {
-    console.log('====== Render category products =====')
-
-    try {
-      const { query: querySearch, originalUrl } = req
-      const { perPage, currentPage, offset } = pagination.config(12, querySearch.page)
-
-      const { category, item } = req.query
-      const categories = {
-        baskets: 'Baskets',
-        'home-decors': 'Home decors',
-        'kitchen-ware': 'Kitchen ware',
-        lights: 'Lights',
-        handbags: 'Handbags',
-      }
-      const categoryName = categories[category] || 'All Products'
-      const query = category ? { category: categoryName } : {}
-      const itemFill = utils.items[item]
-
-      if (itemFill) {
-        query.id = { $regex: itemFill, $options: 'i' }
-      }
-
-      const products = await Product.find(query).limit(perPage).skip(offset)
-      const total = await Product.countDocuments(query)
-      const paginationResult = pagination.paginationCover(
-        originalUrl,
-        querySearch,
-        total,
-        perPage,
-        currentPage
-      )
-
-      return res.render('index', {
-        view_content: 'products/products',
-        url: `/product?category=${categoryName}`,
-        category: categoryName,
-        item: utils.fillItem[itemFill],
-        title: categoryName,
-        pagination: paginationResult.html,
-        products,
-      })
-    } catch (error) {
-      console.error(error)
-      return res.status(500).send('Internal Server Error')
-    }
-  },
-
   // Form update the product
   formUpdate: async (req, res) => {
     console.log('====== ProductController.formUpdate =====')
@@ -224,7 +112,7 @@ const ProductController = {
       }
 
       return res.render('index', {
-        view_content: 'products/admin/edit',
+        view_content: 'products/edit',
         title: 'Edit Product',
         data,
       })
@@ -241,6 +129,7 @@ const ProductController = {
       //Validation
       const { errors } = validationResult(req)
       const id = req.params.id
+      const price = req.body.price.split(',')
 
       if (errors.length > 0) {
         return res.status(400).send({
@@ -257,7 +146,7 @@ const ProductController = {
         subcategory: req.body.subcategory,
         material: req.body.material,
         size: req.body.size,
-        price: req.body.price,
+        price,
         description: req.body.description,
       }
 
@@ -299,7 +188,7 @@ const ProductController = {
 
   // Delete a product
   delete: async (req, res) => {
-    console.log('====== ProductController.detele =====')
+    console.log('====== ProductController.delete =====')
 
     try {
       const id = req.params.id
@@ -325,6 +214,119 @@ const ProductController = {
         message: 'Delete product fail!',
         console: error.message,
       })
+    }
+  },
+
+  // Get a product
+  renderProduct: async (req, res) => {
+    console.log('====== ProductController.renderProduct =====')
+
+    try {
+      const id = req.params.id
+      const product = await Product.findOne({ id })
+      const categoryName = utils.categories[product.category]
+      const item = utils.fillItemProduct(id)
+      const urlItem = utils.fillUrl[item]
+      const products = (
+        await Product.aggregate([
+          { $match: { category: product.category } },
+          { $sample: { size: 8 } },
+        ])
+      ).map((doc) => Product.hydrate(doc))
+
+      return res.render('index', {
+        view_content: 'products/details-product',
+        url: `/product?category=${categoryName}`,
+        title: product.title,
+        urlItem,
+        item,
+        product,
+        products,
+      })
+    } catch (error) {
+      console.error(error)
+      return res.status(500).send('Internal Server Error')
+    }
+  },
+
+  // Get a product
+  getProduct: async (req, res) => {
+    console.log('======  ProductController.getProduct =====')
+
+    try {
+      const product = await Product.findOne({ id: req.params.id })
+      return res.status(200).send(product)
+    } catch (error) {
+      console.error(error)
+      return res.status(500).send('Internal Server Error')
+    }
+  },
+
+  // Get category product data
+  getCategoryProductData: async (req, res) => {
+    console.log('====== ProductController.getCategoryProductData =====')
+
+    try {
+      const category = req.params.category
+      const query = category === 'all' ? {} : { category }
+      const products = await Product.find(query).limit(8)
+      const data = {
+        products,
+        pathCategory: utils.categories[category],
+      }
+
+      return res.status(200).send(data)
+    } catch (error) {
+      console.error(error)
+      return res.status(500).send('Internal Server Error')
+    }
+  },
+
+  // Render category products
+  renderProductCategory: async (req, res) => {
+    console.log('====== ProductController.renderProductCategory =====')
+
+    try {
+      const { query: querySearch, originalUrl } = req
+      const { perPage, currentPage, offset } = pagination.config(12, querySearch.page)
+      const { category, item } = req.query
+      const categories = {
+        baskets: 'Baskets',
+        'home-decors': 'Home decors',
+        'kitchen-ware': 'Kitchen ware',
+        lights: 'Lights',
+        handbags: 'Handbags',
+      }
+      const categoryName = categories[category] || 'All Products'
+      const query = category ? { category: categoryName } : {}
+      const itemFill = utils.items[item]
+
+      if (itemFill) {
+        query.id = { $regex: itemFill, $options: 'i' }
+      }
+
+      const products = await Product.find(query).limit(perPage).skip(offset)
+      const total = await Product.countDocuments(query)
+      const paginationResult = pagination.paginationCover(
+        originalUrl,
+        querySearch,
+        total,
+        perPage,
+        currentPage
+      )
+
+      return res.render('index', {
+        view_content: 'products/products',
+        url: `/product?category=${categoryName}`,
+        category: categoryName,
+        item: utils.fillItem[itemFill],
+        title: categoryName,
+        pagination: paginationResult.html,
+        products,
+      })
+    } catch (error) {
+      console.error(error)
+      return res.status(500).send('Internal Server Error')
     }
   },
 }

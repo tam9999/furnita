@@ -397,13 +397,13 @@ ul {
   fill: #fff;
 }
 .product-action .action .btn-views:hover {
-  background: #fa8a07;
+  background: #B88F5E;
 }
 .product-action .action .btn-views.btn-wishlist.active {
-  background: #ca6f04;
+  background: #B88F5E;
 }
 .product-action .action .btn-views.btn-wishlist.active path {
-  fill: red;
+  fill: rgb(223, 113, 113);
 }
 .product-action .smart {
   position: absolute;

@@ -11,9 +11,11 @@ const AuthController = {
   login: async (req, res) => {
     console.log('===== AuthController.login => START =====')
 
-    await jwToken.verify(req.session.accessUser, (err, payload) => {
+    await jwToken.verify(req.cookies['ACCESS_TOKEN'], (err, payload) => {
       if (payload) {
-        return res.redirect('product/create')
+        console.log(req.cookies['ARRAY'][0])
+
+        return res.redirect('/admin')
       }
     })
 
@@ -22,11 +24,11 @@ const AuthController = {
 
   handleLogin: async (req, res) => {
     console.log('===== AuthController.handleLogin => START =====')
+
     try {
       const { errors } = validationResult(req)
 
       if (errors.length > 0) {
-        console.log(errors)
         return res.status(400).send({
           title: 'Notice',
           messages: errors,
@@ -44,7 +46,7 @@ const AuthController = {
         1000 * 60 * 60 * 12
       )
 
-      req.session.accessUser = accessToken
+      res.cookie('ACCESS_TOKEN', accessToken)
 
       return res.status(200).send({
         title: 'Notice',
@@ -52,8 +54,10 @@ const AuthController = {
         status: true,
       })
     } catch (error) {
-      console.error(error)
-      return res.status(500).send({ title: 'Notice', message: error.message })
+      return res.status(500).send({
+        title: 'Notice',
+        message: error.message,
+      })
     }
   },
 
@@ -84,7 +88,7 @@ const AuthController = {
       )
 
       res.render('index', {
-        view_content: 'products/admin/table',
+        view_content: 'products/index',
         title: 'Products List',
         pagination: paginationResult.html,
         products,

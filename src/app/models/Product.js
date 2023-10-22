@@ -27,11 +27,13 @@ const ProductSchema = new mongoose.Schema(
       type: String,
     },
     price: {
-      type: String,
+      type: Array,
+      get: (price) => {
+        return price.length > 1 ? `${price[0]} $ - ${price[1]} $` : `${price[0]} $`
+      },
     },
     images: {
       type: Array,
-      required: true,
     },
     description: {
       type: String,
@@ -39,6 +41,8 @@ const ProductSchema = new mongoose.Schema(
   },
   {
     timestamps: { createdAt: true, updatedAt: true },
+    toObject: { getters: true, setters: true },
+    toJSON: { getters: true, setters: true },
   }
 )
 

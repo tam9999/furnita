@@ -8,7 +8,7 @@ const ArticlesController = require('../app/controllers/ArticlesController')
 
 // Products
 // router.route('/').get(auth.user, AuthController.getProductsList)
-router.route('/').get(AuthController.getProductsList)
+router.route('/').get(auth, AuthController.getProductsList)
 // router.route('/product').get(auth.user, AuthController.getProductsList)
 router.route('/product').get(AuthController.getProductsList)
 // router.route('/product/search').get(auth.user, AuthController.searchProduct)

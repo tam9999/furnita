@@ -9,6 +9,7 @@ const cors = require('cors')
 const passport = require('passport')
 const path = require('path')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const sessions = require('express-session')
 const fileupload = require('express-fileupload')
 const routes = require('./routes')
@@ -22,6 +23,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(fileupload())
+app.use(cookieParser())
 
 // Middle basic
 app.use(

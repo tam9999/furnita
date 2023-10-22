@@ -44,9 +44,8 @@ const ArticlesController = {
 
     try {
       const article = await Articles.findOne({ _id: '651fbcfb50e476f8d658eede' })
-      console.log(article)
       return res.render('index', {
-        view_content: 'news-details',
+        view_content: 'articles/details-news',
         title: article.title,
         title_category: 'new',
         url: 'new',
