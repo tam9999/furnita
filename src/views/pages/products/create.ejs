@@ -74,40 +74,44 @@
                           <label class="form-label" for="form12">Title</label>
                         </div>
 
-                        <div class="form-outline">
-                          <input
-                            type="text"
-                            class="form-control form-control-lg"
-                            name="category"
-                            id="category" />
-                          <label class="form-label" for="form12">Category</label>
-                        </div>
+                        <select
+                          class="form-select form-select-lg mb-3"
+                          name="category"
+                          id="category">
+                          <option value>Category</option>
+                          <% locals?.categoriesData.forEach((categoryItem) => { %>
+                          <option value="<%= categoryItem.name %>"><%= categoryItem.name %></option>
+                          <% }) %>
+                        </select>
 
-                        <div class="form-outline">
-                          <input
-                            type="text"
-                            class="form-control form-control-lg"
+                        <div class="rattan-bamboo" style="display: none">
+                          <select
+                            class="form-select form-select-lg mb-3"
                             name="subcategory"
-                            id="subcategory" />
-                          <label class="form-label" for="form12">Subcategory</label>
-                        </div>
+                            id="subcategory">
+                            <option value>Subcategory</option>
+                            <% locals?.categoriesData[2].subcategories.forEach((subcategory) => { %>
+                            <option value="<%= subcategory.name %>"><%= subcategory.name %></option>
+                            <% }) %>
+                          </select>
 
-                        <div class="form-outline">
-                          <input
-                            type="text"
-                            class="form-control form-control-lg"
-                            name="material"
-                            id="material" />
-                          <label class="form-label" for="form12">Material</label>
-                        </div>
+                          <div class="form-outline">
+                            <input
+                              type="text"
+                              class="form-control form-control-lg"
+                              name="material"
+                              id="material" />
+                            <label class="form-label" for="form12">Material</label>
+                          </div>
 
-                        <div class="form-outline">
-                          <input
-                            type="text"
-                            class="form-control form-control-lg"
-                            name="size"
-                            id="size" />
-                          <label class="form-label" for="form12">Size</label>
+                          <div class="form-outline">
+                            <input
+                              type="text"
+                              class="form-control form-control-lg"
+                              name="size"
+                              id="size" />
+                            <label class="form-label" for="form12">Size</label>
+                          </div>
                         </div>
 
                         <div class="form-outline">
@@ -137,7 +141,7 @@
                           <label class="form-label" for="form12">Description</label>
                         </div>
 
-                        <button type="submit" class="btn-create">Create</button>
+                        <button type="submit" class="btn-create mt-3">Create</button>
                       </div>
                     </form>
                   </div>
@@ -167,6 +171,13 @@
 <script type="text/javascript" src="/assets/js/product.js"></script>
 
 <script>
+  $('#category').change(function () {
+    var selectedOption = $(this).val()
+    if (selectedOption === 'Rattan & Bamboo') {
+      $('.rattan-bamboo').show()
+    }
+  })
+
   // Create product
   $('form').submit(function (event) {
     event.preventDefault()
@@ -188,7 +199,7 @@
           showConfirmButton: false,
           time: 1500,
         })
-        window.location = '/admin/product'
+        // window.location.reload()
       },
       error: (error) => {
         if (error.status === 400) {

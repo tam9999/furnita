@@ -19,6 +19,7 @@
 }
 .home-slider {
   margin-bottom: 40px;
+  border-radius: 6px;
 }
 .home-slider .swiper-slide {
   text-align: center;
@@ -141,7 +142,7 @@
 }
 .section_flashsale {
   background-color: #f3eee4;
-  background-image: url(/img/logo/background_module.png?1688630334113);
+  background-image: url(/assets/background_module.png?1688630334113);
   padding: 40px 0 30px;
   margin-bottom: 40px;
 }
@@ -318,7 +319,7 @@
   position: relative;
 }
 .section_featured_product .see-more a:hover {
-  background-image: url(/img/logo/background_module.png);
+  background-image: url(/assets/background_module.png);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .section_featured_product .tabs-title {
@@ -628,7 +629,7 @@
   position: relative;
 }
 .section_customized_branding .see-more a:hover {
-  background-image: url(/img/logo/background_module.png);
+  background-image: url(/assets/background_module.png);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .section_nghenhan {
@@ -943,7 +944,7 @@
   position: relative;
 }
 .section_blog .see-more a:hover {
-  background-image: url(/img/logo/background_module.png);
+  background-image: url(/assets/background_module.png);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .section_blog .item-blog .block-thumb {
@@ -1329,24 +1330,4 @@
 .button-control .swiper-button-disabled {
   opacity: 0.7;
   cursor: inherit;
-}
-.toast-notification {
-  padding: 7px 10px;
-  border-radius: 5px;
-  color: #fff;
-  background: #dc3545;
-  display: inline-block;
-  position: fixed;
-  top: -56px;
-  right: 5px;
-  opacity: 0;
-  transition: all 0.4s ease-out;
-  z-index: 1111;
-}
-
-.toast-notification:before {
-  content: '※';
-  margin-right: 2px;
-  color: #fff;
-  font-weight: normal;
 }

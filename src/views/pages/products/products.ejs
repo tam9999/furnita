@@ -175,84 +175,31 @@
               <div class="aside-content aside-content-menu">
                 <nav class="nav-category">
                   <ul class="nav navbar-pills">
+                    <% locals?.categoriesData.forEach((categoryItem) => { %>
                     <li class="nav-item relative">
                       <a
-                        title="Agricultural"
-                        href="/product?category=agricultural"
+                        title="<%= categoryItem.name %>"
+                        href="<%= categoryItem.url %>"
                         class="nav-link pr-5">
-                        Agricultural
+                        <%= categoryItem.name %>
                       </a>
-                    </li>
-
-                    <li class="nav-item relative">
-                      <a title="Wooden" href="/product?category=wooden" class="nav-link pr-5">
-                        Wooden
-                      </a>
-                    </li>
-
-                    <li class="nav-item relative">
-                      <a
-                        title="Kitchen ware"
-                        href="/product?category=rattan_bamboo"
-                        class="nav-link pr-5">
-                        Rattan & Bamboo
-                      </a>
+                      <% if (categoryItem.subcategories) { %>
                       <i class="open_mnu down_icon"></i>
                       <ul class="menu_down" style="display: none">
+                        <% categoryItem.subcategories.forEach((subcategory) => { %>
                         <li class="nav-item">
                           <a
-                            title="Placemats & coasters"
+                            title="<%= subcategory.name %>"
                             class="nav-link"
-                            href="/product?category=rattan_bamboo">
-                            Baskets
+                            href="<%= subcategory.url %>">
+                            <%= subcategory.name %>
                           </a>
                         </li>
-                        <li class="nav-item">
-                          <a
-                            title="Tray & trugs"
-                            class="nav-link"
-                            href="/product?category=rattan_bamboo">
-                            Home decors
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a
-                            title="Bowls & banneton baskets"
-                            class="nav-link"
-                            href="/product?category=rattan_bamboo">
-                            Kitchen ware
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a
-                            title="Kitchen utensils"
-                            class="nav-link"
-                            href="/product?category=rattan_bamboo">
-                            Lights
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a
-                            title="Cutlery trays & baskets"
-                            class="nav-link"
-                            href="/product?category=rattan_bamboo">
-                            Handbags
-                          </a>
-                        </li>
+                        <% }) %>
                       </ul>
+                      <% } %>
                     </li>
-
-                    <li class="nav-item relative">
-                      <a title="Rubber" href="/product?category=rubber" class="nav-link pr-5">
-                        Rubber
-                      </a>
-                    </li>
-
-                    <li class="nav-item relative">
-                      <a title="Chillies" href="/product?category=chillies" class="nav-link pr-5">
-                        Chillies
-                      </a>
-                    </li>
+                    <% }) %>
                   </ul>
                 </nav>
               </div>
@@ -369,20 +316,9 @@
                       <div class="action">
                         <a
                           href="javascript:void(0)"
+                          data-id="<%= product?.id %>"
+                          data-amount="1"
                           class="btn-cart btn-views add_to_cart is-added"
-                          title="Add to cart">
-                          <svg class="icon">
-                            <use
-                              xmlns:xlink="http://www.w3.org/1999/xlink"
-                              xlink:href="#icon-cart"></use>
-                          </svg>
-                        </a>
-
-                        <a
-                          href="javascript:void(0)"
-                          class="setWishlist btn-wishlist btn-views"
-                          data-wish="bo-tra-0-35-l-ifp-chi-vang"
-                          tabindex="0"
                           title="Add to wish">
                           <svg class="icon">
                             <use
@@ -412,7 +348,7 @@
                           <%= product?.title %>
                         </a>
                       </h3>
-                      <div class="price-box"><%= product?.price %></div>
+                      <div class="price-box"><%= product?.price %> $</div>
                     </div>
                   </div>
                 </div>
@@ -448,6 +384,5 @@
   </script>
   <script src="/assets/js/col.js" type="text/javascript"></script>
 </div>
-<%- include('../../components/quick-view-product') %>
 
 <link rel="preload" as="script" href="/assets/js/main.js" />

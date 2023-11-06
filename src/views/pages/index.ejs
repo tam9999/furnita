@@ -70,85 +70,52 @@
     <div class="container">
       <div class="danhmuc-swiper swiper-container">
         <div class="swiper-wrapper">
+          <% locals?.categoriesData.forEach((categoryItem) => { %>
           <div class="swiper-slide">
-            <a href="/product?category=kitchen-ware" title="Agricultural"></a>
+            <a href="<%= categoryItem.url %>" title="<%= categoryItem.name %>"></a>
             <div class="danhmuc-thumb">
               <img
                 width="170"
                 height="170"
                 class="lazyload"
-                src="/img/categories/category_1.jpg"
-                alt="Agricultural" />
+                src="<%= categoryItem.imageSrc %>"
+                alt="<%= categoryItem.name %>" />
               <span class="image-shadow"></span>
             </div>
             <div class="danhmuc-info">
-              <h3>Agricultural</h3>
+              <h3>
+                <svg
+                  version="1.1"
+                  id="Layer_1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 64 42"
+                  style="enable-background: new 0 0 64 42; width: 20px; height: 20px"
+                  xml:space="preserve">
+                  <style type="text/css">
+                    .st0 {
+                      fill: #ce1126;
+                    }
+                    .st1 {
+                      fill: #fcd116;
+                    }
+                  </style>
+                  <path
+                    id="Rounded_Rectangle_7_copy_1_"
+                    class="st0"
+                    d="M5.8,0h52.3C61.4,0,64,2.6,64,5.7v30.6c0,3.2-2.6,5.7-5.8,5.7H5.8
+    C2.6,42,0,39.4,0,36.3V5.7C0,2.6,2.6,0,5.8,0z" />
+                  <polygon
+                    class="st1"
+                    points="32,5.1 35.9,17.3 48.7,17.3 38.4,24.7 42.3,36.9 32,29.4 21.7,36.9 25.6,24.7 15.3,17.3 28.1,17.3 " />
+                </svg>
+                <%= categoryItem.name %>
+              </h3>
             </div>
           </div>
-
-          <div class="swiper-slide">
-            <a href="/product?category=home-decors" title="Wooden"></a>
-            <div class="danhmuc-thumb">
-              <img
-                width="170"
-                height="170"
-                class="lazyload"
-                src="/img/categories/category_2.jpg"
-                alt="Wooden" />
-              <span class="image-shadow"></span>
-            </div>
-            <div class="danhmuc-info">
-              <h3>Wooden</h3>
-            </div>
-          </div>
-
-          <div class="swiper-slide">
-            <a href="/product?category=baskets" title="Rattan & Bamboo"></a>
-            <div class="danhmuc-thumb">
-              <img
-                width="170"
-                height="170"
-                class="lazyload"
-                src="/img/categories/category_3.jpg"
-                alt="Rattan & Bamboo" />
-              <span class="image-shadow"></span>
-            </div>
-            <div class="danhmuc-info">
-              <h3>Rattan & Bamboo</h3>
-            </div>
-          </div>
-
-          <div class="swiper-slide">
-            <a href="/product?category=rubber" title="Rubber"></a>
-            <div class="danhmuc-thumb">
-              <img
-                width="170"
-                height="170"
-                class="lazyload"
-                src="/img/categories/category_4.jpg"
-                alt="Rubber" />
-              <span class="image-shadow"></span>
-            </div>
-            <div class="danhmuc-info">
-              <h3>Rubber</h3>
-            </div>
-          </div>
-
-          <div class="swiper-slide">
-            <a href="/product?category=chillies" title="Chillies"></a>
-            <div class="danhmuc-thumb">
-              <img
-                width="170"
-                height="170"
-                class="lazyload"
-                src="/img/categories/category_5.jpg"
-                alt="Chillies" />
-              <span class="image-shadow"></span>
-            </div>
-            <div class="danhmuc-info">
-              <h3>Chillies</h3>
-            </div>
-          </div>
+          <%})%>
         </div>
         <div class="swiper-pagination"></div>
       </div>
@@ -225,26 +192,13 @@
           <li class="tab-link has-content" data-tab="tab-1" data-category="all">
             <span class="line-clamp line-clamp-1" title="All"> All </span>
           </li>
-
-          <li class="tab-link" data-tab="tab-1" data-category="Agricultural">
-            <span class="line-clamp line-clamp-1" title="Agricultural"> Agricultural </span>
+          <% locals?.categoriesData.forEach((categoryItem) => { %>
+          <li class="tab-link" data-tab="tab-1" data-category="<%= categoryItem.name %>">
+            <span class="line-clamp line-clamp-1" title="<%= categoryItem.name %>">
+              <%= categoryItem.name %>
+            </span>
           </li>
-
-          <li class="tab-link" data-tab="tab-2" data-category="Wooden">
-            <span class="line-clamp line-clamp-1" title="Wooden"> Wooden </span>
-          </li>
-
-          <li class="tab-link" data-tab="tab-3" data-category="Rattan & Bamboo">
-            <span class="line-clamp line-clamp-1" title="Rattan & Bamboo"> Rattan & Bamboo </span>
-          </li>
-
-          <li class="tab-link" data-tab="tab-2" data-category="Rubber">
-            <span class="line-clamp line-clamp-1" title="Rubber"> Rubber </span>
-          </li>
-
-          <li class="tab-link" data-tab="tab-3" data-category="Chillies">
-            <span class="line-clamp line-clamp-1" title="Chillies"> Chillies </span>
-          </li>
+          <% }) %>
         </ul>
       </div>
 
@@ -267,21 +221,8 @@
                   <a
                     href="javascript:void(0)"
                     data-id="<%= product?.id %>"
-                    data-title="<%= product?.title %>"
-                    data-price="<%= product?.price%>"
-                    data-image="<%= product?.images[0]%>"
+                    data-amount="1"
                     class="btn-cart btn-views add_to_cart is-added"
-                    title="Add to cart">
-                    <svg class="icon">
-                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-cart"></use>
-                    </svg>
-                  </a>
-
-                  <a
-                    href="javascript:void(0)"
-                    class="setWishlist btn-wishlist btn-views"
-                    data-wish="bo-tra-0-35-l-ifp-chi-vang"
-                    tabindex="0"
                     title="Add to wish">
                     <svg class="icon">
                       <use
@@ -306,7 +247,7 @@
                     <%= product?.title %>
                   </a>
                 </h3>
-                <div class="price-box"><%= product?.price %></div>
+                <div class="price-box"><%= product?.price %> $</div>
               </div>
             </div>
           </div>
@@ -372,34 +313,25 @@
 
       <div class="product-quatang-swiper swiper-container">
         <div class="swiper-wrapper">
-          <% for (const customize of customizes) {%>
+          <% for (const product of customProducts) {%>
           <div class="swiper-slide">
             <div class="variants product-action">
               <div class="product-thumbnail">
-                <a class="image_thumb" href="/product/details/<%= customize?.id %>">
+                <a class="image_thumb" href="/product/details/<%= product?.id %>">
                   <img
                     width="234"
                     height="234"
                     class="lazyload"
                     src="/img/logo/lazy.png"
-                    data-src="<%= customize?.images[0] %>" />
+                    data-src="<%= product?.images[0] %>" />
                 </a>
 
                 <div class="action">
                   <a
                     href="javascript:void(0)"
+                    data-id="<%= product?.id %>"
+                    data-amount="1"
                     class="btn-cart btn-views add_to_cart is-added"
-                    title="Add to cart">
-                    <svg class="icon">
-                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-cart"></use>
-                    </svg>
-                  </a>
-
-                  <a
-                    href="javascript:void(0)"
-                    class="setWishlist btn-wishlist btn-views"
-                    data-wish="bo-tra-0-35-l-ifp-chi-vang"
-                    tabindex="0"
                     title="Add to wish">
                     <svg class="icon">
                       <use
@@ -408,7 +340,7 @@
                     </svg>
                   </a>
 
-                  <a title="Quick view" data-id="<%= customize?.id %>" class="quick-view btn-views">
+                  <a title="Quick view" data-id="<%= product?.id %>" class="quick-view btn-views">
                     <svg class="icon">
                       <use
                         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -420,11 +352,11 @@
 
               <div class="product-info">
                 <h3 class="product-name">
-                  <a class="line-clamp line-clamp-2" href="/product/details/<%= customize?.id %>">
-                    <%= customize?.title %>
+                  <a class="line-clamp line-clamp-2" href="/product/details/<%= product?.id %>">
+                    <%= product?.title %>
                   </a>
                 </h3>
-                <div class="price-box"><%= customize?.price %></div>
+                <div class="price-box"><%= product?.price %>$</div>
               </div>
             </div>
           </div>
@@ -445,11 +377,11 @@
       <div class="row">
         <div class="col-md-6">
           <div class="job">
-            One of the leading companies for exporting handicrafts products in Vietnam, Giao Chau
-            Rattan & Bamboo Manufacture and export Co.,Ltd has been become a trusted and reliable
-            supplier for oversea Importers since found 2006. Our products made by craftmen who are
-            highly weaving skills at well-known hundred-years traditional handicraft Village in
-            Chuong My District, Ha Noi Capital – Vietnam, made from natural materials such as:
+            One of the leading companies for exporting handicrafts products in Vietnam, Robin
+            Furnita Rattan & Bamboo Manufacture and export Co.,Ltd has been become a trusted and
+            reliable supplier for oversea Importers since found 2006. Our products made by craftmen
+            who are highly weaving skills at well-known hundred-years traditional handicraft Village
+            in Chuong My District, Ha Noi Capital – Vietnam, made from natural materials such as:
             Bamboo, Rattan, Seagrass, Water-Hyacinth,.etc. Our products are decorating for Homewares
             as Bathroom, Living Room, Kitchen and Picnic, … These products are the best choice for
             bringing you to the nature and eco-friendly enviroment…
@@ -654,7 +586,7 @@
               height="211"
               class="lazyload"
               src="/img/logo/lazy.png"
-              data-src="/img/categories/category_2.jpg"
+              data-src="/img/categories/category_4.jpg"
               alt="Banner" />
             <a></a>
           </div>
@@ -667,6 +599,18 @@
               class="lazyload"
               src="/img/logo/lazy.png"
               data-src="/img/categories/category_3.jpg"
+              alt="Banner" />
+            <a></a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="thumb-image">
+            <img
+              width="211"
+              height="211"
+              class="lazyload"
+              src="/img/logo/lazy.png"
+              data-src="/img/categories/category_4.jpg"
               alt="Banner" />
             <a></a>
           </div>
@@ -691,18 +635,6 @@
               class="lazyload"
               src="/img/logo/lazy.png"
               data-src="/img/categories/category_5.jpg"
-              alt="Banner" />
-            <a></a>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="thumb-image">
-            <img
-              width="211"
-              height="211"
-              class="lazyload"
-              src="/img/logo/lazy.png"
-              data-src="/img/categories/danhmuc_5.jpg"
               alt="Banner" />
             <a></a>
           </div>

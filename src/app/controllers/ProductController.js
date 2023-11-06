@@ -2,40 +2,68 @@
 
 const fs = require('fs')
 const path = require('path')
-const Product = require('../models/Product')
+const ProductModel = require('../models/Product')
 const { validationResult } = require('express-validator')
-const utils = require('../../utils')
-const pagination = require('../../utils/pagination')
-const upload = require('../../utils/upload')
+const utilityFunctions = require('../../utils')
+const paginationUtility = require('../../utils/pagination')
+const uploadUtility = require('../../utils/upload')
 
 const ProductController = {
-  // Show index page
-  index: async (req, res) => {
-    console.log('===== Show index page =====')
+  // Display index page
+  displayIndex: async (req, res) => {
+    console.log('===== Display index page =====')
 
     try {
-      const products = (await Product.aggregate([{ $sample: { size: 8 } }])).map((doc) =>
-        Product.hydrate(doc)
+      const products = (await ProductModel.aggregate([{ $sample: { size: 8 } }])).map((doc) =>
+        ProductModel.hydrate(doc)
       )
 
-      const customizes = (await Product.aggregate([{ $sample: { size: 10 } }])).map((doc) =>
-        Product.hydrate(doc)
+      const customProducts = (await ProductModel.aggregate([{ $sample: { size: 10 } }])).map(
+        (doc) => ProductModel.hydrate(doc)
       )
 
       res.render('index', {
         view_content: 'index',
         title: 'Robin Furnita',
         products,
-        customizes,
+        customProducts,
       })
     } catch (error) {
       console.error(error)
     }
   },
 
-  // Show form create product
-  formCreate: (req, res) => {
-    console.log('====== Form create product =====')
+  // Display about page
+  displayAbout: async (req, res) => {
+    res.render('index', { view_content: 'about', title: 'About Us' })
+  },
+
+  // Display contact page
+  displayContact: async (req, res) => {
+    res.render('index', { view_content: 'contact', title: 'Contact Us' })
+  },
+
+  // Display catalogue page
+  displayCatalogue: async (req, res) => {
+    res.render('index', { view_content: 'catalogue', title: 'Catalogue' })
+  },
+
+  // Display get quotations page
+  displayGetQuotation: async (req, res) => {
+    const listGetQuotations = JSON.parse(req.cookies['add-to-cart'])
+    let products = []
+
+    for (const id of listGetQuotations) {
+      const result = await ProductModel.findOne({ id })
+      products.push(result)
+    }
+
+    res.render('index', { view_content: 'get-quotation', title: 'Get Quotations', products })
+  },
+
+  // Display product creation form
+  displayCreateForm: (req, res) => {
+    console.log('====== Display product creation form =====')
 
     res.render('index', {
       view_content: 'products/create',
@@ -43,9 +71,9 @@ const ProductController = {
     })
   },
 
-  // Create product
-  create: async (req, res) => {
-    console.log('====== Create product =====')
+  // Create a new product
+  createProduct: async (req, res) => {
+    console.log('====== Create a new product =====')
 
     try {
       //Validation
@@ -54,14 +82,14 @@ const ProductController = {
       if (errors.length) {
         return res.status(400).send({
           title: 'Create Product',
-          message: 'Create product fail',
+          message: 'Product creation failed',
           errors: errors,
         })
       }
 
-      const images = await upload(req, res)
+      const images = await uploadUtility(req, res)
       const price = req.body.price.split(',')
-      const product = new Product({
+      const newProduct = new ProductModel({
         id: req.body.id,
         title: req.body.title,
         category: req.body.category,
@@ -73,15 +101,15 @@ const ProductController = {
         description: req.body.description,
       })
 
-      await product.save()
+      await newProduct.save()
 
       return res.status(200).send({
         title: 'Create Product',
-        message: 'Create Product Success!',
+        message: 'Product creation successful!',
       })
     } catch (error) {
       const dir = `../../public/img/products/${req.body.id}`
-      const product = await Product.find({ id: req.body.id })
+      const product = await ProductModel.find({ id: req.body.id })
 
       if (!product.length) {
         fs.rmdir(path.join(__dirname, dir), { recursive: true, force: true }, (err) => {
@@ -93,37 +121,37 @@ const ProductController = {
 
       return res.status(500).send({
         title: 'Create Product',
-        message: 'Create product fail',
+        message: 'Product creation failed',
         console: error.message,
       })
     }
   },
 
-  // Form update the product
-  formUpdate: async (req, res) => {
-    console.log('====== ProductController.formUpdate =====')
+  // Display product update form
+  displayUpdateForm: async (req, res) => {
+    console.log('====== Display product update form =====')
 
     try {
       const id = req.params.id
-      const data = await Product.findOne({ id })
+      const productData = await ProductModel.findOne({ id })
 
-      if (!data) {
+      if (!productData) {
         return res.status(404).send('Product not found')
       }
 
       return res.render('index', {
         view_content: 'products/edit',
         title: 'Edit Product',
-        data,
+        productData,
       })
     } catch (error) {
       console.error(error)
     }
   },
 
-  // Update product
-  update: async (req, res) => {
-    console.log('====== ProductController.update =====')
+  // Update a product
+  updateProduct: async (req, res) => {
+    console.log('====== Update a product =====')
 
     try {
       //Validation
@@ -134,12 +162,12 @@ const ProductController = {
       if (errors.length > 0) {
         return res.status(400).send({
           title: 'Update Product',
-          message: 'Update product fail',
+          message: 'Product update failed',
           errors: errors,
         })
       }
 
-      const updateObject = {
+      const updateData = {
         id: req.body.id,
         title: req.body.title,
         category: req.body.category,
@@ -150,49 +178,49 @@ const ProductController = {
         description: req.body.description,
       }
 
-      await Product.findOneAndUpdate({ id }, { $set: updateObject })
+      await ProductModel.findOneAndUpdate({ id }, { $set: updateData })
 
       return res.status(200).send({
         title: 'Update Product',
-        message: 'Update Product Success!',
+        message: 'Product update successful!',
       })
     } catch (error) {
       console.error(error)
       return res.status(500).send({
         title: 'Update Product',
-        message: 'Update product fail',
+        message: 'Product update failed',
         console: error.message,
       })
     }
   },
 
-  // Update images product
-  updateImg: async (req, res) => {
-    console.log('====== ProductController.updateImg =====')
+  // Update product images
+  updateProductImages: async (req, res) => {
+    console.log('====== Update product images =====')
 
     try {
       const { id } = req.body
-      const images = await upload(req, res)
+      const images = await uploadUtility(req, res)
 
-      await Product.findOneAndUpdate({ id }, { $set: { images } })
+      await ProductModel.findOneAndUpdate({ id }, { $set: { images } })
 
       return res.redirect('/admin')
     } catch (error) {
       return res.status(500).send({
         title: 'Update images',
-        message: 'Update images fail',
+        message: 'Image update failed',
         console: error.message,
       })
     }
   },
 
   // Delete a product
-  delete: async (req, res) => {
-    console.log('====== ProductController.delete =====')
+  deleteProduct: async (req, res) => {
+    console.log('====== Delete a product =====')
 
     try {
       const id = req.params.id
-      const product = await Product.findOneAndRemove({ id })
+      const product = await ProductModel.findOneAndRemove({ id })
 
       if (product) {
         const dir = `../../public/img/products/${req.params.id}`
@@ -205,34 +233,34 @@ const ProductController = {
 
       return res.status(200).send({
         title: 'Delete',
-        message: 'Delete product success!',
+        message: 'Product deletion successful!',
       })
     } catch (error) {
       console.error(error)
       return res.status(500).json({
         title: 'Delete',
-        message: 'Delete product fail!',
+        message: 'Product deletion failed!',
         console: error.message,
       })
     }
   },
 
-  // Get a product
-  renderProduct: async (req, res) => {
-    console.log('====== ProductController.renderProduct =====')
+  // Display a product
+  displayProduct: async (req, res) => {
+    console.log('====== Display a product =====')
 
     try {
       const id = req.params.id
-      const product = await Product.findOne({ id })
-      const categoryName = utils.categories[product.category]
-      const item = utils.fillItemProduct(id)
-      const urlItem = utils.fillUrl[item]
+      const product = await ProductModel.findOne({ id })
+      const categoryName = utilityFunctions.categories[product.category]
+      const item = utilityFunctions.fillItemProduct(id)
+      const urlItem = utilityFunctions.fillUrl[item]
       const products = (
-        await Product.aggregate([
+        await ProductModel.aggregate([
           { $match: { category: product.category } },
           { $sample: { size: 8 } },
         ])
-      ).map((doc) => Product.hydrate(doc))
+      ).map((doc) => ProductModel.hydrate(doc))
 
       return res.render('index', {
         view_content: 'products/details-product',
@@ -250,11 +278,11 @@ const ProductController = {
   },
 
   // Get a product
-  getProduct: async (req, res) => {
-    console.log('======  ProductController.getProduct =====')
+  fetchProduct: async (req, res) => {
+    console.log('======  Fetch a product =====')
 
     try {
-      const product = await Product.findOne({ id: req.params.id })
+      const product = await ProductModel.findOne({ id: req.params.id })
       return res.status(200).send(product)
     } catch (error) {
       console.error(error)
@@ -263,16 +291,16 @@ const ProductController = {
   },
 
   // Get category product data
-  getCategoryProductData: async (req, res) => {
-    console.log('====== ProductController.getCategoryProductData =====')
+  fetchCategoryProductData: async (req, res) => {
+    console.log('====== Fetch category product data =====')
 
     try {
       const category = req.params.category
       const query = category === 'all' ? {} : { category }
-      const products = await Product.find(query).limit(8)
+      const products = await ProductModel.find(query).limit(8)
       const data = {
         products,
-        pathCategory: utils.categories[category],
+        pathCategory: utilityFunctions.categories[category],
       }
 
       return res.status(200).send(data)
@@ -282,32 +310,40 @@ const ProductController = {
     }
   },
 
-  // Render category products
-  renderProductCategory: async (req, res) => {
-    console.log('====== ProductController.renderProductCategory =====')
+  // Display category products
+  displayProductCategory: async (req, res) => {
+    console.log('====== Display category products =====')
 
     try {
       const { query: querySearch, originalUrl } = req
-      const { perPage, currentPage, offset } = pagination.config(12, querySearch.page)
-      const { category, item } = req.query
+      const { perPage, currentPage, offset } = paginationUtility.config(12, querySearch.page)
+      const { category, subcategory } = req.query
       const categories = {
+        'agriculture-products': 'Agriculture products',
+        'wood-furniture': 'Wood furniture',
+        'rattan-bamboo': 'Rattan & Bamboo',
+        'dried-fruit': 'Dried fruit',
+        'spices-herbs': 'Spices & herbs',
+      }
+
+      const subcategories = {
         baskets: 'Baskets',
         'home-decors': 'Home decors',
         'kitchen-ware': 'Kitchen ware',
         lights: 'Lights',
         handbags: 'Handbags',
       }
+
       const categoryName = categories[category] || 'All Products'
       const query = category ? { category: categoryName } : {}
-      const itemFill = utils.items[item]
 
-      if (itemFill) {
-        query.id = { $regex: itemFill, $options: 'i' }
+      if (subcategory) {
+        query.subcategory = subcategories[subcategory]
       }
 
-      const products = await Product.find(query).limit(perPage).skip(offset)
-      const total = await Product.countDocuments(query)
-      const paginationResult = pagination.paginationCover(
+      const products = await ProductModel.find(query).limit(perPage).skip(offset)
+      const total = await ProductModel.countDocuments(query)
+      const paginationResult = paginationUtility.paginationCover(
         originalUrl,
         querySearch,
         total,
@@ -318,8 +354,8 @@ const ProductController = {
       return res.render('index', {
         view_content: 'products/products',
         url: `/product?category=${categoryName}`,
-        category: categoryName,
-        item: utils.fillItem[itemFill],
+        category,
+        subcategory,
         title: categoryName,
         pagination: paginationResult.html,
         products,

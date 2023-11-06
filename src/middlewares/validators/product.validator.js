@@ -18,8 +18,7 @@ const ProductValidator = {
       }),
     body('title').notEmpty().withMessage('Title should not be left empty'),
     body('category').notEmpty().withMessage('Category should not be left empty'),
-    // body('images').notEmpty().withMessage('Images should not be left empty'),
-    body('description').notEmpty().withMessage('Description should not be left empty'),
+    // body('description').notEmpty().withMessage('Description should not be left empty'),
   ],
 
   update: [
@@ -40,7 +39,7 @@ const ProductValidator = {
       }),
     body('title').notEmpty().withMessage('Title should not be left empty'),
     body('category').notEmpty().withMessage('Category should not be left empty'),
-    body('description').notEmpty().withMessage('Description should not be left empty'),
+    // body('description').notEmpty().withMessage('Description should not be left empty'),
   ],
 }
 

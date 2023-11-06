@@ -28,9 +28,9 @@ const ProductSchema = new mongoose.Schema(
     },
     price: {
       type: Array,
-      get: (price) => {
-        return price.length > 1 ? `${price[0]} $ - ${price[1]} $` : `${price[0]} $`
-      },
+      // get: (price) => {
+      //   return price.length > 1 ? `${price[0]} $ - ${price[1]} $` : `${price[0]} $`
+      // },
     },
     images: {
       type: Array,

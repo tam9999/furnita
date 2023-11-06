@@ -1,7 +1,7 @@
-const loading = '<div style="width: 100%; margin-top: 20px" class="text-center">Loading...</div>'
+const loading = '<div class="text-center" style="width: 100%; margin-top: 20px">Loading...</div>'
 
-$('.tab-link').click(function () {
-  const category = $(this).attr('data-category')
+$('.tab-link').on('click', function () {
+  const category = $(this).data('category')
 
   $.ajax({
     url: `/product/get-data-category/${category}`,
@@ -17,7 +17,7 @@ $('.tab-link').click(function () {
       const { products, pathCategory } = data
 
       if (products.length > 0) {
-        for (const product of products) {
+        products.forEach((product) => {
           html += `
             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 col-fix">
               <div class="variants product-action">
@@ -34,18 +34,9 @@ $('.tab-link').click(function () {
                   <div class="action">
                     <a
                       href="javascript:void(0)"
+                      data-id="${product.id}"
+                      data-amount="1"
                       class="btn-cart btn-views add_to_cart is-added"
-                      title="Add to cart">
-                      <svg class="icon">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-cart"></use>
-                      </svg>
-                    </a>
-
-                    <a
-                      href="javascript:void(0)"
-                      class="setWishlist btn-wishlist btn-views"
-                      data-wish="bo-tra-0-35-l-ifp-chi-vang"
-                      tabindex="0"
                       title="Add to wish">
                       <svg class="icon">
                         <use
@@ -70,33 +61,16 @@ $('.tab-link').click(function () {
                       ${product.title}
                     </a>
                   </h3>
-                  <div class="price-box">${product.price}</div>
+                  <div class="price-box">${product.price} $</div>
                 </div>
               </div>
             </div>
             `
-        }
+        })
 
         html += ` </div><div class="see-more">
                     <a title="See all" href="/product?category=${pathCategory}">See all</a>
                   </div></div> `
-
-        function awe_lazyloadImage() {
-          var ll = new LazyLoad({
-            elements_selector: '.lazyload',
-            load_delay: 100,
-            threshold: 0,
-          })
-        }
-        window.awe_lazyloadImage = awe_lazyloadImage
-
-        function clear() {
-          $('.text2line').empty()
-          $('.quickview-id').empty()
-          $('.quickview-info').empty()
-          $('.product-summary').empty()
-          $('.product-description').empty()
-        }
 
         const content = $(html)
         setTimeout(function () {
@@ -111,6 +85,7 @@ $('.tab-link').click(function () {
             $('#thumblist_quickview li').removeClass('active')
             $(this).addClass('active')
           })
+
           $(document).on('click', '.quick-view', function (e) {
             if ($(window).width() > 1025) {
               e.preventDefault()
@@ -127,11 +102,11 @@ $('.tab-link').click(function () {
             }
           )
 
-          var modal = $('.quickview-product')
-          var span = $('.quickview-close')
+          const modal = $('.quickview-product')
+          const span = $('.quickview-close')
 
-          $('.quick-view').click(function () {
-            const id = $(this).attr('data-id')
+          $('.quick-view').on('click', function () {
+            const id = $(this).data('id')
             $.ajax({
               url: `/product/quick-view/${id}`,
               type: 'GET',
@@ -143,17 +118,17 @@ $('.tab-link').click(function () {
               $('.img-3').attr('src', product.images[2])
               $('.img-4').attr('src', product.images[3])
               $('.text2line').text(product.title)
-              $('.quickview-id').append(`<p><strong>Product code: </strong>${product.id}</p>`)
-              $('.quickview-info').append(`<p><strong>Material: </strong>${product.material}</p>`)
-              $('.product-summary').append(`<p><strong>Size: </strong>${product.size}</p>`)
-              $('.product-description').append(
+              $('.quickview-id').html(`<p><strong>Product code: </strong>${product.id}</p>`)
+              $('.quickview-info').html(`<p><strong>Material: </strong>${product.material}</p>`)
+              $('.product-summary').html(`<p><strong>Size: </strong>${product.size}</p>`)
+              $('.product-description').html(
                 `<p><strong>Description: </strong>${product.description}</p>`
               )
               modal.show()
             })
           })
 
-          span.click(function () {
+          span.on('click', function () {
             clear()
             modal.hide()
           })

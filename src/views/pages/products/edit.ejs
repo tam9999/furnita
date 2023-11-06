@@ -76,44 +76,52 @@
                           <label class="form-label" for="form12">Title</label>
                         </div>
 
-                        <div class="form-outline">
-                          <input
-                            type="text"
-                            class="form-control form-control-lg"
-                            name="category"
-                            id="category"
-                            value="<%= locals.data?.category %>" />
-                          <label class="form-label" for="form12">Category</label>
-                        </div>
+                        <select
+                          class="form-select form-select-lg mb-3"
+                          name="category"
+                          id="category">
+                          <option value>Category</option>
+                          <% locals?.categoriesData.forEach((categoryItem) => {%>
+                          <option <%= categoryItem.name === data?.category ? 'selected' : '' %> 
+                            value="<%= categoryItem.name %>"> 
+                            <%= categoryItem.name %> 
+                          </option>
+                          <% }) %>
+                        </select>
 
-                        <div class="form-outline">
-                          <input
-                            type="text"
-                            class="form-control form-control-lg"
+                        <div class="rattan-bamboo" style="display: none">
+                          <select
+                            class="form-select form-select-lg mb-3"
                             name="subcategory"
-                            id="subcategory"
-                            value="<%= locals.data?.subcategory %>" />
-                          <label class="form-label" for="form12">Subcategory</label>
-                        </div>
+                            id="subcategory">
+                            <option value>Subcategory</option>
+                            <% locals?.categoriesData[2].subcategories.forEach((subcategory) => { %>
+                            <option <%= subcategory.name === data?.subcategory ? 'selected' : '' %>
+                               value="<%= subcategory.name %>">
+                               <%= subcategory.name %>
+                            </option>
+                            <% }) %>
+                          </select>
 
-                        <div class="form-outline">
-                          <input
-                            type="text"
-                            class="form-control form-control-lg"
-                            name="material"
-                            id="material"
-                            value="<%= locals.data?.material %>" />
-                          <label class="form-label" for="form12">Material</label>
-                        </div>
+                          <div class="form-outline">
+                            <input
+                              type="text"
+                              class="form-control form-control-lg"
+                              name="material"
+                              id="material"
+                              value="<%= locals.data?.material %>" />
+                            <label class="form-label" for="form12">Material</label>
+                          </div>
 
-                        <div class="form-outline">
-                          <input
-                            type="text"
-                            class="form-control form-control-lg"
-                            name="size"
-                            id="size"
-                            value="<%= locals.data?.size %>" />
-                          <label class="form-label" for="form12">Size</label>
+                          <div class="form-outline">
+                            <input
+                              type="text"
+                              class="form-control form-control-lg"
+                              name="size"
+                              id="size"
+                              value="<%= locals.data?.size %>" />
+                            <label class="form-label" for="form12">Size</label>
+                          </div>
                         </div>
 
                         <div class="form-outline">
@@ -132,8 +140,7 @@
                             id="description"
                             class="form-control content-area form-control-lg"
                             style="height: 250px">
-<%= locals.data?.description %></textarea
-                          >
+                            <%= locals.data?.description %></textarea>
                           <label class="form-label" for="form12">Description</label>
                         </div>
 
@@ -176,6 +183,17 @@
 <script type="text/javascript" src="/assets/js/product.js"></script>
 
 <script>
+  if ($('#category').val() === 'Rattan & Bamboo') {
+    $('.rattan-bamboo').show()
+  }
+
+  $('#category').change(function () {
+    var selectedOption = $(this).val()
+    if (selectedOption === 'Rattan & Bamboo') {
+      $('.rattan-bamboo').show()
+    }
+  })
+
   // Edit product
   $('form').submit(function (event) {
     event.preventDefault()

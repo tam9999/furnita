@@ -143,14 +143,7 @@
         <div class="container">
           <div class="danhmuc-swiper swiper-container">
             <div class="swiper-wrapper">
-              <% const categoryData = [ { name: 'Agricultural', imageSrc:
-              '/img/categories/category_1.jpg', url:'/product?category=agricultural' }, { name:
-              'Wooden', imageSrc: '/img/categories/category_2.jpg', url: '/product?category=wooden'
-              }, { name: 'Rattan & Bamboo', imageSrc: '/img/categories/category_3.jpg', url:
-              '/product?category=eco-friendly-handicrafts' }, { name: 'Rubber', imageSrc:
-              '/img/categories/category_4.jpg', url: '/product?category=rubber' }, { name:
-              'Chillies', imageSrc: '/img/categories/category_5.jpg', url:
-              '/product?category=chillies' }, ]; %> <% categoryData.forEach((categoryItem) => { %>
+              <% locals?.categoriesData.forEach((categoryItem) => { %>
               <div class="swiper-slide">
                 <a href="<%= categoryItem.url %>" title="<%= categoryItem.name %>"></a>
                 <div class="danhmuc-thumb">
@@ -163,7 +156,36 @@
                   <span class="image-shadow"></span>
                 </div>
                 <div class="danhmuc-info">
-                  <h3><%= categoryItem.name %></h3>
+                  <h3>
+                    <svg
+                      version="1.1"
+                      id="Layer_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 64 42"
+                      style="enable-background: new 0 0 64 42; width: 16px; height: 16px"
+                      xml:space="preserve">
+                      <style type="text/css">
+                        .st0 {
+                          fill: #ce1126;
+                        }
+                        .st1 {
+                          fill: #fcd116;
+                        }
+                      </style>
+                      <path
+                        id="Rounded_Rectangle_7_copy_1_"
+                        class="st0"
+                        d="M5.8,0h52.3C61.4,0,64,2.6,64,5.7v30.6c0,3.2-2.6,5.7-5.8,5.7H5.8
+                                    C2.6,42,0,39.4,0,36.3V5.7C0,2.6,2.6,0,5.8,0z" />
+                      <polygon
+                        class="st1"
+                        points="32,5.1 35.9,17.3 48.7,17.3 38.4,24.7 42.3,36.9 32,29.4 21.7,36.9 25.6,24.7 15.3,17.3 28.1,17.3 " />
+                    </svg>
+                    <%= categoryItem.name %>
+                  </h3>
                 </div>
               </div>
               <% }); %>
